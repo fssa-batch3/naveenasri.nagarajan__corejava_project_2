@@ -35,37 +35,32 @@ public class UserDAO {
 
 		return rows == 1;
 	}
+	 // Method to check if a user with the given email exists in the database
+    public boolean isEmailExists(String email) throws SQLException {
+        String query = "SELECT * FROM USER WHERE email = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement pmt = connection.prepareStatement(query)) {
+            pmt.setString(1, email);
+            ResultSet rs = pmt.executeQuery();
+            return rs.next(); // If a row is found, the email exists
+        }
+    }
 
-	// Get user from DB
-	public boolean login(User user) throws SQLException {
-
-		Connection connection = getConnection();
-		String query = "SELECT * FROM USER WHERE email = ? AND PASSWORD = ?";
-		PreparedStatement pmt = connection.prepareStatement(query);
-		pmt.setString(1, user.getEmail());
-		pmt.setString(2, user.getPassword());
-
-		ResultSet rs = pmt.executeQuery();
-//		if (rs.next()) {
+    // Method to authenticate the user with the provided email and password
+    public boolean login(User user, String email) throws SQLException {
+        String query = "SELECT * FROM USER WHERE email = ? AND password = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement pmt = connection.prepareStatement(query)) {
+            pmt.setString(1, email);
+            pmt.setString(2, user.getPassword());
+            ResultSet rs = pmt.executeQuery();
+//    		if (rs.next()) {
 //			String userEmail = rs.getString("EMAIL");
 //			String userPass = rs.getString("PASSWORD");
 //		}
-		return rs.next();
-	}
-	// Add new task to DB
-
-	public boolean isEmailExists(String email) throws SQLException {
-		Connection connection = getConnection();
-		String query = "SELECT COUNT(*) FROM USER WHERE email = ?";
-		PreparedStatement pmt = connection.prepareStatement(query);
-		pmt.setString(1, email);
-		ResultSet resultSet = pmt.executeQuery();
-		resultSet.next();
-		int count = resultSet.getInt(1);
-		pmt.close();
-		connection.close();
-		return count > 0;
-	}
+            return rs.next(); // If a row is found, authentication is successful
+        }
+    }
 
 
 	// Update user information based on email

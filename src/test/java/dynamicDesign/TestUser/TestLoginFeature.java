@@ -14,9 +14,11 @@ public class TestLoginFeature {
 	@Test
 	public void loginSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User("maha12@gmail.com", "Navee@123");
+		String email = "maha12@gmail.com";
+		String password = "Navee@123";
+		User user1 = new User(email,password );
 		try {
-			assertTrue(userService.loginUser(user1));
+			assertTrue(userService.loginUser(user1,email));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -27,14 +29,43 @@ public class TestLoginFeature {
 
 	public void loginFailed() {
 		UserService userService = new UserService();
-		User user2 = new User("ahkbkj@gmail.com", "Password@796");
+		String email = "ahkbkj@gmail.com";
+		String password = "Password@796";
+		User user2 = new User(email,password);
 		try {
-			assertFalse(userService.loginUser(user2));
+			assertFalse(userService.loginUser(user2,email));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	@Test
+	public void testLoginPasswordCheck() {
+		UserService userService = new UserService();
+		String email = "maha12@gmail.com";
+		String password = "navee@123";
+		User user1 = new User(email,password );
+		try {
+			userService.loginUser(user1,email);
+			fail("Password is validated so give correct password");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testLoginEmailCheck() {
+		UserService userService = new UserService();
+		String email = "Maha12@gmail.com";
+		String password = "Navee@123";
+		User user1 = new User(email,password );
+		try {
+			userService.loginUser(user1,email);
+			fail("Email is validated so give correct Email");
+		} catch (ServiceException e) {
+			e.printStackTrace();
 
+		}
+	}
 
 }

@@ -3,6 +3,7 @@ package dynamicDesign.service;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dynamicDesign.dao.DesignDAO;
 import dynamicDesign.model.Design;
@@ -30,9 +31,19 @@ public class DesignService {
     }
 
 	   
+	
+	 public List<Design> listDesigns() throws ServiceException {
+	        DesignDAO designDAO = new DesignDAO();
+
+	        try {
+	            return designDAO.listDesigns();
+	        } catch (SQLException e) {
+	            throw new ServiceException(e);
+	        }
+	    }
+	
 //    public static void main(String[]args) {
 //    	DesignService designservice  = new DesignService();
-//    	Design design1 = new Design("Living Room Design", "https://example.com/design1", 100.0, "user@example.com", 1);
 //    	
 //      try{
 //    	  System.out.print(designService.createDesign(design1));
@@ -41,7 +52,7 @@ public class DesignService {
 //    	  
 //      }
       
-    }
+   }
 
 
 

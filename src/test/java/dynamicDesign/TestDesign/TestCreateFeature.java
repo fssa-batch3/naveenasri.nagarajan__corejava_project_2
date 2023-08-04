@@ -12,7 +12,7 @@ import dynamicDesign.service.exception.ServiceException;
 public class TestCreateFeature {
 
 	@Test
-	public void testRegistrationSuccess() {
+	public void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
 		Design design1 = new Design("Living Room Design", "https://example.com/design1", 100.0, "user@example.com", 1);
 		try {

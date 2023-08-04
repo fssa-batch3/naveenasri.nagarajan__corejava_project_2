@@ -33,25 +33,31 @@ public class UserService {
 	    }
 	}
 
+	public boolean loginUser(User user, String email) throws ServiceException {
+	    try {
+	        UserValidator.validateEmail(email); // Use the provided email for validation
+	        UserValidator.validatePassword(user.getPassword());
 
-	public boolean loginUser(User user) throws ServiceException {
+	        UserDAO userDAO = new UserDAO();
 
-		try {
-			UserValidator.validateEmail(user.getEmail());
-			UserValidator.validatePassword(user.getPassword());
+	        // Check if the email already exists
+	        if (!userDAO.isEmailExists(email)) {
+	            throw new ServiceException("Before logging in, you have to register");
+	        }
 
-			UserDAO userDAO = new UserDAO();
-			if (userDAO.login(user)) {
-				System.out.println(user.getEmail() + " Successfully logged in");
-				return true;
-			} else {
-				return false;
-			}
-		} catch (Exception e) {
-			throw new ServiceException(e.getLocalizedMessage());
-		}
-
+	        if (userDAO.login(user, email)) {
+	            System.out.println(email + " Successfully logged in");
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    } catch (ServiceException e) {
+	        throw e; // Rethrow the ServiceException
+	    } catch (Exception e) {
+	        throw new ServiceException(e.getLocalizedMessage());
+	    }
 	}
+
 
 
 	    // Update user information
@@ -83,7 +89,6 @@ public class UserService {
 	        try {
 	            // Check if the email exists before attempting to delete
 	            if (!userDAO.isEmailExists(email)) {
-	            	
 	                throw new ServiceException("User with this email does not exist");
 	            }
 	            
