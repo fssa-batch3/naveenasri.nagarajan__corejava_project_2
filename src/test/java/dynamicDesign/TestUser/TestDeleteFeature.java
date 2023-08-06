@@ -3,39 +3,48 @@ package dynamicDesign.TestUser;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import dynamicDesign.service.UserService;
-
 import dynamicDesign.service.exception.ServiceException;
 
 public class TestDeleteFeature {
 
 	@Test
-	void testDeleteUserSuccess1() {
-		 UserService userService = new UserService();
-		// Assuming this email exists in the database
-		String email = "maha12@gmail.com";
+	public void testDeleteUserSuccess() {
+		UserService userService = new UserService();
+		// Assuming a user with the email "maha@example.com" exists in the database
 		try {
-			assertTrue(UserService.deleteUser(email));
+			boolean isDeleted = userService.deleteUser("babu@gmail.com");
+			assertTrue(isDeleted, "User deletion failed.");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail("Exception occurred while deleting the user.");
+		}
+	}
+
+	@Test
+	public void testDeleteNonExistingUser() {
+		UserService userService = new UserService();
+		// Assuming a user with the email "nonexisting@example.com" does not exist in
+		// the database
+		try {
+			userService.deleteUser("nonexisting@example.com");
+			fail("User with non-existing email should not be deleted, but method succeeded.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
 
-    @Test
-   void testDeleteUserNotFound() {
-        UserService userService = new UserService();
-        // Assuming this email does not exist in the database
-        String email = "nonexistent_user@gmail.com";
-        try {
-            userService.deleteUser(email);
-            fail("This user is not found");
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
-
-  
+	@Test
+	public void testDeleteUserWithInvalidEmailFormat() {
+		UserService userService = new UserService();
+		// Assuming "invalid_email_format" is not a valid email format
+		try {
+			userService.deleteUser("invalid_email_format");
+			fail("User with invalid email format should not be deleted, but method succeeded.");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

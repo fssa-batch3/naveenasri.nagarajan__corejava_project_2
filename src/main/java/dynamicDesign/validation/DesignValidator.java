@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import dynamicDesign.model.Design;
 import dynamicDesign.service.exception.ServiceException;
-import dynamicDesign.validation.exception.InvalidUserException;
+// import dynamicDesign.validation.exception.InvalidUserException;
 
 public class DesignValidator {
 	

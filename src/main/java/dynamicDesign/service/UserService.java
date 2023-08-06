@@ -83,7 +83,7 @@ public class UserService {
 	    }
 
 	 // Delete user based on email
-	    public static boolean deleteUser(String email) throws ServiceException {
+	    public boolean deleteUser(String email) throws ServiceException {
 	        UserDAO userDAO = new UserDAO();
 
 	        try {
@@ -100,14 +100,16 @@ public class UserService {
 	    }
 	    
 	    
-	    public static void main(String[]args) {
-	      try{
-	    	  System.out.print(deleteUser("maha12@gmail.com"));
-	      }catch(Exception e) {
-	    	  e.printStackTrace();
-	    	  
-	      }
-	    }
+	    
+	    
+//	    public static void main(String[]args) {
+//	      try{
+//	    	  System.out.print(deleteUser("maha12@gmail.com"));
+//	      }catch(Exception e) {
+//	    	  e.printStackTrace();
+//	    	  
+//	      }
+//	    }
 
 
 }

@@ -79,7 +79,7 @@ public class UserValidator {
 	        return false;
 
 	    // Phone number regex pattern for Indian phone numbers (starting with +91)
-	    String regex = "^\\+91[6-9]\\d{9}$";
+	    String regex = "^(\\+?91|91)?[6-9]\\d{9}$";
 
 	    // Compile the regex pattern into a Pattern object
 	    Pattern pattern = Pattern.compile(regex);
@@ -100,6 +100,5 @@ public class UserValidator {
 	    // Return the match result, which is true if the phone number is valid, false otherwise
 	    return isMatch;
 	}
-
 
 }

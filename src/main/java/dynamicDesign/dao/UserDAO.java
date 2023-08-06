@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dynamicDesign.dao.exception.DAOException;
+// import dynamicDesign.dao.exception.DAOException;
 import dynamicDesign.model.User;
 
 public class UserDAO {
@@ -35,6 +35,8 @@ public class UserDAO {
 
 		return rows == 1;
 	}
+
+	
 	 // Method to check if a user with the given email exists in the database
     public boolean isEmailExists(String email) throws SQLException {
         String query = "SELECT * FROM USER WHERE email = ?";
