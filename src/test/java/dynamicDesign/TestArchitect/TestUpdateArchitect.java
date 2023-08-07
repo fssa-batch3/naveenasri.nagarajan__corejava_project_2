@@ -13,7 +13,7 @@ public class TestUpdateArchitect {
 	@Test
 	public void testUpdateSuccess() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(1,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -26,7 +26,7 @@ public class TestUpdateArchitect {
 	@Test
 	public void testUpdateEmailNotFound() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(2,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -42,7 +42,7 @@ public class TestUpdateArchitect {
 	@Test
 	public void testUpdateInvalidEmailFormat() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -58,7 +58,7 @@ public class TestUpdateArchitect {
 	public void testUpdateMissingRequiredField() {
 		ArchitectService architectService = new ArchitectService();
 		// Leaving the name field empty
-		Architect architect = new Architect("profilePhoto.jpg", "", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(4,"profilePhoto.jpg", "", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -84,7 +84,7 @@ public class TestUpdateArchitect {
 	@Test
 	public void testUpdateNullEmail() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(5,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -98,7 +98,7 @@ public class TestUpdateArchitect {
 	@Test
 	public void testUpdateEmptyEmail() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(6,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {

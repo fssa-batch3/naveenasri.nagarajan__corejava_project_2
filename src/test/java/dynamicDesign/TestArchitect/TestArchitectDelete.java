@@ -1,51 +1,69 @@
 package dynamicDesign.TestArchitect;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-import dynamicDesign.model.Architect;
+
 import dynamicDesign.service.ArchitectService;
 import dynamicDesign.service.exception.ServiceException;
+import dynamicDesign.validation.exception.InvalidArchitectException;
 
 public class TestArchitectDelete {
 
-	@Test
-	public void testDeleteArchitectSuccess() {
-		ArchitectService architectService = new ArchitectService();
-		// Assuming an architect with the email "john.doe@example.com" exists in the
-		// database
-		try {
-			boolean isDeleted = architectService.deleteArchitect("john.doe@example.com");
-			assertTrue(isDeleted, "Architect deletion failed.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail("Exception occurred while deleting the architect.");
-		}
-	}
+    @Test
+    public void testDeleteArchitectSuccess() {
+        ArchitectService architectService = new ArchitectService();
+        // Assume you have a valid architectId for an existing architect
+        int architectIdToDelete = 1;
 
-	@Test
-	public void testDeleteNonExistingArchitect() {
-		ArchitectService architectService = new ArchitectService();
-		// Assuming an architect with the email "nonexisting@example.com" does not exist
-		// in the database
-		try {
-			architectService.deleteArchitect("nonexisting@example.com");
-			fail("Architect with non-existing email should not be deleted, but method succeeded.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            assertTrue(architectService.deleteArchitect(architectIdToDelete));
+            System.out.println("Architect deleted successfully");
+        } catch (ServiceException | InvalidArchitectException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Test
-	public void testDeleteArchitectWithInvalidEmailFormat() {
-		ArchitectService architectService = new ArchitectService();
-		// Assuming "invalid_email_format" is not a valid email format
-		try {
-			architectService.deleteArchitect("invalid_email_format");
-			fail("Architect with invalid email format should not be deleted, but method succeeded.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-	}
+    @Test
+    public void testDeleteNonExistingArchitect() {
+        ArchitectService architectService = new ArchitectService();
+        // Assume you have an architectId that does not exist in the database
+        int nonExistingArchitectId = 1000;
+
+        try {
+            assertFalse(architectService.deleteArchitect(nonExistingArchitectId));
+            System.out.println("Architect not found, delete failed");
+        } catch (ServiceException | InvalidArchitectException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testDeleteArchitectWithInvalidId() {
+        ArchitectService architectService = new ArchitectService();
+        // Assume you have an invalid architectId, e.g. negative value
+        int invalidArchitectId = -1;
+
+        try {
+            assertFalse(architectService.deleteArchitect(invalidArchitectId));
+            System.out.println("Invalid architect ID, delete failed");
+        } catch (ServiceException | InvalidArchitectException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testDeleteArchitectWithNullId() {
+        ArchitectService architectService = new ArchitectService();
+        int nullArchitectId = 0;  // Assuming 0 is considered a null architect ID
+
+        try {
+            assertFalse(architectService.deleteArchitect(nullArchitectId));
+            System.out.println("Null architect ID, delete failed");
+        } catch (ServiceException | InvalidArchitectException e) {
+            e.printStackTrace();
+        }
+    }
 }

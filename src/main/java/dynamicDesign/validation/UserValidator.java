@@ -8,97 +8,85 @@ import dynamicDesign.validation.exception.InvalidUserException;
 public class UserValidator {
 
 	public static boolean validateUser(User user) throws InvalidUserException {
-
 		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
 				&& validateEmail(user.getEmail())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
 		}
-
 	}
 
 	public static boolean validateName(String name) {
-		boolean match = false;
-
 		if (name == null)
 			return false;
 
 		String regex = "^[A-Za-z]\\w{2,29}$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(name);
-		match = m.matches();
-		if (match) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(name);
+		boolean isMatch = matcher.matches();
+		if (isMatch) {
 			System.out.println("The user name is valid.");
 		} else {
 			System.out.println("The user name is not valid");
 		}
 
-		return match;
+		return isMatch;
 	}
 
 	public static boolean validatePassword(String password) {
-		boolean match = false;
-
 		if (password == null)
 			return false;
 
-		String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
-		match = Pattern.matches(pattern_string, password);
+		String patternString = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
+		boolean isMatch = Pattern.matches(patternString, password);
 
-		if (match) {
-
+		if (isMatch) {
 			System.out.println("Valid password.");
 		} else {
 			System.out.println("Invalid password.");
 		}
 
-		return match;
+		return isMatch;
 	}
 
 	public static boolean validateEmail(String email) {
-		boolean isMatch = false;
-
 		if (email == null)
 			return false;
+
 		String regex = "^.*@.*\\..*$";
-		isMatch = Pattern.matches(regex, email);
+		boolean isMatch = Pattern.matches(regex, email);
 		if (isMatch) {
 			System.out.println("The email address is: Valid");
 		} else {
 			System.out.println("The email address is: Invalid");
 		}
 		return isMatch;
-
 	}
-	
-	
+
 	public static boolean validatePhoneNumber(String phoneNumber) {
-	    // Check if the provided phone number is null
-	    if (phoneNumber == null)
-	        return false;
+		if (phoneNumber == null)
+			return false;
 
-	    // Phone number regex pattern for Indian phone numbers (starting with +91)
-	    String regex = "^(\\+?91|91)?[6-9]\\d{9}$";
+		String regex = "^(\\+?91|91)?[6-9]\\d{9}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(phoneNumber);
+		boolean isMatch = matcher.matches();
 
-	    // Compile the regex pattern into a Pattern object
-	    Pattern pattern = Pattern.compile(regex);
+		if (isMatch) {
+			System.out.println("The phone number is: Valid");
+		} else {
+			System.out.println("The phone number is: Invalid");
+		}
 
-	    // Create a Matcher object to match the provided phone number against the pattern
-	    Matcher matcher = pattern.matcher(phoneNumber);
-
-	    // Perform the match and store the result in a boolean variable
-	    boolean isMatch = matcher.matches();
-
-	    // Print whether the phone number is valid or invalid based on the match result
-	    if (isMatch) {
-	        System.out.println("The phone number is: Valid");
-	    } else {
-	        System.out.println("The phone number is: Invalid");
-	    }
-
-	    // Return the match result, which is true if the phone number is valid, false otherwise
-	    return isMatch;
+		return isMatch;
 	}
 
+	public static boolean validateDeleteUser(User user) throws InvalidUserException {
+		if (user != null && user.getUserId() > 0 && validateEmail(user.getEmail())) {
+			System.out.println("User deletion details are valid.");
+			return true;
+		} else {
+			throw new InvalidUserException("Invalid user details for deletion");
+		}
+	}
 }

@@ -1,9 +1,10 @@
 package dynamicDesign.TestUser;
 
-import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import dynamicDesign.model.User;
 import dynamicDesign.service.UserService;
 import dynamicDesign.service.exception.ServiceException;
 
@@ -12,9 +13,10 @@ public class TestDeleteFeature {
 	@Test
 	public void testDeleteUserSuccess() {
 		UserService userService = new UserService();
-		// Assuming a user with the email "maha@example.com" exists in the database
+		// Assuming a user with the email "babu@gmail.com" exists in the database
 		try {
-			boolean isDeleted = userService.deleteUser("babu@gmail.com");
+			User user = new User(1, "babu@gmail.com", "Babu", "Navee@123", "9876543123", "user", false);
+			boolean isDeleted = userService.deleteUser(user);
 			assertTrue(isDeleted, "User deletion failed.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -28,7 +30,9 @@ public class TestDeleteFeature {
 		// Assuming a user with the email "nonexisting@example.com" does not exist in
 		// the database
 		try {
-			userService.deleteUser("nonexisting@example.com");
+			User user = new User(2, "nonexisting@example.com", "NonExistingUser", "Navee@123", "9876543123", "user",
+					false);
+			userService.deleteUser(user);
 			fail("User with non-existing email should not be deleted, but method succeeded.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -36,12 +40,12 @@ public class TestDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteUserWithInvalidEmailFormat() {
+	public void testDeleteUserWithInvalidUserId() {
 		UserService userService = new UserService();
-		// Assuming "invalid_email_format" is not a valid email format
+		User user = new User(-1, "babu@gmail.com", "Babu", "Navee@123", "9876543123", "user", false);
 		try {
-			userService.deleteUser("invalid_email_format");
-			fail("User with invalid email format should not be deleted, but method succeeded.");
+			boolean isDeleted = userService.deleteUser(user);
+			assertFalse(isDeleted, "User should not be deleted.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

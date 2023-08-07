@@ -17,7 +17,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample valid architect
-        Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+        Architect architect = new Architect(1,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
 
@@ -33,7 +33,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample architect with invalid details (missing required fields)
-        Architect architect = new Architect("profilePhoto.jpg", null, "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect(2,"profilePhoto.jpg", null, "Male", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", 5,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
 
@@ -51,7 +51,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample architect with an email that already exists in the database
-        Architect architect = new Architect("profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "", "Password@123", "Bachelor of Architecture", 5,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
 
@@ -69,7 +69,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample architect with an email that already exists in the database
-        Architect architect = new Architect("profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect(4,"profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "maha@example.com", "Password@123", "Bachelor of Architecture", 5,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
 
@@ -86,7 +86,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample architect with negative experience
-        Architect architect = new Architect("profilePhoto.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect(5,"profilePhoto.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", -2,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
 
@@ -102,7 +102,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample architect with valid URLs for profile photo, cover photo, degree certificate, and NATACertificate
-        Architect architect = new Architect("https://example.com/profile.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect(6,"https://example.com/profile.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
                 "https://example.com/cover.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", 5,
                 "https://example.com/degree.jpg", "https://example.com/NATACert.jpg");
         try {
@@ -117,7 +117,7 @@ public class TestArchitectRegister {
         ArchitectService architectService = new ArchitectService();
 
         // Create a sample architect with invalid URLs for profile photo, cover photo, degree certificate, and NATACertificate
-        Architect architect = new Architect("invalidprofile.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect(7,"invalidprofile.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
                 "invalidcover.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", 5,
                 "invaliddegree.jpg", "invalidNATACert.jpg");
 

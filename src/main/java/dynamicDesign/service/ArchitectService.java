@@ -7,7 +7,7 @@ import dynamicDesign.dao.ArchitectDAO;
 import dynamicDesign.model.Architect;
 import dynamicDesign.service.exception.ServiceException;
 import dynamicDesign.validation.ArchitectValidator;
-import dynamicDesign.validation.exception.InvalidUserException;
+import dynamicDesign.validation.exception.InvalidArchitectException;
 
 public class ArchitectService {
 
@@ -17,30 +17,27 @@ public class ArchitectService {
 		try {
 			// Check if the Architect is null
 			if (architect == null) {
-				throw new InvalidUserException("Architect is null");
+				throw new InvalidArchitectException("Architect is null");
 			}
 
-			// Check if the email already exists
-			if (architectDAO.isEmailExists(architect.getEmail())) {
-				throw new ServiceException("Architect with this email already exists");
-			}
-
+			// Validate the architect's details using the ArchitectValidator
 			ArchitectValidator.validateArchitect(architect);
+
+			// Call the DAO's arcRegister method to register the architect
 			return architectDAO.arcRegister(architect);
-		} catch (InvalidUserException | SQLException e) {
+		} catch (SQLException | InvalidArchitectException e) {
 			throw new ServiceException(e);
 		}
 	}
-
-	public List<Architect> listArchitects() throws ServiceException {
-		ArchitectDAO architectDAO = new ArchitectDAO();
-
-		try {
-			return architectDAO.listArchitects();
-		} catch (SQLException e) {
-			throw new ServiceException(e);
-		}
-	}
+//	public List<Architect> listArchitects() throws ServiceException {
+//		ArchitectDAO architectDAO = new ArchitectDAO();
+//
+//		try {
+//			return architectDAO.listArchitects();
+//		} catch (SQLException e) {
+//			throw new ServiceException(e);
+//		}
+//	}
 
 	public boolean updateArchitect(Architect architect, String email) throws ServiceException {
 		ArchitectDAO architectDAO = new ArchitectDAO();
@@ -48,7 +45,7 @@ public class ArchitectService {
 		try {
 			// Check if the architect is null
 			if (architect == null) {
-				throw new InvalidUserException("Architect is null");
+				throw new InvalidArchitectException("Architect is null");
 			}
 
 			// Check if the email exists before attempting to update
@@ -58,22 +55,21 @@ public class ArchitectService {
 
 			ArchitectValidator.validateArchitect(architect);
 			return architectDAO.updateArchitect(architect, email);
-		} catch (InvalidUserException | SQLException e) {
+		} catch (InvalidArchitectException | SQLException e) {
 			throw new ServiceException(e);
 		}
 	}
 
-	// Delete architect based on email
-	public boolean deleteArchitect(String email) throws ServiceException {
+	public boolean deleteArchitect(int architectId) throws ServiceException, InvalidArchitectException {
 		ArchitectDAO architectDAO = new ArchitectDAO();
 
 		try {
-			// Check if the email exists before attempting to delete
-			if (!architectDAO.isEmailExists(email)) {
-				throw new ServiceException("Architect with this email does not exist");
+			// Check if the architectId is valid
+			if (architectId <= 0) {
+				throw new InvalidArchitectException("Invalid architect ID");
 			}
 
-			return architectDAO.deleteArchitect(email);
+			return architectDAO.deleteArchitect(architectId);
 		} catch (SQLException e) {
 			throw new ServiceException(e);
 		}
