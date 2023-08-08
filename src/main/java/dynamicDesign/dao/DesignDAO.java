@@ -9,30 +9,45 @@ import java.util.List;
 
 import dynamicDesign.dao.exception.DAOException;
 import dynamicDesign.model.Design;
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.util.ArrayList;
 
 public class DesignDAO {
 
-	// connect to database
 	public Connection getConnection() throws SQLException {
+		String DB_URL;
+		String DB_USER;
+		String DB_PASSWORD;
+
+		if (System.getenv("CI") != null) {
+			DB_URL = System.getenv("DB_URL");
+			DB_USER = System.getenv("DB_USER");
+			DB_PASSWORD = System.getenv("DB_PASSWORD");
+		} else {
+			Dotenv env = Dotenv.load();
+			DB_URL = env.get("DB_URL");
+			DB_USER = env.get("DB_USER");
+			DB_PASSWORD = env.get("DB_PASSWORD");
+		}
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
 	}
 
-	// Add new user to DB - Register
+	// Add new design to DB - Create
 	public boolean createDesign(Design design) throws DAOException {
-		try (Connection connection = getConnection()) {
-			String query = "INSERT INTO designs (designid, designname, designurl, price, email, noofroom) VALUES (?, ?, ?, ?, ?, ?)";
-			try (PreparedStatement pmt = connection.prepareStatement(query)) {
-				pmt.setInt(1, design.getDesignId());
-				pmt.setString(2, design.getDesignName());
-				pmt.setString(3, design.getDesignUrl());
-				pmt.setDouble(4, design.getPrice());
-				pmt.setString(5, design.getEmail());
-				pmt.setInt(6, design.getNoOfRoom());
+		String query = "INSERT INTO designs (designId, designName, designUrl, price, email, noOfRooms) VALUES (?, ?, ?, ?, ?, ?)";
 
-				int rows = pmt.executeUpdate();
-				return rows == 1;
-			}
+		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query);) {
+			pmt.setInt(1, design.getDesignId());
+			pmt.setString(2, design.getDesignName());
+			pmt.setString(3, design.getDesignUrl());
+			pmt.setDouble(4, design.getPrice());
+			pmt.setString(5, design.getEmail());
+			pmt.setInt(6, design.getNoOfRoom());
+
+			int rows = pmt.executeUpdate();
+			return rows == 1;
+
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
@@ -70,7 +85,7 @@ public class DesignDAO {
 
 	public boolean updateDesign(Design design) throws SQLException {
 		Connection connection = getConnection();
-		String query = "UPDATE designs SET designname=?, designurl=?, price=?, email=?, noofroom=? WHERE designid=?";
+		String query = "UPDATE designs SET designName=?, designUrl=?, price=?, email=?, noOfRooms =? WHERE designid=?";
 
 		try (PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setString(1, design.getDesignName());
@@ -86,20 +101,19 @@ public class DesignDAO {
 			connection.close();
 		}
 	}
-	
+
 	// Delete design based on design ID
 	public boolean deleteDesign(int designId) throws SQLException {
-	    Connection connection = getConnection();
-	    
-	    String query = "UPDATE designs SET isDeleted = ? WHERE designid = ?";
-	    
-	    try (PreparedStatement pmt = connection.prepareStatement(query)) {
-	        pmt.setBoolean(1, true); // Set isDeleted to true to mark the design as deleted
-	        pmt.setInt(2, designId);
-	        int rows = pmt.executeUpdate();
-	        return rows == 1;
-	    }
-	}
+		Connection connection = getConnection();
 
+		String query = "UPDATE designs SET isDeleted = ? WHERE designid = ?";
+
+		try (PreparedStatement pmt = connection.prepareStatement(query)) {
+			pmt.setBoolean(1, true); // Set isDeleted to true to mark the design as deleted
+			pmt.setInt(2, designId);
+			int rows = pmt.executeUpdate();
+			return rows == 1;
+		}
+	}
 
 }

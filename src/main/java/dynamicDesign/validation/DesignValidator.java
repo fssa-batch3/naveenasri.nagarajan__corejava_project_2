@@ -3,34 +3,33 @@ package dynamicDesign.validation;
 import java.util.regex.Pattern;
 
 import dynamicDesign.model.Design;
-import dynamicDesign.service.exception.ServiceException;
 import dynamicDesign.validation.exception.InvalidDesignException;
 
 public class DesignValidator {
 
-	public static boolean validateDesign(Design design) throws ServiceException, InvalidDesignException {
+	public static boolean validateDesign(Design design) throws  InvalidDesignException {
 		if (design == null) {
-			throw new IllegalArgumentException("Design is null");
+			throw new InvalidDesignException("Design is null");
 		}
 
 		if (design.getDesignName() == null || design.getDesignName().trim().isEmpty()) {
-			throw new ServiceException("Design name is required");
+			throw new InvalidDesignException("Design name is required");
 		}
 
 		if (design.getDesignUrl() == null || design.getDesignUrl().trim().isEmpty()) {
-			throw new ServiceException("Design URL is required");
+			throw new InvalidDesignException("Design URL is required");
 		}
 
 		if (design.getPrice() < 0) {
-			throw new ServiceException("Price must be a non-negative value");
+			throw new InvalidDesignException("Price must be a non-negative value");
 		}
 
 		if (design.getEmail() == null || !isValidEmail(design.getEmail())) {
-			throw new ServiceException("Invalid email");
+			throw new InvalidDesignException("Invalid email");
 		}
 
 		if (design.getNoOfRoom() < 0) {
-			throw new ServiceException("Number of rooms must be a non-negative value");
+			throw new InvalidDesignException("Number of rooms must be a non-negative value");
 		}
 
 		// Add validation for design ID

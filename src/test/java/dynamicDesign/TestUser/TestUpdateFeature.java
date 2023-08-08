@@ -13,7 +13,7 @@ public class TestUpdateFeature {
 	@Test
 	public void testUpdateSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User(1, "maha12@gmail.com", "Mahasenthil", "Navee@123", "8072444056", "user");
+		User user1 = new User(3, "maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user");
 		try {
 			assertTrue(userService.updateUser(user1, "maha12@gmail.com"));
 		} catch (ServiceException e) {

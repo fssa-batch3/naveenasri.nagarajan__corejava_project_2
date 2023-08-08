@@ -3,13 +3,11 @@ package dynamicDesign.service;
 // import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import dynamicDesign.dao.DesignDAO;
 import dynamicDesign.dao.exception.DAOException;
 import dynamicDesign.model.Design;
 import dynamicDesign.service.exception.ServiceException;
-import dynamicDesign.validation.DesignValidator;
 
 public class DesignService {
 	public boolean createDesign(Design design) throws ServiceException {

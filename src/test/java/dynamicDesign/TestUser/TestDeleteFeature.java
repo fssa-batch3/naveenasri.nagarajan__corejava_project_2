@@ -15,7 +15,7 @@ public class TestDeleteFeature {
 		UserService userService = new UserService();
 		// Assuming a user with the email "babu@gmail.com" exists in the database
 		try {
-			User user = new User(1, "babu@gmail.com", "Babu", "Navee@123", "9876543123", "user", false);
+			User user = new User(3, "maha122@gmail.com", "Mahasenthil", "Navee@123", "9888844056", "user", false);
 			boolean isDeleted = userService.deleteUser(user);
 			assertTrue(isDeleted, "User deletion failed.");
 		} catch (ServiceException e) {

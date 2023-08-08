@@ -13,7 +13,7 @@ public class TestLoginFeature {
 	@Test
 	public void loginSuccess() {
 		UserService userService = new UserService();
-		String email = "maha12@gmail.com";
+		String email = "maha122@gmail.com";
 		String password = "Navee@123";
 		User user1 = new User(email, password);
 		try {

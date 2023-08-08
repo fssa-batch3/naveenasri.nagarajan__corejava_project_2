@@ -53,40 +53,40 @@ public class ArchitectDAO {
 		}
 	}
 
-//	public List<Architect> listArchitects() throws SQLException {
-//		List<Architect> architects = new ArrayList<>();
-//		Connection connection = getConnection();
-//		String query = "SELECT * FROM ARCHITECT";
-//		PreparedStatement pmt = connection.prepareStatement(query);
-//
-//		ResultSet resultSet = pmt.executeQuery();
-//
-//		while (resultSet.next()) {
-//			int architectID = resultSet.getInt("architectID");
-//			String profilePhoto = resultSet.getString("profilePhoto");
-//			String name = resultSet.getString("name");
-//			String gender = resultSet.getString("gender");
-//			String phoneNumber = resultSet.getString("phoneNumber");
-//			String address = resultSet.getString("address");
-//			String coverPhoto = resultSet.getString("coverPhoto");
-//			String email = resultSet.getString("email");
-//			String password = resultSet.getString("password");
-//			String education = resultSet.getString("education");
-//			int experience = resultSet.getInt("experience");
-//			String degreeCertificate = resultSet.getString("degreeCertificate");
-//			String NATACertificate = resultSet.getString("NATACertificate");
-//
-//			Architect architect = new Architect(architectID, profilePhoto, name, gender, phoneNumber, address,
-//					coverPhoto, email, password, education, experience, degreeCertificate, NATACertificate);
-//			architects.add(architect);
-//		}
-//
-//		resultSet.close();
-//		pmt.close();
-//		connection.close();
-//
-//		return architects;
-//	}
+	public List<Architect> listArchitects() throws SQLException {
+		List<Architect> architects = new ArrayList<>();
+		Connection connection = getConnection();
+		String query = "SELECT * FROM ARCHITECT";
+		PreparedStatement pmt = connection.prepareStatement(query);
+
+		ResultSet resultSet = pmt.executeQuery();
+
+		while (resultSet.next()) {
+			int architectID = resultSet.getInt("architectID");
+			String profilePhoto = resultSet.getString("profilePhoto");
+			String name = resultSet.getString("name");
+			String gender = resultSet.getString("gender");
+			String phoneNumber = resultSet.getString("phoneNumber");
+			String address = resultSet.getString("address");
+			String coverPhoto = resultSet.getString("coverPhoto");
+			String email = resultSet.getString("email");
+			String password = resultSet.getString("password");
+			String education = resultSet.getString("education");
+			int experience = resultSet.getInt("experience");
+			String degreeCertificate = resultSet.getString("degreeCertificate");
+			String NATACertificate = resultSet.getString("NATACertificate");
+
+			Architect architect = new Architect(architectID, profilePhoto, name, gender, phoneNumber, address,
+					coverPhoto, email, password, education, experience, degreeCertificate, NATACertificate);
+			architects.add(architect);
+		}
+
+		resultSet.close();
+		pmt.close();
+		connection.close();
+
+		return architects;
+	}
 
 	// Update architect information based on email
 	public boolean updateArchitect(Architect architect, String email) throws SQLException {

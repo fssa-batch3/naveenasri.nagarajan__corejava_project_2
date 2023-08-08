@@ -29,15 +29,17 @@ public class ArchitectService {
 			throw new ServiceException(e);
 		}
 	}
-//	public List<Architect> listArchitects() throws ServiceException {
-//		ArchitectDAO architectDAO = new ArchitectDAO();
-//
-//		try {
-//			return architectDAO.listArchitects();
-//		} catch (SQLException e) {
-//			throw new ServiceException(e);
-//		}
-//	}
+	
+	
+	public List<Architect> listArchitects() throws ServiceException {
+		ArchitectDAO architectDAO = new ArchitectDAO();
+
+		try {
+			return architectDAO.listArchitects();
+		} catch (SQLException e) {
+			throw new ServiceException(e);
+		}
+	}
 
 	public boolean updateArchitect(Architect architect, String email) throws ServiceException {
 		ArchitectDAO architectDAO = new ArchitectDAO();

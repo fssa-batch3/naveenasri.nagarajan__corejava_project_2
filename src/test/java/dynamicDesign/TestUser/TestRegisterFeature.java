@@ -14,7 +14,7 @@ public class TestRegisterFeature {
     @Test
     public void testRegistrationSuccess() {
         UserService userService = new UserService();
-        User user1 = new User(2, "maha12@gmail.com", "Maha12", "Navee@123", "9876543123", "user");
+        User user1 = new User(3, "maha122@gmail.com", "Maha12", "Navee@123", "9876543123", "user");
         try {
             assertTrue(userService.registerUser(user1));
         } catch (ServiceException e) {
