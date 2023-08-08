@@ -29,6 +29,10 @@ public class UserDAO {
 			DB_PASSWORD = env.get("DB_PASSWORD");
 		}
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
+		
+		
+		
+		
 	}
 
 	// Add new user to DB - Register
