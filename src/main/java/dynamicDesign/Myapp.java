@@ -1,5 +1,0 @@
-package dynamicDesign;
-
- class Myapp {
-
-}
