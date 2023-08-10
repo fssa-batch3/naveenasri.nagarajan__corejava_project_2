@@ -60,9 +60,8 @@ public class DesignDAO {
 		String query = "SELECT * FROM designs";
 		try (Connection connection = getConnection();
 
-				PreparedStatement pmt = connection.prepareStatement(query);ResultSet resultSet = pmt.executeQuery()) {
-
-			
+				PreparedStatement pmt = connection.prepareStatement(query);
+				ResultSet resultSet = pmt.executeQuery()) {
 
 			while (resultSet.next()) {
 				int designId = resultSet.getInt(1); // Use the correct column name here
