@@ -8,6 +8,7 @@ import com.fssa.dynamicDesign.model.Architect;
 import com.fssa.dynamicDesign.service.exception.ServiceException;
 import com.fssa.dynamicDesign.validation.ArchitectValidator;
 import com.fssa.dynamicDesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicDesign.validation.exception.InvalidUserException;
 
 public class ArchitectService {
 
@@ -27,6 +28,30 @@ public class ArchitectService {
 			return architectDAO.arcRegister(architect);
 		} catch (SQLException | InvalidArchitectException e) {
 			throw new ServiceException(e);
+		}
+	}
+
+	public boolean loginArchitect(Architect architect, String email) throws ServiceException {
+		try {
+			ArchitectValidator.validateEmail(email);
+			ArchitectValidator.validatePassword(architect.getPassword());
+
+			ArchitectDAO architectDAO = new ArchitectDAO();
+
+			if (!architectDAO.isEmailExists(email)) {
+				throw new ServiceException("Before logging in, you have to register");
+			}
+
+			if (architectDAO.login(architect, email)) {
+				System.out.println(email + " Successfully logged in");
+				return true;
+			} else {
+				return false;
+			}
+		} catch (ServiceException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new ServiceException(e.getLocalizedMessage());
 		}
 	}
 
@@ -61,21 +86,22 @@ public class ArchitectService {
 		}
 	}
 
-	
-	public boolean deleteArchitect(int architectId) throws ServiceException, InvalidArchitectException {
-		ArchitectDAO architectDAO = new ArchitectDAO();
+	public boolean deleteArchitect(Architect architect) throws ServiceException {
+	    ArchitectDAO architectDAO = new ArchitectDAO();
+	    try {
+	        if (architect == null) {
+	            throw new InvalidArchitectException("Architect is null");
+	        }
 
-		try {
-			// Check if the architectId is valid
-			if (architectId <= 0) {
-				throw new InvalidArchitectException("Invalid architect ID");
-			}
-			ArchitectValidator.validateArchitectID(architectId);
+	        if (!architectDAO.isEmailExists(architect.getEmail())) {
+	            throw new ServiceException("Architect with this email does not exist");
+	        }
 
-			return architectDAO.deleteArchitect(architectId);
-		} catch (SQLException e) {
-			throw new ServiceException(e);
-		}
+	        ArchitectValidator.validateDeleteArchitect(architect);
+	        return architectDAO.deleteArchitect(architect);
+	    } catch (InvalidArchitectException | SQLException e) {
+	        throw new ServiceException(e);
+	    }
 	}
 
 }

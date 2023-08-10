@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.dynamicDesign.model.Architect;
+import com.fssa.dynamicDesign.model.User;
 import com.fssa.dynamicDesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicDesign.validation.exception.InvalidUserException;
 
 public class ArchitectValidator {
 
@@ -194,6 +196,16 @@ public class ArchitectValidator {
 
 		System.out.println("URL is valid.");
 		return true;
+	}
+	
+	
+	public static boolean validateDeleteArchitect(Architect architect) throws InvalidArchitectException {
+		if (architect != null && architect.getArchitectID() > 0 && validateEmail(architect.getEmail())) {
+			System.out.println("Architect deletion details are valid.");
+			return true;
+		} else {
+			throw new InvalidArchitectException("Invalid Architect details for deletion");
+		}
 	}
 	
 }

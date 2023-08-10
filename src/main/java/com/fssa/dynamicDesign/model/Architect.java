@@ -54,7 +54,19 @@ public class Architect {
 		this.degreeCertificate = degreeCertificate;
 		NATACertificate = nATACertificate;
 	}
+	
+	public Architect(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
 
+	public Architect(String email, boolean isDeleted) {
+		super();
+		this.email = email;
+		this.isDeleted = isDeleted;
+	}
+	
 	public int getArchitectID() {
 		return architectID;
 	}
