@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.validation.ArchitectValidator;
 import com.fssa.dynamicDesign.validation.exception.InvalidArchitectException;
 
 public class TestValidateEducation {

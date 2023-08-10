@@ -1,6 +1,9 @@
 package com.fssa.dynamicDesign.TestDesign;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,8 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.fssa.dynamicDesign.dao.DesignDAO;
 import com.fssa.dynamicDesign.model.Design;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
 
 public class TestListDesign {
 	public static void main(String[] args) {
@@ -52,39 +55,31 @@ public class TestListDesign {
 		}
 	}
 
-//	@Test
-//	 public void testListDesignSuccess() {
-//	 	DesignDAO design1 = new DesignDAO();
-//	 	DesignService designService1 = new DesignService();
-//	 	try {
-//	 		assertTrue(designService1.createDesign(new Design("Modern design", "https://example.com/negative_id", 80.0, "user@example.com", 5)));
-//	 		List<Design> list = design1.listDesigns();
-//	 		assertNotNull(list);
-//	 	}catch(ServiceException e) {
-//	 		e.printStackTrace();
-//	 	}
+	@Test
+	public void testListDesignsNotEmptysuccess() {
+		DesignDAO designDAO = new DesignDAO();
 
-	// }
-	// @Test
-	// public void testListDesignFailure() {
-	// DesignDAO design1 = new DesignDAO();
-	// try {
-	// DesignService designService1 = new DesignService("Modern design",
-	// "https://example.com/negative_id", 80.0, "user@example.com", 5);
-	// assertFalse(designService1);
-	// }catch(ServiceException e) {
-	// e.printStackTrace();
-	// }
+		try {
+			List<Design> designs = designDAO.listDesigns();
+			assertNotNull(designs, "List of designs is null.");
+			assertTrue(!designs.isEmpty(), "List of designs is empty.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			fail("Exception occurred while fetching designs from the database.");
+		}
+	}
 
-	// ArrayList<Design> list = null;
+	@Test
+    public void testListDesignsNotEmptyFailure() {
+        DesignDAO designDAO = new DesignDAO();
 
-	// try {
-	// list = DesignDAO.listDesigns();
-
-	// }catch (DAOException e) {
-	// e.printStackTrace();
-	// }
-	// assertEquals(0, list.size());
-	// }
-
+        try {
+            List<Design> designs = designDAO.listDesigns();
+            assertNotNull(designs, "List of designs is null.");
+            assertFalse(designs.isEmpty(), "List of designs is empty.");
+        } catch (SQLException e) {
+            fail("Exception occurred while fetching designs from the database.");
+        }
+    }
+	
 }

@@ -3,6 +3,7 @@ package com.fssa.dynamicDesign.service;
 // import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.fssa.dynamicDesign.dao.DesignDAO;
 import com.fssa.dynamicDesign.dao.exception.DAOException;
@@ -14,13 +15,6 @@ import com.fssa.dynamicDesign.validation.exception.InvalidDesignException;
 
 public class DesignService {
 	public boolean createDesign(Design design) throws ServiceException {
-
-//		try {
-//			DesignValidator.validateDesign(design);
-//		} catch (InvalidDesignException e) {
-//			System.out.println("While creating Design The Design details should be valid");
-//			e.printStackTrace();
-//		}
 
 		DesignDAO designDAO = new DesignDAO();
 		try {
@@ -40,15 +34,15 @@ public class DesignService {
 		}
 	}
 
-//	public List<Design> listDesigns() throws ServiceException {
-//		DesignDAO designDAO = new DesignDAO();
-//
-//		try {
-//			return designDAO.listDesigns();
-//		} catch (SQLException e) {
-//			throw new ServiceException(e);
-//		}
-//	}
+	public List<Design> listDesigns() throws ServiceException {
+		DesignDAO designDAO = new DesignDAO();
+
+		try {
+			return designDAO.listDesigns();
+		} catch (SQLException e) {
+			throw new ServiceException(e);
+		}
+	}
 
 	public boolean updateDesign(Design design) throws ServiceException {
 		DesignDAO designDAO = new DesignDAO();

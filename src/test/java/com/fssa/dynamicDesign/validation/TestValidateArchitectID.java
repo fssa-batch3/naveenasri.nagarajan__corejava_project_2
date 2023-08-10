@@ -28,6 +28,7 @@ public class TestValidateArchitectID {
 			System.out.println("Invalid negative architect ID test passed.");
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
+			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for an invalid negative architect ID.");
 		}
 	}
@@ -50,6 +51,7 @@ public class TestValidateArchitectID {
 			System.out.println("Invalid non-numeric architect ID test passed.");
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
+			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for an invalid non-numeric architect ID.");
 		}
 	}

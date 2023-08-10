@@ -54,33 +54,35 @@ public class DesignDAO {
 		}
 	}
 
-//	// List all designs from the DB
-//	public List<Design> listDesigns() throws SQLException {
-//		List<Design> designs = new ArrayList<>();
-//		Connection connection = getConnection();
-//		String query = "SELECT * FROM designs";
-//		PreparedStatement pmt = connection.prepareStatement(query);
-//
-//		ResultSet resultSet = pmt.executeQuery();
-//
-//		while (resultSet.next()) {
-//			int designId = resultSet.getInt(1); // Use the correct column name here
-//			String designName = resultSet.getString("designname");
-//			String designUrl = resultSet.getString("designurl");
-//			double price = resultSet.getDouble("price");
-//			String email = resultSet.getString("email");
-//			int noOfRoom = resultSet.getInt("noofroom");
-//
-//			Design design = new Design(designId, designName, designUrl, price, email, noOfRoom);
-//			designs.add(design);
-//		}
-//
-//		resultSet.close();
-//		pmt.close();
-//		connection.close();
-//
-//		return designs;
-//	}
+	// List all designs from the DB
+	public List<Design> listDesigns() throws SQLException {
+		List<Design> designs = new ArrayList<>();
+		String query = "SELECT * FROM designs";
+		try (Connection connection = getConnection();
+
+				PreparedStatement pmt = connection.prepareStatement(query);ResultSet resultSet = pmt.executeQuery()) {
+
+			
+
+			while (resultSet.next()) {
+				int designId = resultSet.getInt(1); // Use the correct column name here
+				String designName = resultSet.getString("designname");
+				String designUrl = resultSet.getString("designurl");
+				double price = resultSet.getDouble("price");
+				String email = resultSet.getString("email");
+				int noOfRoom = resultSet.getInt("noofrooms");
+
+				Design design = new Design(designId, designName, designUrl, price, email, noOfRoom);
+				designs.add(design);
+			}
+
+			resultSet.close();
+			pmt.close();
+			connection.close();
+
+			return designs;
+		}
+	}
 
 	// Other methods and constructor
 
