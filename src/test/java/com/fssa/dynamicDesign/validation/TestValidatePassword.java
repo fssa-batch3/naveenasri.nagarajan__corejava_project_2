@@ -27,6 +27,7 @@ public class TestValidatePassword {
         try {
             assertFalse(UserValidator.validatePassword("Password@"));
             System.out.println("Invalid password without numbers test passed.");
+            fail();
         } catch (InvalidUserException e) {
             e.printStackTrace();
         }
@@ -37,6 +38,7 @@ public class TestValidatePassword {
         try {
             assertFalse(UserValidator.validatePassword("password123"));
             System.out.println("Invalid password without special characters test passed.");
+            fail();
         } catch (InvalidUserException e) {
             e.printStackTrace();
         }
@@ -47,6 +49,7 @@ public class TestValidatePassword {
         try {
             assertFalse(UserValidator.validatePassword("password123"));
             System.out.println("Invalid password without capital letters test passed.");
+            fail();
         } catch (InvalidUserException e) {
             e.printStackTrace();
         }
@@ -57,6 +60,7 @@ public class TestValidatePassword {
         try {
             assertFalse(UserValidator.validatePassword(""));
             System.out.println("Invalid password without Any letters test passed.");
+            fail();
         } catch (InvalidUserException e) {
             e.printStackTrace();
         }
@@ -67,6 +71,7 @@ public class TestValidatePassword {
         try {
             assertFalse(UserValidator.validatePassword("PASSWORD@123"));
             System.out.println("Invalid password without small letters test passed.");
+            fail();
         } catch (InvalidUserException e) {
             e.printStackTrace();
         }
@@ -77,6 +82,7 @@ public class TestValidatePassword {
         try {
             assertFalse(UserValidator.validatePassword("Pas@123"));
             System.out.println("Invalid password shorter length test passed.");
+            fail();
         } catch (InvalidUserException e) {
             e.printStackTrace();
         }

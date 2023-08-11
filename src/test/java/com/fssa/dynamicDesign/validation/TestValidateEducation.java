@@ -2,6 +2,7 @@ package com.fssa.dynamicDesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ public class TestValidateEducation {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid education.");
+			fail();
 		}
 	}
 
@@ -28,6 +30,7 @@ public class TestValidateEducation {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid education with spaces.");
+			fail();
 		}
 	}
 
@@ -36,6 +39,7 @@ public class TestValidateEducation {
 		try {
 			assertFalse(ArchitectValidator.validateEducation(null));
 			System.out.println("Invalid null education test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid null education.");
@@ -47,6 +51,7 @@ public class TestValidateEducation {
 		try {
 			assertFalse(ArchitectValidator.validateEducation(""));
 			System.out.println("Invalid empty education test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid empty education.");
@@ -58,6 +63,7 @@ public class TestValidateEducation {
 		try {
 			assertFalse(ArchitectValidator.validateEducation("PhD in Physics 123"));
 			System.out.println("Invalid education with numbers test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid education with numbers.");
@@ -69,6 +75,7 @@ public class TestValidateEducation {
 		try {
 			assertFalse(ArchitectValidator.validateEducation("High School Diploma @#$"));
 			System.out.println("Invalid education with special characters test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid education with special characters.");

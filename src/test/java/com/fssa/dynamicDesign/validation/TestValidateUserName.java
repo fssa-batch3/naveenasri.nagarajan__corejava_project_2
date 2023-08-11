@@ -2,6 +2,7 @@ package com.fssa.dynamicDesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ public class TestValidateUserName {
 			System.out.println("Valid user name test passed.");
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -25,6 +27,7 @@ public class TestValidateUserName {
 		try {
 			assertFalse(UserValidator.validateName("123InvalidUserName"));
 			System.out.println("Invalid user name starting with a number test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}
@@ -35,6 +38,7 @@ public class TestValidateUserName {
 		try {
 			assertFalse(UserValidator.validateName("Ab"));
 			System.out.println("Invalid user name shorter length test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}
@@ -45,6 +49,7 @@ public class TestValidateUserName {
 		try {
 			assertFalse(UserValidator.validateName("ThisIsAVeryLongUserNameThatExceedsTheLimit"));
 			System.out.println("Invalid user name longer length test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}
@@ -55,6 +60,7 @@ public class TestValidateUserName {
 		try {
 			assertFalse(UserValidator.validateName("Invalid User Name"));
 			System.out.println("Invalid user name with spaces test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}
@@ -65,6 +71,7 @@ public class TestValidateUserName {
 		try {
 			assertFalse(UserValidator.validateName("Invalid$UserName"));
 			System.out.println("Invalid user name with special characters test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}

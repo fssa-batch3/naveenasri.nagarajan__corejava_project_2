@@ -2,6 +2,7 @@ package com.fssa.dynamicDesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,7 @@ public class TestValidatePhoneNumber {
 			System.out.println("Valid phone number test passed.");
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -27,6 +29,7 @@ public class TestValidatePhoneNumber {
 			System.out.println("Valid phone number without country code test passed.");
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 
@@ -35,6 +38,7 @@ public class TestValidatePhoneNumber {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("+920987654321"));
 			System.out.println("Invalid phone number with invalid country code test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}
@@ -45,6 +49,7 @@ public class TestValidatePhoneNumber {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("987654321"));
 			System.out.println("Invalid phone number with invalid length test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}
@@ -55,6 +60,7 @@ public class TestValidatePhoneNumber {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("9876abcd12"));
 			System.out.println("Invalid phone number with non-numeric characters test passed.");
+			fail();
 		} catch (InvalidUserException e) {
 			e.printStackTrace();
 		}

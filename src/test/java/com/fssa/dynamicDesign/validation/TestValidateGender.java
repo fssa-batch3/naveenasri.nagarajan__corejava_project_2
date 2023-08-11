@@ -2,6 +2,7 @@ package com.fssa.dynamicDesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,7 @@ public class TestValidateGender {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid Male gender.");
+			fail();
 		}
 	}
 
@@ -29,6 +31,7 @@ public class TestValidateGender {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid Female gender.");
+			fail();
 		}
 	}
 
@@ -40,6 +43,7 @@ public class TestValidateGender {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid Other gender.");
+			fail();
 		}
 	}
 
@@ -48,6 +52,7 @@ public class TestValidateGender {
 		try {
 			assertFalse(ArchitectValidator.validateGender(null));
 			System.out.println("Invalid null gender test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid null gender.");
@@ -59,6 +64,7 @@ public class TestValidateGender {
 		try {
 			assertFalse(ArchitectValidator.validateGender("NonAllowed"));
 			System.out.println("Invalid non-allowed gender test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid non-allowed gender.");
@@ -70,6 +76,7 @@ public class TestValidateGender {
 		try {
 			assertFalse(ArchitectValidator.validateGender("mAle"));
 			System.out.println("Invalid mixed-case gender test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid mixed-case gender.");

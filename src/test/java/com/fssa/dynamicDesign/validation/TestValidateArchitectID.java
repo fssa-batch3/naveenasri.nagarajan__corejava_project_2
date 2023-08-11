@@ -2,6 +2,7 @@ package com.fssa.dynamicDesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,7 @@ public class TestValidateArchitectID {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid architect ID.");
+			fail();
 		}
 	}
 
@@ -26,6 +28,7 @@ public class TestValidateArchitectID {
 		try {
 			assertFalse(ArchitectValidator.validateArchitectID(-123));
 			System.out.println("Invalid negative architect ID test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			e.printStackTrace();
@@ -41,6 +44,7 @@ public class TestValidateArchitectID {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid zero architect ID.");
+			fail();
 		}
 	}
 
@@ -49,6 +53,7 @@ public class TestValidateArchitectID {
 		try {
 			assertFalse(ArchitectValidator.validateArchitectID(Integer.parseInt("-1"))); // -1 as a string
 			System.out.println("Invalid non-numeric architect ID test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			e.printStackTrace();
@@ -64,6 +69,7 @@ public class TestValidateArchitectID {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid large architect ID.");
+			fail();
 		}
 	}
 }

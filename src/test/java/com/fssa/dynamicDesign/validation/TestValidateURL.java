@@ -28,6 +28,7 @@ public class TestValidateURL {
         try {
             assertFalse(ArchitectValidator.validateURL(""));
             System.out.println("Invalid empty URL test passed.");
+            fail();
         } catch (InvalidArchitectException e) {
             e.printStackTrace();
         }
@@ -38,6 +39,7 @@ public class TestValidateURL {
         try {
             assertFalse(ArchitectValidator.validateURL("   "));
             System.out.println("Invalid WhiteSpace URL test passed.");
+            fail();
         } catch (InvalidArchitectException e) {
             e.printStackTrace();
         }
@@ -48,6 +50,7 @@ public class TestValidateURL {
         try {
             assertFalse(ArchitectValidator.validateURL(null));
             System.out.println("Invalid null URL test passed.");
+            fail();
         } catch (InvalidArchitectException e) {
             e.printStackTrace();
         }

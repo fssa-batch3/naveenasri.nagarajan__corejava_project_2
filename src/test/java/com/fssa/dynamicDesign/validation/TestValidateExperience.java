@@ -2,6 +2,7 @@ package com.fssa.dynamicDesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,7 @@ public class TestValidateExperience {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid experience.");
+			fail();
 		}
 	}
 
@@ -29,6 +31,7 @@ public class TestValidateExperience {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid single-digit experience.");
+			fail();
 		}
 	}
 
@@ -37,6 +40,7 @@ public class TestValidateExperience {
 		try {
 			assertFalse(ArchitectValidator.validateExperience(-3));
 			System.out.println("Invalid negative experience test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid negative experience.");
@@ -48,6 +52,7 @@ public class TestValidateExperience {
 		try {
 			assertFalse(ArchitectValidator.validateExperience(Integer.parseInt("-1"))); // -1 as a string
 			System.out.println("Invalid non-numeric experience test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid non-numeric experience.");
@@ -59,6 +64,7 @@ public class TestValidateExperience {
 		try {
 			assertFalse(ArchitectValidator.validateExperience(123));
 			System.out.println("Invalid three-digit experience test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid three-digit experience.");

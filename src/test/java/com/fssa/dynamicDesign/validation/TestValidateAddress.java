@@ -31,6 +31,7 @@ public class TestValidateAddress {
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid address with special characters.");
+			fail();
 		}
 	}
 
@@ -39,6 +40,7 @@ public class TestValidateAddress {
 		try {
 			assertFalse(ArchitectValidator.validateAddress(null));
 			System.out.println("Invalid null address test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid null address.");
@@ -50,6 +52,7 @@ public class TestValidateAddress {
 		try {
 			assertFalse(ArchitectValidator.validateAddress(""));
 			System.out.println("Invalid empty address test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid empty address.");
@@ -61,6 +64,7 @@ public class TestValidateAddress {
 		try {
 			assertFalse(ArchitectValidator.validateAddress("   "));
 			System.out.println("Invalid whitespace-only address test passed.");
+			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid whitespace-only address.");
