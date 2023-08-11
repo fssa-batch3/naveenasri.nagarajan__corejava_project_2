@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.validation.exception;
+package com.fssa.dynamicdesign.validation.exception;
 
 public class InvalidArchitectException extends Exception {
 

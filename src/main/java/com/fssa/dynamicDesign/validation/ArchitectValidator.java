@@ -1,12 +1,12 @@
-package com.fssa.dynamicDesign.validation;
+package com.fssa.dynamicdesign.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.dynamicDesign.model.Architect;
-import com.fssa.dynamicDesign.model.User;
-import com.fssa.dynamicDesign.validation.exception.InvalidArchitectException;
-import com.fssa.dynamicDesign.validation.exception.InvalidUserException;
+import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.model.User;
+import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class ArchitectValidator {
 

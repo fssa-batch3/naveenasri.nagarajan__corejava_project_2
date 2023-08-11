@@ -1,14 +1,14 @@
-package com.fssa.dynamicDesign.TestDesign;
+package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.service.DesignService;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.service.DesignService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestDeleteDesign {
+public class TestDesignDeleteFeature {
 
 	@Test
 	public void testDeleteDesignSuccess() {

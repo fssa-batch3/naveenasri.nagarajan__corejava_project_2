@@ -1,12 +1,12 @@
-package com.fssa.dynamicDesign.service;
+package com.fssa.dynamicdesign.service;
 
 import java.sql.SQLException;
 
-import com.fssa.dynamicDesign.dao.UserDAO;
-import com.fssa.dynamicDesign.model.User;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
-import com.fssa.dynamicDesign.validation.UserValidator;
-import com.fssa.dynamicDesign.validation.exception.InvalidUserException;
+import com.fssa.dynamicdesign.dao.UserDAO;
+import com.fssa.dynamicdesign.model.User;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.validation.UserValidator;
+import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class UserService {
 

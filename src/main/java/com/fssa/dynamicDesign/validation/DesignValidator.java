@@ -1,9 +1,9 @@
-package com.fssa.dynamicDesign.validation;
+package com.fssa.dynamicdesign.validation;
 
 import java.util.regex.Pattern;
 
-import com.fssa.dynamicDesign.model.Design;
-import com.fssa.dynamicDesign.validation.exception.InvalidDesignException;
+import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 public class DesignValidator {
 

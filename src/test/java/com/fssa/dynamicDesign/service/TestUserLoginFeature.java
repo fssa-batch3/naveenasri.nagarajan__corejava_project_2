@@ -1,14 +1,14 @@
-package com.fssa.dynamicDesign.TestUser;
+package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.model.User;
-import com.fssa.dynamicDesign.service.UserService;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.model.User;
+import com.fssa.dynamicdesign.service.UserService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestLoginFeature {
+public class TestUserLoginFeature {
 
 	@Test
 	public void loginSuccess() {
@@ -25,7 +25,7 @@ public class TestLoginFeature {
 	}
 
 	@Test
-	public void loginFailed() {
+	public void testEmailNotExists() {
 		UserService userService = new UserService();
 		String email = "ahkbkj@gmail.com";
 		String password = "Password@796";

@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.validation;
+package com.fssa.dynamicdesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.validation.ArchitectValidator;
-import com.fssa.dynamicDesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicdesign.validation.ArchitectValidator;
+import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
 public class TestValidateURL {
 

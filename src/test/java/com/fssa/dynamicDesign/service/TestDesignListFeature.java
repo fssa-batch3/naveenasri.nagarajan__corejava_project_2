@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.TestDesign;
+package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -14,10 +14,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.dao.DesignDAO;
-import com.fssa.dynamicDesign.model.Design;
+import com.fssa.dynamicdesign.dao.DesignDAO;
+import com.fssa.dynamicdesign.model.Design;
 
-public class TestListDesign {
+public class TestDesignListFeature {
 	public static void main(String[] args) {
 
 		String selectQuery = "SELECT * FROM designs"; // Change the table name to 'designs'

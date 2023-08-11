@@ -1,6 +1,7 @@
-package com.fssa.dynamicDesign.TestArchitect;
+package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -11,12 +12,12 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.dao.ArchitectDAO;
-import com.fssa.dynamicDesign.model.Architect;
-import com.fssa.dynamicDesign.service.ArchitectService;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.dao.ArchitectDAO;
+import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.service.ArchitectService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestArchitectList {
+public class TestArchitectListFeature {
 
 
 	@Test
@@ -30,6 +31,7 @@ public class TestArchitectList {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        Assertions.fail("Exception occurred while fetching architects from the database.");
+	        fail();
 	    }
 	}
 
@@ -44,7 +46,7 @@ public class TestArchitectList {
 			Assertions.assertFalse(architects.isEmpty(), "List of architects is not empty.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			Assertions.fail("Exception occurred while fetching architects from the service.");
+			fail("Exception occurred while fetching architects from the service.");
 		}
 	}
 

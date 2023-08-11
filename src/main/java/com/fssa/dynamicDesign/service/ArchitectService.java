@@ -1,14 +1,14 @@
-package com.fssa.dynamicDesign.service;
+package com.fssa.dynamicdesign.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.fssa.dynamicDesign.dao.ArchitectDAO;
-import com.fssa.dynamicDesign.model.Architect;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
-import com.fssa.dynamicDesign.validation.ArchitectValidator;
-import com.fssa.dynamicDesign.validation.exception.InvalidArchitectException;
-import com.fssa.dynamicDesign.validation.exception.InvalidUserException;
+import com.fssa.dynamicdesign.dao.ArchitectDAO;
+import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.validation.ArchitectValidator;
+import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class ArchitectService {
 

@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.dao;
+package com.fssa.dynamicdesign.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.fssa.dynamicDesign.model.User;
+import com.fssa.dynamicdesign.model.User;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -28,9 +28,8 @@ public class UserDAO {
 			DB_USER = env.get("DB_USER");
 			DB_PASSWORD = env.get("DB_PASSWORD");
 		}
-		 return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
-		//return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
-
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
+		// return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
 
 	}
 
@@ -39,8 +38,7 @@ public class UserDAO {
 
 		String query = "INSERT INTO USER (userId, email, userName, password, phoneNumber, type) VALUES (?, ?, ?, ?, ?, ?)";
 
-		try (Connection connection = getConnection(); 
-				PreparedStatement pmt = connection.prepareStatement(query)) {
+		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setInt(1, user.getUserId()); // Set the userId during registration
 			pmt.setString(2, user.getEmail());
 			pmt.setString(3, user.getUsername());

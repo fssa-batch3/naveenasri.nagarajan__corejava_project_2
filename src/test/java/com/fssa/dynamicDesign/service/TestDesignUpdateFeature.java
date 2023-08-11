@@ -1,15 +1,15 @@
-package com.fssa.dynamicDesign.TestDesign;
+package com.fssa.dynamicdesign.service;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.model.Design;
-import com.fssa.dynamicDesign.service.DesignService;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
-import com.fssa.dynamicDesign.validation.exception.InvalidDesignException;
+import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.service.DesignService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TestUpdateDesign {
+public class TestDesignUpdateFeature {
 
 	@Test
 	public void testUpdateDesignSuccess() {

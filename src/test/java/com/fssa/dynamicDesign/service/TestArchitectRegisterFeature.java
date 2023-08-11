@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.TestArchitect;
+package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.model.Architect;
-import com.fssa.dynamicDesign.service.ArchitectService;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.service.ArchitectService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestArchitectRegister {
+public class TestArchitectRegisterFeature {
 
 	@Test
 	public void testArchitectRegistrationSuccess() {

@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.model;
+package com.fssa.dynamicdesign.model;
 
 public class Architect {
 	private int architectID;

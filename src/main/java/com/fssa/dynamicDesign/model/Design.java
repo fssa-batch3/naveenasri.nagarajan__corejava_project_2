@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.model;
+package com.fssa.dynamicdesign.model;
 
 public class Design {
 	private Integer designId;

@@ -1,17 +1,17 @@
-package com.fssa.dynamicDesign.service;
+package com.fssa.dynamicdesign.service;
 
 // import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.fssa.dynamicDesign.dao.DesignDAO;
-import com.fssa.dynamicDesign.dao.exception.DAOException;
-import com.fssa.dynamicDesign.model.Design;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
-import com.fssa.dynamicDesign.validation.DesignValidator;
-import com.fssa.dynamicDesign.validation.UserValidator;
-import com.fssa.dynamicDesign.validation.exception.InvalidDesignException;
+import com.fssa.dynamicdesign.dao.DesignDAO;
+import com.fssa.dynamicdesign.dao.exception.DAOException;
+import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.validation.DesignValidator;
+import com.fssa.dynamicdesign.validation.UserValidator;
+import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 public class DesignService {
 	public boolean createDesign(Design design) throws ServiceException {

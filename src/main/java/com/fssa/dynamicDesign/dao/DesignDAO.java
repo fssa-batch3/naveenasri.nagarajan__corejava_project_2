@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.dao;
+package com.fssa.dynamicdesign.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.fssa.dynamicDesign.dao.exception.DAOException;
-import com.fssa.dynamicDesign.model.Design;
+import com.fssa.dynamicdesign.dao.exception.DAOException;
+import com.fssa.dynamicdesign.model.Design;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

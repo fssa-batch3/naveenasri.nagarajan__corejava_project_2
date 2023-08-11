@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.service.exception;
+package com.fssa.dynamicdesign.service.exception;
 
  public class ServiceException extends Exception {
 

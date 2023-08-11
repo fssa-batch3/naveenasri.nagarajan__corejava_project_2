@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.dao.exception;
+package com.fssa.dynamicdesign.dao.exception;
 
 
 public class DAOException extends Exception {

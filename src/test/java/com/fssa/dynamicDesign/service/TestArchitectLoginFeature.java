@@ -1,17 +1,17 @@
-package com.fssa.dynamicDesign.TestArchitect;
+package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.model.Architect;
-import com.fssa.dynamicDesign.service.ArchitectService;
-import com.fssa.dynamicDesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.service.ArchitectService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 public class TestArchitectLoginFeature {
 
 	@Test
-	public void loginSuccess() {
+	public void testloginSuccess() {
 		ArchitectService architectService = new ArchitectService();
 		String email = "ajai@example.com";
 		String password = "Navee@123";
@@ -25,7 +25,7 @@ public class TestArchitectLoginFeature {
 	}
 
 	@Test
-	public void loginFailed() {
+	public void testEmailNotExists() {
 		ArchitectService architectService = new ArchitectService();
 		String email = "nonexisting@gmail.com";
 		String password = "Password@796";

@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.validation;
+package com.fssa.dynamicdesign.validation;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicDesign.validation.UserValidator;
-import com.fssa.dynamicDesign.validation.exception.InvalidUserException;
+import com.fssa.dynamicdesign.validation.UserValidator;
+import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class TestValidateUserName {
 

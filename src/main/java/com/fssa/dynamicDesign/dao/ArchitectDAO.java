@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign.dao;
+package com.fssa.dynamicdesign.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fssa.dynamicDesign.model.Architect;
+import com.fssa.dynamicdesign.model.Architect;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

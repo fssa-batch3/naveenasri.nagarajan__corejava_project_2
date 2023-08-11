@@ -1,4 +1,4 @@
-package com.fssa.dynamicDesign;
+package com.fssa.dynamicdesign;
 
  class Myapp {
 
