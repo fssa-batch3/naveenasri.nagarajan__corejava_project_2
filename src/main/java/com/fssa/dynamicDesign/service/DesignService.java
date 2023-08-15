@@ -1,7 +1,5 @@
 package com.fssa.dynamicdesign.service;
 
-// import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,7 +8,6 @@ import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Design;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.validation.DesignValidator;
-import com.fssa.dynamicdesign.validation.UserValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 public class DesignService {
@@ -55,12 +52,7 @@ public class DesignService {
 			DesignValidator.validateDesign(design);
 
 			return designDAO.updateDesign(design);
-		} 
-//		catch (InvalidDesignException e) {
-//			System.out.println("While Updating Design The Design details should be valid");
-//			throw new InvalidDesignException(e);
-//		} 
-		catch (SQLException | InvalidDesignException e) {
+		} catch (SQLException | InvalidDesignException e) {
 			throw new ServiceException(e);
 		}
 	}
@@ -71,7 +63,7 @@ public class DesignService {
 		try {
 			DesignValidator.isValidDesignId(designId);
 			return designDAO.deleteDesign(designId);
-		} catch (SQLException | InvalidDesignException  e) {
+		} catch (SQLException | InvalidDesignException e) {
 			throw new ServiceException(e);
 		}
 	}

@@ -32,7 +32,7 @@ public class ArchitectDAO {
 			DB_PASSWORD = env.get("DB_PASSWORD");
 		}
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
-		//return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
+		// return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
 	}
 
 	public boolean arcRegister(Architect architect) throws SQLException {
@@ -69,17 +69,17 @@ public class ArchitectDAO {
 			return rs.next(); // If a row is found, the email exists
 		}
 	}
-	
+
 	public boolean login(Architect architect, String email) throws SQLException {
-        String query = "SELECT * FROM ARCHITECT WHERE email = ? AND password = ?";
-        try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
-            pmt.setString(1, email); // Use provided email for the query
-            pmt.setString(2, architect.getPassword());
-            try (ResultSet rs = pmt.executeQuery()) {
-                return rs.next(); // If a row is found, authentication is successful
-            }
-        }
-    }
+		String query = "SELECT * FROM ARCHITECT WHERE email = ? AND password = ?";
+		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
+			pmt.setString(1, email); // Use provided email for the query
+			pmt.setString(2, architect.getPassword());
+			try (ResultSet rs = pmt.executeQuery()) {
+				return rs.next(); // If a row is found, authentication is successful
+			}
+		}
+	}
 
 	public List<Architect> listArchitects() throws SQLException {
 		List<Architect> architects = new ArrayList<>();
@@ -109,8 +109,6 @@ public class ArchitectDAO {
 			}
 
 			resultSet.close();
-			pmt.close();
-			connection.close();
 
 			return architects;
 		}
@@ -134,9 +132,7 @@ public class ArchitectDAO {
 			pmt.setString(11, email); // Use the provided email parameter for WHERE clause
 			int rows = pmt.executeUpdate();
 
-			// Return successful or not
-			pmt.close();
-			connection.close();
+	
 
 			return rows == 1;
 		}

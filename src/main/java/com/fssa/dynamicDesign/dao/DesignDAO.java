@@ -76,10 +76,6 @@ public class DesignDAO {
 				designs.add(design);
 			}
 
-			resultSet.close();
-			pmt.close();
-			connection.close();
-
 			return designs;
 		}
 	}
