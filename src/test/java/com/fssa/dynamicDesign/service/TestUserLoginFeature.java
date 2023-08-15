@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.User;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestUserLoginFeature {
+ class TestUserLoginFeature {
 
 	@Test
-	public void loginSuccess() {
+	 void loginSuccess() {
 		UserService userService = new UserService();
 		String email = "maha122@gmail.com";
 		String password = "Navee@123";
@@ -24,7 +24,7 @@ public class TestUserLoginFeature {
 	}
 
 	@Test
-	public void testEmailNotExists() {
+	 void testEmailNotExists() {
 		UserService userService = new UserService();
 		String email = "ahkbkj@gmail.com";
 		String password = "Password@796";
@@ -40,7 +40,7 @@ public class TestUserLoginFeature {
 	
 
 	@Test
-	public void testLoginEmailCheck() {
+	 void testLoginEmailCheck() {
 		UserService userService = new UserService();
 		String email = "invalidemail"; // Invalid email format
 		String password = "Navee@123";
@@ -54,7 +54,7 @@ public class TestUserLoginFeature {
 	}
 
 	@Test
-	public void testLoginNullUser() {
+	 void testLoginNullUser() {
 		UserService userService = new UserService();
 		try {
 			userService.loginUser(null, "maha12@gmail.com"); // Expecting login failure
@@ -65,7 +65,7 @@ public class TestUserLoginFeature {
 	}
 	
 //	@Test
-//	public void testLoginPasswordCheck() {
+//	 void testLoginPasswordCheck() {
 //		UserService userService = new UserService();
 //		String email = "maha12@gmail.com";
 //		String password = "navee@123"; // Incorrect password format

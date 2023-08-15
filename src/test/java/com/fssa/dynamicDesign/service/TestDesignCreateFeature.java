@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.Design;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestDesignCreateFeature {
+ class TestDesignCreateFeature {
 
 	@Test
-	public void testCreateDesignSuccess() {
+	 void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
 		Design design1 = new Design(199, "Living Room Design", "https://example.com/design1", 100.0, "user@example.com",
 				1);
@@ -26,7 +26,7 @@ public class TestDesignCreateFeature {
 	}
 
 	@Test
-	public void testNegativePriceValue() {
+	 void testNegativePriceValue() {
 		DesignService designService = new DesignService();
 		Design design = new Design(1, "Modern design", "https://example.com/negative_price", -50.0, "user@example.com",
 				3);
@@ -39,7 +39,7 @@ public class TestDesignCreateFeature {
 	}
 
 	@Test
-	public void testNegativeRooms() {
+	 void testNegativeRooms() {
 		DesignService designService = new DesignService();
 		Design design = new Design(1, "Modern design", "https://example.com/negative_id", 80.0, "user@example.com", -5);
 		try {
@@ -51,7 +51,7 @@ public class TestDesignCreateFeature {
 	}
 
 	@Test
-	public void testNullDesignObject() {
+	 void testNullDesignObject() {
 		DesignService designService = new DesignService();
 		Design design = null;
 		try {

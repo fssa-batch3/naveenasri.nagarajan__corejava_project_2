@@ -56,7 +56,7 @@ public class TestDesignListFeature {
 	}
 
 	@Test
-	public void testListDesignsNotEmptysuccess() {
+	 void testListDesignsNotEmptysuccess() {
 		DesignDAO designDAO = new DesignDAO();
 
 		try {
@@ -70,7 +70,7 @@ public class TestDesignListFeature {
 	}
 
 	@Test
-    public void testListDesignsNotEmptyFailure() {
+     void testListDesignsNotEmptyFailure() {
         DesignDAO designDAO = new DesignDAO();
 
         try {

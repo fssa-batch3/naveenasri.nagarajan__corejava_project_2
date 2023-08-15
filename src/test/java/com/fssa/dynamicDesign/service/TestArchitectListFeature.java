@@ -12,11 +12,11 @@ import com.fssa.dynamicdesign.dao.ArchitectDAO;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestArchitectListFeature {
+ class TestArchitectListFeature {
 
 
 	@Test
-	public void testListArchitectsNotEmptyTrue() {
+	 void testListArchitectsNotEmptyTrue() {
 	    ArchitectDAO architectDAO = new ArchitectDAO();
 
 	    try {
@@ -32,7 +32,7 @@ public class TestArchitectListFeature {
 
 
 	@Test
-	public void testListArchitects() {
+	 void testListArchitects() {
 		ArchitectService architectService = new ArchitectService();
 
 		try {

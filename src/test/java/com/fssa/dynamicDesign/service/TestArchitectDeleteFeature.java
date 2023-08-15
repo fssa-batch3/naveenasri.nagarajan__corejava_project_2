@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestArchitectDeleteFeature {
+ class TestArchitectDeleteFeature {
 
 	@Test
-	public void testDeleteArchitectSuccess() {
+	 void testDeleteArchitectSuccess() {
 		ArchitectService architectService = new ArchitectService();
 		// Assuming an architect with the email "architect@gmail.com" exists in the
 		// database
@@ -29,7 +29,7 @@ public class TestArchitectDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteNonExistingArchitect() {
+	 void testDeleteNonExistingArchitect() {
 		ArchitectService architectService = new ArchitectService();
 		// Assuming an architect with the email "nonexisting@example.com" does not exist
 		// in the database
@@ -44,7 +44,7 @@ public class TestArchitectDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteArchitectWithInvalidArchitectId() {
+	 void testDeleteArchitectWithInvalidArchitectId() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = new Architect(-1, "profile.jpg", "Architect Name", "Male", "9876543210", "Address",
 				"cover.jpg", "architect@gmail.com", "Architect@123", "B.Arch", 5, "degree.pdf", "nata.pdf", false);

@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
-public class TestValidatePassword {
+ class TestValidatePassword {
 
     @Test
-    public void testValidPassword() {
+     void testValidPassword() {
         try {
             assertTrue(UserValidator.validatePassword("Password@123"));
             System.out.println("Valid password test passed.");
@@ -22,7 +22,7 @@ public class TestValidatePassword {
     }
 
     @Test
-    public void testInvalidPasswordWithoutNumbers() {
+     void testInvalidPasswordWithoutNumbers() {
         try {
             assertFalse(UserValidator.validatePassword("Password@"));
             System.out.println("Invalid password without numbers test passed.");
@@ -33,7 +33,7 @@ public class TestValidatePassword {
     }
 
     @Test
-    public void testInvalidPasswordWithoutSpecialCharacters() {
+     void testInvalidPasswordWithoutSpecialCharacters() {
         try {
             assertFalse(UserValidator.validatePassword("password123"));
             System.out.println("Invalid password without special characters test passed.");
@@ -44,7 +44,7 @@ public class TestValidatePassword {
     }
 
     @Test
-    public void testInvalidPasswordWithoutCapitalLetters() {
+     void testInvalidPasswordWithoutCapitalLetters() {
         try {
             assertFalse(UserValidator.validatePassword("password123"));
             System.out.println("Invalid password without capital letters test passed.");
@@ -55,7 +55,7 @@ public class TestValidatePassword {
     }
 
     @Test
-    public void testInvalidPasswordWithoutAnyLetters() {
+     void testInvalidPasswordWithoutAnyLetters() {
         try {
             assertFalse(UserValidator.validatePassword(""));
             System.out.println("Invalid password without Any letters test passed.");
@@ -66,7 +66,7 @@ public class TestValidatePassword {
     }
     
     @Test
-    public void testInvalidPasswordWithoutSmallLetters() {
+     void testInvalidPasswordWithoutSmallLetters() {
         try {
             assertFalse(UserValidator.validatePassword("PASSWORD@123"));
             System.out.println("Invalid password without small letters test passed.");
@@ -77,7 +77,7 @@ public class TestValidatePassword {
     }
 
     @Test
-    public void testInvalidPasswordShorterLength() {
+     void testInvalidPasswordShorterLength() {
         try {
             assertFalse(UserValidator.validatePassword("Pas@123"));
             System.out.println("Invalid password shorter length test passed.");

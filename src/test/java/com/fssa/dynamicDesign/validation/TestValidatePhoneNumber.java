@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
-public class TestValidatePhoneNumber {
+ class TestValidatePhoneNumber {
 
 	@Test
-	public void testValidPhoneNumber() {
+	 void testValidPhoneNumber() {
 		try {
 			assertTrue(UserValidator.validatePhoneNumber("+919876543210"));
 			System.out.println("Valid phone number test passed.");
@@ -22,7 +22,7 @@ public class TestValidatePhoneNumber {
 	}
 
 	@Test
-	public void testValidPhoneNumberWithoutCountryCode() {
+	 void testValidPhoneNumberWithoutCountryCode() {
 		try {
 			assertTrue(UserValidator.validatePhoneNumber("9876543210"));
 			System.out.println("Valid phone number without country code test passed.");
@@ -33,7 +33,7 @@ public class TestValidatePhoneNumber {
 	}
 
 	@Test
-	public void testInvalidPhoneNumberWithInvalidCountryCode() {
+	 void testInvalidPhoneNumberWithInvalidCountryCode() {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("+920987654321"));
 			System.out.println("Invalid phone number with invalid country code test passed.");
@@ -44,7 +44,7 @@ public class TestValidatePhoneNumber {
 	}
 
 	@Test
-	public void testInvalidPhoneNumberWithInvalidLength() {
+	 void testInvalidPhoneNumberWithInvalidLength() {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("987654321"));
 			System.out.println("Invalid phone number with invalid length test passed.");
@@ -55,7 +55,7 @@ public class TestValidatePhoneNumber {
 	}
 
 	@Test
-	public void testInvalidPhoneNumberWithNonNumericCharacters() {
+	 void testInvalidPhoneNumberWithNonNumericCharacters() {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("9876abcd12"));
 			System.out.println("Invalid phone number with non-numeric characters test passed.");

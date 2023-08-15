@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestArchitectRegisterFeature {
+ class TestArchitectRegisterFeature {
 
 	@Test
-	public void testArchitectRegistrationSuccess() {
+	 void testArchitectRegistrationSuccess() {
 		ArchitectService architectService = new ArchitectService();
 
 		// Create a sample valid architect
@@ -31,7 +31,7 @@ public class TestArchitectRegisterFeature {
 	}
 
 	@Test
-	public void testArchitectRegistrationValidURLs() {
+	 void testArchitectRegistrationValidURLs() {
 		ArchitectService architectService = new ArchitectService();
 		// ********************** Important ******************
 		// change ArchitectID , Email , Architect Name
@@ -50,7 +50,7 @@ public class TestArchitectRegisterFeature {
 	}
 
 	@Test
-	public void testArchitectRegistrationNullName() {
+	 void testArchitectRegistrationNullName() {
 		ArchitectService architectService = new ArchitectService();
 
 		// Create a sample architect with invalid details (missing required fields)
@@ -67,7 +67,7 @@ public class TestArchitectRegisterFeature {
 	}
 
 	@Test
-	public void testArchitectRegistrationEmailExists() {
+	 void testArchitectRegistrationEmailExists() {
 		ArchitectService architectService = new ArchitectService();
 
 		// Create a sample architect with an email that already exists in the database
@@ -84,7 +84,7 @@ public class TestArchitectRegisterFeature {
 	}
 
 	@Test
-	public void testArchitectRegistrationInvalidURLs() {
+	 void testArchitectRegistrationInvalidURLs() {
 		ArchitectService architectService = new ArchitectService();
 
 		// Create a sample architect with invalid URLs for profile photo, cover photo,
@@ -101,7 +101,7 @@ public class TestArchitectRegisterFeature {
 	}
 
 //	@Test
-//	public void testArchitectRegistrationInvalidExperience() {
+//	 void testArchitectRegistrationInvalidExperience() {
 //		ArchitectService architectService = new ArchitectService();
 //
 //		// Create a sample architect with negative experience
@@ -117,7 +117,7 @@ public class TestArchitectRegisterFeature {
 //	}
 
 //    @Test
-//    public void testArchitectRegistrationEmptyEmailExists() {
+//     void testArchitectRegistrationEmptyEmailExists() {
 //        ArchitectService architectService = new ArchitectService();
 //
 //        // Create a sample architect with an email that already exists in the database

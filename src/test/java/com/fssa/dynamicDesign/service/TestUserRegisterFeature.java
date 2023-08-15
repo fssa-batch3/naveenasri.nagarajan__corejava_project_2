@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.User;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestUserRegisterFeature {
+ class TestUserRegisterFeature {
 
 	@Test
-	public void testRegistrationSuccess() {
+	 void testRegistrationSuccess() {
 		UserService userService = new UserService();
 		// email is not repeating so give unique email
 		//********************** Important ******************
@@ -28,7 +28,7 @@ public class TestUserRegisterFeature {
 	}
 
 	@Test
-	public void testRegistrationNullPassword() {
+	 void testRegistrationNullPassword() {
 		UserService userService = new UserService();
 		User user = new User(5, "JohnDoe", null, "john@example.com", "8565473543", "user");
 		try {
@@ -40,7 +40,7 @@ public class TestUserRegisterFeature {
 	}
 
 	@Test
-	public void testRegistrationNullUser() {
+	 void testRegistrationNullUser() {
 		UserService userService = new UserService();
 		try {
 			userService.registerUser(null);
@@ -51,7 +51,7 @@ public class TestUserRegisterFeature {
 	}
 
 //    @Test
-//    public void testRegistrationEmailEmpty() {
+//     void testRegistrationEmailEmpty() {
 //        UserService userService = new UserService();
 //        User user1 = new User(2, "", "Babu", "Babu@123", "9876543123", "user");
 //        try {
@@ -63,7 +63,7 @@ public class TestUserRegisterFeature {
 //    }
 //
 //    @Test
-//    public void testRegistrationPhoneNumberInvalid() {
+//     void testRegistrationPhoneNumberInvalid() {
 //        UserService userService = new UserService();
 //        User user1 = new User(3, "babu@gmail.com", "Babu", "Babu@123", "987654h123", "user");
 //        try {
@@ -75,7 +75,7 @@ public class TestUserRegisterFeature {
 //    }
 //
 //    @Test
-//    public void testRegistrationEmptyPassword() {
+//     void testRegistrationEmptyPassword() {
 //        UserService userService = new UserService();
 //        User user = new User(4, "JohnDoe", "", "john@example.com", "8565473543", "user");
 //        try {
@@ -87,7 +87,7 @@ public class TestUserRegisterFeature {
 //    }
 
 //    @Test
-//    public void testRegistrationEmptyUsername() {
+//     void testRegistrationEmptyUsername() {
 //        UserService userService = new UserService();
 //        User user = new User(6, "", "P@ssw0rd", "john@example.com", "8565473543", "user");
 //        try {

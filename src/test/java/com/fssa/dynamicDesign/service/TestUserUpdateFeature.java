@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.User;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestUserUpdateFeature {
+ class TestUserUpdateFeature {
 
 	@Test
-	public void testUpdateSuccess() {
+	 void testUpdateSuccess() {
 		UserService userService = new UserService();
 		// check the userID , give valid details
 		User user1 = new User(3, "maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user");
@@ -23,7 +23,7 @@ public class TestUserUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateEmailNotFound() {
+	 void testUpdateEmailNotFound() {
 		UserService userService = new UserService();
 		User user1 = new User(1, "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
 		try {
@@ -36,7 +36,7 @@ public class TestUserUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateInvalidEmailFormat() {
+	 void testUpdateInvalidEmailFormat() {
 		UserService userService = new UserService();
 		User user1 = new User(1, "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
 		try {
@@ -49,7 +49,7 @@ public class TestUserUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateMissingRequiredField() {
+	 void testUpdateMissingRequiredField() {
 		UserService userService = new UserService();
 		// Leaving the name field empty
 		User user1 = new User(1, "maha12@gmail.com", "", "Navee@123", "8072444056", "user");

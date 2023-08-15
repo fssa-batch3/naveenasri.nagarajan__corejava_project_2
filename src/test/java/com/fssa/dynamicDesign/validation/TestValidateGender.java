@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
-public class TestValidateGender {
+ class TestValidateGender {
 
 	@Test
-	public void testValidMaleGender() {
+	 void testValidMaleGender() {
 		try {
 			assertTrue(ArchitectValidator.validateGender("Male"));
 			System.out.println("Valid Male gender test passed.");
@@ -23,7 +23,7 @@ public class TestValidateGender {
 	}
 
 	@Test
-	public void testValidFemaleGender() {
+	 void testValidFemaleGender() {
 		try {
 			assertTrue(ArchitectValidator.validateGender("Female"));
 			System.out.println("Valid Female gender test passed.");
@@ -35,7 +35,7 @@ public class TestValidateGender {
 	}
 
 	@Test
-	public void testValidOtherGender() {
+	 void testValidOtherGender() {
 		try {
 			assertTrue(ArchitectValidator.validateGender("Other"));
 			System.out.println("Valid Other gender test passed.");
@@ -47,7 +47,7 @@ public class TestValidateGender {
 	}
 
 	@Test
-	public void testInvalidNullGender() {
+	 void testInvalidNullGender() {
 		try {
 			assertFalse(ArchitectValidator.validateGender(null));
 			System.out.println("Invalid null gender test passed.");
@@ -59,7 +59,7 @@ public class TestValidateGender {
 	}
 
 	@Test
-	public void testInvalidNonAllowedGender() {
+	 void testInvalidNonAllowedGender() {
 		try {
 			assertFalse(ArchitectValidator.validateGender("NonAllowed"));
 			System.out.println("Invalid non-allowed gender test passed.");
@@ -71,7 +71,7 @@ public class TestValidateGender {
 	}
 
 	@Test
-	public void testInvalidMixedCaseGender() {
+	 void testInvalidMixedCaseGender() {
 		try {
 			assertFalse(ArchitectValidator.validateGender("mAle"));
 			System.out.println("Invalid mixed-case gender test passed.");

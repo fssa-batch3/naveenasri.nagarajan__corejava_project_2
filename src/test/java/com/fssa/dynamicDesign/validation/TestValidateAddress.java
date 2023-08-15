@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
-public class TestValidateAddress {
+ class TestValidateAddress {
 
 	@Test
-	public void testValidAddress() {
+	 void testValidAddress() {
 		try {
 			assertTrue(ArchitectValidator.validateAddress("123 Main Street"));
 			System.out.println("Valid address test passed.");
@@ -23,7 +23,7 @@ public class TestValidateAddress {
 	}
 
 	@Test
-	public void testValidAddressWithSpecialCharacters() {
+	 void testValidAddressWithSpecialCharacters() {
 		try {
 			assertTrue(ArchitectValidator.validateAddress("Apt #4B, 456 Elm Ave"));
 			System.out.println("Valid address with special characters test passed.");
@@ -35,7 +35,7 @@ public class TestValidateAddress {
 	}
 
 	@Test
-	public void testInvalidNullAddress() {
+	 void testInvalidNullAddress() {
 		try {
 			assertFalse(ArchitectValidator.validateAddress(null));
 			System.out.println("Invalid null address test passed.");
@@ -47,7 +47,7 @@ public class TestValidateAddress {
 	}
 
 	@Test
-	public void testInvalidEmptyAddress() {
+	 void testInvalidEmptyAddress() {
 		try {
 			assertFalse(ArchitectValidator.validateAddress(""));
 			System.out.println("Invalid empty address test passed.");
@@ -59,7 +59,7 @@ public class TestValidateAddress {
 	}
 
 	@Test
-	public void testInvalidWhitespaceOnlyAddress() {
+	 void testInvalidWhitespaceOnlyAddress() {
 		try {
 			assertFalse(ArchitectValidator.validateAddress("   "));
 			System.out.println("Invalid whitespace-only address test passed.");

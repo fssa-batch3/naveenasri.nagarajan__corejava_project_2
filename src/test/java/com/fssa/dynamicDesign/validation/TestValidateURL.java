@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
-public class TestValidateURL {
+ class TestValidateURL {
 
     @Test
-    public void testValidURL() {
+     void testValidURL() {
         try {
             assertTrue(ArchitectValidator.validateURL("https://example.com"));
             System.out.println("Valid URL test passed.");
@@ -23,7 +23,7 @@ public class TestValidateURL {
     }
 
     @Test
-    public void testInvalidEmptyURL() {
+     void testInvalidEmptyURL() {
         try {
             assertFalse(ArchitectValidator.validateURL(""));
             System.out.println("Invalid empty URL test passed.");
@@ -34,7 +34,7 @@ public class TestValidateURL {
     }
 
     @Test
-    public void testInvalidWhitespaceURL() {
+     void testInvalidWhitespaceURL() {
         try {
             assertFalse(ArchitectValidator.validateURL("   "));
             System.out.println("Invalid WhiteSpace URL test passed.");
@@ -45,7 +45,7 @@ public class TestValidateURL {
     }
     
     @Test
-    public void testInvalidNullURL() {
+     void testInvalidNullURL() {
         try {
             assertFalse(ArchitectValidator.validateURL(null));
             System.out.println("Invalid null URL test passed.");

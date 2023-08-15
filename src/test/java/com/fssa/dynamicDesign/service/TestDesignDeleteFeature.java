@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestDesignDeleteFeature {
+ class TestDesignDeleteFeature {
 
 	@Test
-	public void testDeleteDesignSuccess() {
+	 void testDeleteDesignSuccess() {
 		DesignService designService = new DesignService();
 		// Assume you have a valid designId for an existing design
 		int designIdToDelete = 199;
@@ -24,7 +24,7 @@ public class TestDesignDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteNonExistingDesign() {
+	 void testDeleteNonExistingDesign() {
 		DesignService designService = new DesignService();
 		// Assume you have a designId that does not exist in the database
 		int nonExistingDesignId = 1000;
@@ -38,7 +38,7 @@ public class TestDesignDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteDesignWithInvalidId() {
+	 void testDeleteDesignWithInvalidId() {
 		DesignService designService = new DesignService();
 		// Assume you have an invalid designId, e.g. negative value
 		int invalidDesignId = -1;
@@ -52,7 +52,7 @@ public class TestDesignDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteDesignWithNullId() {
+	 void testDeleteDesignWithNullId() {
 		DesignService designService = new DesignService();
 		int nullDesignId = 0; // Assuming 0 is considered a null design ID
 

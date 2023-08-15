@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
-public class TestValidateEducation {
+ class TestValidateEducation {
 
 	@Test
-	public void testValidEducation() {
+	 void testValidEducation() {
 		try {
 			assertTrue(ArchitectValidator.validateEducation("Bachelor of Science"));
 			System.out.println("Valid education test passed.");
@@ -23,7 +23,7 @@ public class TestValidateEducation {
 	}
 
 	@Test
-	public void testValidEducationWithSpaces() {
+	 void testValidEducationWithSpaces() {
 		try {
 			assertTrue(ArchitectValidator.validateEducation("Master of Arts in Literature"));
 			System.out.println("Valid education with spaces test passed.");
@@ -35,7 +35,7 @@ public class TestValidateEducation {
 	}
 
 	@Test
-	public void testInvalidNullEducation() {
+	 void testInvalidNullEducation() {
 		try {
 			assertFalse(ArchitectValidator.validateEducation(null));
 			System.out.println("Invalid null education test passed.");
@@ -47,7 +47,7 @@ public class TestValidateEducation {
 	}
 
 	@Test
-	public void testInvalidEmptyEducation() {
+	 void testInvalidEmptyEducation() {
 		try {
 			assertFalse(ArchitectValidator.validateEducation(""));
 			System.out.println("Invalid empty education test passed.");
@@ -59,7 +59,7 @@ public class TestValidateEducation {
 	}
 
 	@Test
-	public void testInvalidEducationWithNumbers() {
+	 void testInvalidEducationWithNumbers() {
 		try {
 			assertFalse(ArchitectValidator.validateEducation("PhD in Physics 123"));
 			System.out.println("Invalid education with numbers test passed.");
@@ -71,7 +71,7 @@ public class TestValidateEducation {
 	}
 
 	@Test
-	public void testInvalidEducationWithSpecialCharacters() {
+	 void testInvalidEducationWithSpecialCharacters() {
 		try {
 			assertFalse(ArchitectValidator.validateEducation("High School Diploma @#$"));
 			System.out.println("Invalid education with special characters test passed.");

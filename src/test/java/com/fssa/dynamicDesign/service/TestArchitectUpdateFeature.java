@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestArchitectUpdateFeature {
+ class TestArchitectUpdateFeature {
 
 	@Test
-	public void testUpdateSuccess() {
+	 void testUpdateSuccess() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = new Architect(1,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
@@ -25,7 +25,7 @@ public class TestArchitectUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateEmailNotFound() {
+	 void testUpdateEmailNotFound() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = new Architect(2,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
@@ -41,7 +41,7 @@ public class TestArchitectUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateInvalidEmailFormat() {
+	 void testUpdateInvalidEmailFormat() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
@@ -56,7 +56,7 @@ public class TestArchitectUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateMissingRequiredField() {
+	 void testUpdateMissingRequiredField() {
 		ArchitectService architectService = new ArchitectService();
 		// Leaving the name field empty
 		Architect architect = new Architect(4,"profilePhoto.jpg", "", "Female", "9876543210", "123 Main Street",
@@ -71,7 +71,7 @@ public class TestArchitectUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateNullArchitect() {
+	 void testUpdateNullArchitect() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = null;
 		try {
@@ -83,7 +83,7 @@ public class TestArchitectUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateNullEmail() {
+	 void testUpdateNullEmail() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = new Architect(5,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
@@ -97,7 +97,7 @@ public class TestArchitectUpdateFeature {
 	}
 
 	@Test
-	public void testUpdateEmptyEmail() {
+	 void testUpdateEmptyEmail() {
 		ArchitectService architectService = new ArchitectService();
 		Architect architect = new Architect(6,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,

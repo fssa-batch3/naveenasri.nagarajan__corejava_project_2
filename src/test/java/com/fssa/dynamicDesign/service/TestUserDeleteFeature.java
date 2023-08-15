@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.model.User;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
-public class TestUserDeleteFeature {
+ class TestUserDeleteFeature {
 
 	@Test
-	public void testDeleteUserSuccess() {
+	 void testDeleteUserSuccess() {
 		UserService userService = new UserService();
 		// Assuming a user with the email "babu@gmail.com" exists in the database
 		try {
@@ -24,7 +24,7 @@ public class TestUserDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteNonExistingUser() {
+	 void testDeleteNonExistingUser() {
 		UserService userService = new UserService();
 		// Assuming a user with the email "nonexisting@example.com" does not exist in
 		// the database
@@ -38,7 +38,7 @@ public class TestUserDeleteFeature {
 	}
 
 	@Test
-	public void testDeleteUserWithInvalidUserId() {
+	 void testDeleteUserWithInvalidUserId() {
 		UserService userService = new UserService();
 		User user = new User(-1, "babu@gmail.com", "Babu", "Navee@123", "9876543123", "user", false);
 		try {

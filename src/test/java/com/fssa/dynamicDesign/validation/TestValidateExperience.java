@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
-public class TestValidateExperience {
+ class TestValidateExperience {
 
 	@Test
-	public void testValidExperience() {
+	 void testValidExperience() {
 		try {
 			assertTrue(ArchitectValidator.validateExperience(5));
 			System.out.println("Valid experience test passed.");
@@ -23,7 +23,7 @@ public class TestValidateExperience {
 	}
 
 	@Test
-	public void testValidExperienceWithSingleDigit() {
+	 void testValidExperienceWithSingleDigit() {
 		try {
 			assertTrue(ArchitectValidator.validateExperience(9));
 			System.out.println("Valid single-digit experience test passed.");
@@ -35,7 +35,7 @@ public class TestValidateExperience {
 	}
 
 	@Test
-	public void testInvalidNegativeExperience() {
+	 void testInvalidNegativeExperience() {
 		try {
 			assertFalse(ArchitectValidator.validateExperience(-3));
 			System.out.println("Invalid negative experience test passed.");
@@ -47,7 +47,7 @@ public class TestValidateExperience {
 	}
 
 	@Test
-	public void testInvalidExperienceWithNonNumeric() {
+	 void testInvalidExperienceWithNonNumeric() {
 		try {
 			assertFalse(ArchitectValidator.validateExperience(Integer.parseInt("-1"))); // -1 as a string
 			System.out.println("Invalid non-numeric experience test passed.");
@@ -59,7 +59,7 @@ public class TestValidateExperience {
 	}
 
 	@Test
-	public void testInvalidExperienceWithThreeDigits() {
+	 void testInvalidExperienceWithThreeDigits() {
 		try {
 			assertFalse(ArchitectValidator.validateExperience(123));
 			System.out.println("Invalid three-digit experience test passed.");
