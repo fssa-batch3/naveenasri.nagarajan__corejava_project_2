@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.Design;
-import com.fssa.dynamicdesign.service.DesignService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 public class TestDesignCreateFeature {

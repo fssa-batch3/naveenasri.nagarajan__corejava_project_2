@@ -52,7 +52,7 @@ public class Architect {
 		this.education = education;
 		this.experience = experience;
 		this.degreeCertificate = degreeCertificate;
-		NATACertificate = nATACertificate;
+		this.NATACertificate = nATACertificate;
 	}
 	
 	public Architect(String email, String password) {

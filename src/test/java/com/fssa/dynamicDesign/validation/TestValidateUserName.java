@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicdesign.validation.UserValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class TestValidateUserName {

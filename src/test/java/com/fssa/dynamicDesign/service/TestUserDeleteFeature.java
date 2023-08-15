@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.User;
-import com.fssa.dynamicdesign.service.UserService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 public class TestUserDeleteFeature {
