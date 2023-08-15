@@ -132,8 +132,6 @@ public class ArchitectDAO {
 			pmt.setString(11, email); // Use the provided email parameter for WHERE clause
 			int rows = pmt.executeUpdate();
 
-	
-
 			return rows == 1;
 		}
 	}

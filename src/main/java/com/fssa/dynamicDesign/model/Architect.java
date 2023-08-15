@@ -32,7 +32,7 @@ public class Architect {
 		this.education = education;
 		this.experience = experience;
 		this.degreeCertificate = degreeCertificate;
-		NATACertificate = nATACertificate;
+		this.NATACertificate = nATACertificate;
 		this.isDeleted = isDeleted;
 	}
 
@@ -168,7 +168,7 @@ public class Architect {
 	}
 
 	public void setNATACertificate(String nATACertificate) {
-		NATACertificate = nATACertificate;
+		this.NATACertificate = nATACertificate;
 	}
 
 	public boolean isDeleted() {
