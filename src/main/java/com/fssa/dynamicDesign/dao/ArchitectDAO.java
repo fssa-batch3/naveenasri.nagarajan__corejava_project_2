@@ -31,8 +31,8 @@ public class ArchitectDAO {
 			DB_USER = env.get("DB_USER");
 			DB_PASSWORD = env.get("DB_PASSWORD");
 		}
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
-		// return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
+		//return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
+	 return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
 	}
 
 	public boolean arcRegister(Architect architect) throws SQLException {
