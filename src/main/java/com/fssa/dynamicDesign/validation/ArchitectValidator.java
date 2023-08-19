@@ -27,7 +27,7 @@ public class ArchitectValidator {
 			throw new InvalidArchitectException("Architect ID is invalid: Negative value.");
 		}
 
-		String regexArchitectID = "^[0-9]+$";
+		String regexArchitectID = "^\\d+$";
 		boolean match = Pattern.matches(regexArchitectID, Integer.toString(architectID));
 
 		if (match) {
@@ -175,7 +175,7 @@ public class ArchitectValidator {
 			throw new InvalidArchitectException("Experience is invalid: Negative value.");
 		}
 
-		String regexExperience = "^[0-9]{1,2}$";
+		String regexExperience = "^\\d{1,2}$";
 		boolean match = Pattern.matches(regexExperience, Integer.toString(experience));
 
 		if (match) {

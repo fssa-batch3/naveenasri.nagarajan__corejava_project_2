@@ -18,13 +18,12 @@ public class UserValidator {
 	}
 
 	
-	
 	public static boolean validateUserID(int userID) throws InvalidUserException {
 		if (userID < 0) {
 			throw new InvalidUserException("User ID is invalid: Negative value.");
 		}
 
-		String regexUserID = "^[0-9]+$";
+		String regexUserID = "^\\d+$";
 		boolean match = Pattern.matches(regexUserID, Integer.toString(userID));
 
 		if (match) {
@@ -36,6 +35,7 @@ public class UserValidator {
 		return match;
 	}
 
+	
 	
 	
 	public static boolean validateName(String name) throws InvalidUserException {

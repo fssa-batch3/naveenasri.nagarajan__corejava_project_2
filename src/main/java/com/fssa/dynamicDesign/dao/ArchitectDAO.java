@@ -1,7 +1,6 @@
 package com.fssa.dynamicdesign.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +10,6 @@ import java.util.List;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.util.ConnectionDb;
 
-import io.github.cdimascio.dotenv.Dotenv;
 
 public class ArchitectDAO {
 
@@ -82,10 +80,10 @@ public class ArchitectDAO {
 				String education = resultSet.getString("education");
 				int experience = resultSet.getInt("experience");
 				String degreeCertificate = resultSet.getString("degreeCertificate");
-				String NATACertificate = resultSet.getString("NATACertificate");
+				String nataCertificate = resultSet.getString("NATACertificate");
 
 				Architect architect = new Architect(architectID, profilePhoto, name, gender, phoneNumber, address,
-						coverPhoto, email, password, education, experience, degreeCertificate, NATACertificate);
+						coverPhoto, email, password, education, experience, degreeCertificate, nataCertificate);
 				architects.add(architect);
 			}
 

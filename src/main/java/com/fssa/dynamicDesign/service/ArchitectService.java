@@ -17,7 +17,7 @@ public class ArchitectService {
 		try {
 			// Check if the Architect is null
 			if (architect == null) {
-				throw new InvalidArchitectException("Architect is null");
+				throw new InvalidArchitectException("Register Architect is null");
 			}
 
 			// Validate the architect's details using the ArchitectValidator
@@ -70,7 +70,7 @@ public class ArchitectService {
 		try {
 			// Check if the architect is null
 			if (architect == null) {
-				throw new InvalidArchitectException("Architect is null");
+				throw new InvalidArchitectException("Update Architect is null");
 			}
 
 			// Check if the email exists before attempting to update
@@ -89,7 +89,7 @@ public class ArchitectService {
 	    ArchitectDAO architectDAO = new ArchitectDAO();
 	    try {
 	        if (architect == null) {
-	            throw new InvalidArchitectException("Architect is null");
+	            throw new InvalidArchitectException("Delete Architect is null");
 	        }
 
 	        if (!architectDAO.isEmailExists(architect.getEmail())) {

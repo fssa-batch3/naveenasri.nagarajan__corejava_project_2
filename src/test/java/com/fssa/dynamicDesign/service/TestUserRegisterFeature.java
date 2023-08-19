@@ -17,7 +17,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 		//********************** Important ******************
 		// change userID , Email
 		//***************************************************
-		 User user1 = new User( "navee89767@123.com","Naveen264a",  "Navee@123", "8072404562", "user");
+		 User user1 = new User( "navee1@123.com","Naveen264a",  "Navee@123", "8072404562", "user");
 	        try {
 	            assertTrue(userService.registerUser(user1));
 	        } catch (ServiceException e) {
