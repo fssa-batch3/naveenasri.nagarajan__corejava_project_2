@@ -13,7 +13,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testUpdateSuccess() {
 		UserService userService = new UserService();
 		// check the userID , give valid details
-		User user1 = new User(3, "maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user");
+		User user1 = new User("maha122@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user");
 		try {
 			assertTrue(userService.updateUser(user1, "maha12@gmail.com"));
 		} catch (ServiceException e) {
@@ -25,7 +25,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateEmailNotFound() {
 		UserService userService = new UserService();
-		User user1 = new User(1, "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
+		User user1 = new User( "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
 		try {
 			// Assuming the user with email "maha12@gmail.com" does not exist in the system
 			userService.updateUser(user1, "noemail@gmail.com");
@@ -38,7 +38,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateInvalidEmailFormat() {
 		UserService userService = new UserService();
-		User user1 = new User(1, "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
+		User user1 = new User( "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
 		try {
 			// Assuming "invalid_email_format" is not a valid email format
 			userService.updateUser(user1, "invalidemailformat");
@@ -52,7 +52,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testUpdateMissingRequiredField() {
 		UserService userService = new UserService();
 		// Leaving the name field empty
-		User user1 = new User(1, "maha12@gmail.com", "", "Navee@123", "8072444056", "user");
+		User user1 = new User("maha12@gmail.com", "", "Navee@123", "8072444056", "user");
 		try {
 			userService.updateUser(user1, "maha12@gmail.com");
 			fail("Expected ServiceException for missing required field, but none was thrown.");

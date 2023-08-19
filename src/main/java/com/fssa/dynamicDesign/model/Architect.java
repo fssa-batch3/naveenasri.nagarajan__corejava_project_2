@@ -55,6 +55,24 @@ public class Architect {
 		this.NATACertificate = nATACertificate;
 	}
 	
+	public Architect( String profilePhoto, String name, String gender, String phoneNumber,
+			String address, String coverPhoto, String email, String password, String education, int experience,
+			String degreeCertificate, String nATACertificate) {
+		super();
+		this.profilePhoto = profilePhoto;
+		this.name = name;
+		this.gender = gender;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.coverPhoto = coverPhoto;
+		this.email = email;
+		this.password = password;
+		this.education = education;
+		this.experience = experience;
+		this.degreeCertificate = degreeCertificate;
+		this.NATACertificate = nATACertificate;
+	}
+	
 	public Architect(String email, String password) {
 		super();
 		this.email = email;

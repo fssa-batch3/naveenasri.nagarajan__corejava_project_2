@@ -9,51 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.util.ConnectionDb;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class ArchitectDAO {
 
-// create connection
-// connect to database
-	public Connection getConnection() throws SQLException {
-		String DB_URL;
-		String DB_USER;
-		String DB_PASSWORD;
-
-		if (System.getenv("CI") != null) {
-			DB_URL = System.getenv("DB_URL");
-			DB_USER = System.getenv("DB_USER");
-			DB_PASSWORD = System.getenv("DB_PASSWORD");
-		} else {
-			Dotenv env = Dotenv.load();
-			DB_URL = env.get("DB_URL");
-			DB_USER = env.get("DB_USER");
-			DB_PASSWORD = env.get("DB_PASSWORD");
-		}
-		//return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
-	 return DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
-	}
 
 	public boolean arcRegister(Architect architect) throws SQLException {
 
-		String query = "INSERT INTO architect (architectID, profilePhoto, name, gender, phoneNumber, address, coverPhoto, email, password, education, experience, degreeCertificate, NATACertificate) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO architect ( profilePhoto, name, gender, phoneNumber, address, coverPhoto, email, password, education, experience, degreeCertificate, NATACertificate) "
+				+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
-			pmt.setInt(1, architect.getArchitectID());
-			pmt.setString(2, architect.getProfilePhoto());
-			pmt.setString(3, architect.getName());
-			pmt.setString(4, architect.getGender());
-			pmt.setString(5, architect.getPhoneNumber());
-			pmt.setString(6, architect.getAddress());
-			pmt.setString(7, architect.getCoverPhoto());
-			pmt.setString(8, architect.getEmail());
-			pmt.setString(9, architect.getPassword());
-			pmt.setString(10, architect.getEducation());
-			pmt.setInt(11, architect.getExperience());
-			pmt.setString(12, architect.getDegreeCertificate());
-			pmt.setString(13, architect.getNATACertificate());
+		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
+		
+			pmt.setString(1, architect.getProfilePhoto());
+			pmt.setString(2, architect.getName());
+			pmt.setString(3, architect.getGender());
+			pmt.setString(4, architect.getPhoneNumber());
+			pmt.setString(5, architect.getAddress());
+			pmt.setString(6, architect.getCoverPhoto());
+			pmt.setString(7, architect.getEmail());
+			pmt.setString(8, architect.getPassword());
+			pmt.setString(9, architect.getEducation());
+			pmt.setInt(10, architect.getExperience());
+			pmt.setString(11, architect.getDegreeCertificate());
+			pmt.setString(12, architect.getNATACertificate());
 
 			int rows = pmt.executeUpdate();
 			return rows == 1;
@@ -63,7 +44,7 @@ public class ArchitectDAO {
 	// Method to check if a ARCHITECT with the given email exists in the database
 	public boolean isEmailExists(String email) throws SQLException {
 		String query = "SELECT * FROM ARCHITECT WHERE email = ?";
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
+		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setString(1, email);
 			ResultSet rs = pmt.executeQuery();
 			return rs.next(); // If a row is found, the email exists
@@ -72,7 +53,7 @@ public class ArchitectDAO {
 
 	public boolean login(Architect architect, String email) throws SQLException {
 		String query = "SELECT * FROM ARCHITECT WHERE email = ? AND password = ?";
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
+		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setString(1, email); // Use provided email for the query
 			pmt.setString(2, architect.getPassword());
 			try (ResultSet rs = pmt.executeQuery()) {
@@ -84,7 +65,7 @@ public class ArchitectDAO {
 	public List<Architect> listArchitects() throws SQLException {
 		List<Architect> architects = new ArrayList<>();
 		String query = "SELECT * FROM ARCHITECT";
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query);) {
+		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query);) {
 
 			ResultSet resultSet = pmt.executeQuery();
 
@@ -118,7 +99,7 @@ public class ArchitectDAO {
 	public boolean updateArchitect(Architect architect, String email) throws SQLException {
 		String query = "UPDATE ARCHITECT SET profilePhoto=?, name=?, gender=?, phoneNumber=?, address=?, "
 				+ "coverPhoto=?, education=?, experience=?, degreeCertificate=?, NATACertificate=? " + "WHERE email=?";
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query);) {
+		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query);) {
 			pmt.setString(1, architect.getProfilePhoto());
 			pmt.setString(2, architect.getName());
 			pmt.setString(3, architect.getGender());
@@ -140,7 +121,7 @@ public class ArchitectDAO {
 	public boolean deleteArchitect(Architect architect) throws SQLException {
 		String query = "UPDATE architect SET isDeleted = ? WHERE email = ?";
 
-		try (Connection connection = getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
+		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setBoolean(1, true); // Set isDeleted to true to mark the architect as deleted
 			pmt.setString(2, architect.getEmail());
 			int rows = pmt.executeUpdate();

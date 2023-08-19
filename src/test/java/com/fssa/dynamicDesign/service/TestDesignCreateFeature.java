@@ -14,7 +14,8 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
-		Design design1 = new Design(199, "Living Room Design", "https://example.com/design1", 100.0, "user@example.com",
+		//designName, designUrl, price, email, noOfRooms
+		Design design1 = new Design( "Living Room Design", "https://example.com/design1", 100.0, "user@example.com",
 				1);
 		try {
 			assertTrue(designService.createDesign(design1));
@@ -28,7 +29,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testNegativePriceValue() {
 		DesignService designService = new DesignService();
-		Design design = new Design(1, "Modern design", "https://example.com/negative_price", -50.0, "user@example.com",
+		Design design = new Design("Modern design", "https://example.com/negative_price", -50.0, "user@example.com",
 				3);
 		try {
 			assertFalse(designService.createDesign(design));
@@ -41,7 +42,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testNegativeRooms() {
 		DesignService designService = new DesignService();
-		Design design = new Design(1, "Modern design", "https://example.com/negative_id", 80.0, "user@example.com", -5);
+		Design design = new Design( "Modern design", "https://example.com/negative_id", 80.0, "user@example.com", -5);
 		try {
 			assertFalse(designService.createDesign(design));
 			fail("Expected ServiceException for negative number of rooms");

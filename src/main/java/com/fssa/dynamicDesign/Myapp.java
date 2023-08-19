@@ -1,5 +1,8 @@
 package com.fssa.dynamicdesign;
 
- class Myapp {
+ public class Myapp {
 
+	 public static void main(String[] args) {
+		System.out.println("welcome to my project!");
+	}
 }

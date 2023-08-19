@@ -33,9 +33,7 @@ public class DesignValidator {
 		}
 
 		// Add validation for design ID
-		if (design.getDesignId() < 0) {
-			throw new InvalidDesignException("Invalid design ID");
-		}
+	
 
 		return true;
 	}

@@ -30,6 +30,14 @@ public class Design {
 		this.email = email;
 		this.noOfRoom = noOfRoom;
 	}
+	public Design( String designName, String designUrl, double price, String email, int noOfRoom) {
+		super();
+		this.designName = designName;
+		this.designUrl = designUrl;
+		this.price = price;
+		this.email = email;
+		this.noOfRoom = noOfRoom;
+	}
 
 	public Integer getDesignId() {
 		return designId;

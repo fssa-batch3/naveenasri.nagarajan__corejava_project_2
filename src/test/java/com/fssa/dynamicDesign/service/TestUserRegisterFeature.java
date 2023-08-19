@@ -17,20 +17,19 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 		//********************** Important ******************
 		// change userID , Email
 		//***************************************************
-		
-		User user1 = new User(6, "isu3@gmail.com", "Ishwarya", "Ishu@123", "8072404562", "user");
-		try {
-			assertTrue(userService.registerUser(user1));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail();
-		}
+		 User user1 = new User( "navee89767@123.com","Naveen264a",  "Navee@123", "8072404562", "user");
+	        try {
+	            assertTrue(userService.registerUser(user1));
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	            fail();
+	        }
 	}
 
 	@Test
 	 void testRegistrationNullPassword() {
 		UserService userService = new UserService();
-		User user = new User(5, "JohnDoe", null, "john@example.com", "8565473543", "user");
+		User user = new User( "john@example.com", "JohnDoe",null, "8565473543", "user");
 		try {
 			userService.registerUser(user);
 			fail("Expected ServiceException for null password, but none was thrown.");
