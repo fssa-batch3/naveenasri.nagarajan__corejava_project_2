@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
+import com.fssa.dynamicdesign.service.DesignService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
  class TestDesignDeleteFeature {
@@ -13,7 +14,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testDeleteDesignSuccess() {
 		DesignService designService = new DesignService();
 		// Assume you have a valid designId for an existing design
-		int designIdToDelete = 199;
+		int designIdToDelete = 1;
 
 		try {
 			assertTrue(designService.deleteDesign(designIdToDelete));

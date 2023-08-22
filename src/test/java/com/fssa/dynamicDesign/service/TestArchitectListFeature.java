@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.dao.ArchitectDAO;
 import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.service.ArchitectService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
  class TestArchitectListFeature {

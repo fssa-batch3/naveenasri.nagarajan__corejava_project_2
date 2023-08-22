@@ -44,14 +44,15 @@ public class DesignDAO {
 				ResultSet resultSet = pmt.executeQuery()) {
 
 			while (resultSet.next()) {
-				 // Use the correct column name here
+				// Use the correct column name here
+
 				String designName = resultSet.getString("designname");
 				String designUrl = resultSet.getString("designurl");
 				double price = resultSet.getDouble("price");
 				String email = resultSet.getString("email");
 				int noOfRoom = resultSet.getInt("noofrooms");
 
-				Design design = new Design( designName, designUrl, price, email, noOfRoom);
+				Design design = new Design(designName, designUrl, price, email, noOfRoom);
 				designs.add(design);
 			}
 
@@ -76,7 +77,7 @@ public class DesignDAO {
 
 			int rows = pmt.executeUpdate();
 			return rows == 1;
-
+			
 		}
 	}
 

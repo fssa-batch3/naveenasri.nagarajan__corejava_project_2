@@ -3,6 +3,7 @@ package com.fssa.dynamicdesign.service;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.service.DesignService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 	@Test
 	 void testUpdateDesignSuccess() {
 	    DesignService designService = new DesignService();
-	    Design designToUpdate = new Design(1, "Living Design", "https://example.com/design10", 110.00, "user@example.com", 1);
+	    Design designToUpdate = new Design(4, "Bedroom Design", "https://example.com/design11", 120.00, "user@example.com", 4);
 	    try {
 	        if (!designService.updateDesign(designToUpdate)) {
 	            fail("Failed to update design.");
@@ -24,10 +25,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 	    }
 	}
 
-    @Test
+    @Test 
      void testUpdateNonExistentDesign() {
         DesignService designService = new DesignService();
-        Design nonExistentDesign = new Design(2, "Updated Design", "https://example.com/updated", 150.0, "user@example.com", 2);
+        Design nonExistentDesign = new Design(1000, "Updated Design", "https://example.com/updated", 150.0, "user@example.com", 2);
         try {
             if (designService.updateDesign(nonExistentDesign)) {
                 fail("Successfully updated non-existent design.");

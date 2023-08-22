@@ -22,7 +22,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 			System.out.println("Your Design Added Successfully ");
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
+			fail();  
 		}
 	}
 
