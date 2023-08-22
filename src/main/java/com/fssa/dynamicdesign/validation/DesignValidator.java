@@ -1,67 +1,64 @@
 package com.fssa.dynamicdesign.validation;
 
-import java.util.regex.Pattern;
-
 import com.fssa.dynamicdesign.model.Design;
 import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 public class DesignValidator {
-
 	public static boolean validateDesign(Design design) throws InvalidDesignException {
-		if (design == null) {
-			throw new InvalidDesignException("Design is null");
-		}
+		validateDesignNull(design);
+	    validateDesignName(design.getDesignName());
+	    validateDesignUrl(design.getDesignUrl());
+	    validatePrice(design.getPrice());
+	    validateNoOfRooms(design.getNoOfRooms());
+	    validateDesignId(design.getDesignId());
+	    validateArchitectId(design.getArchitectId());
 
-		if (design.getDesignName() == null || design.getDesignName().trim().isEmpty()) {
-			throw new InvalidDesignException("Design name is required");
-		}
-
-		if (design.getDesignUrl() == null || design.getDesignUrl().trim().isEmpty()) {
-			throw new InvalidDesignException("Design URL is required");
-		}
-
-		if (design.getPrice() < 0) {
-			throw new InvalidDesignException("Price must be a non-negative value");
-		}
-
-		if (design.getEmail() == null || !isValidEmail(design.getEmail())) {
-			throw new InvalidDesignException("Invalid email");
-		}
-
-		if (design.getNoOfRoom() < 0) {
-			throw new InvalidDesignException("Number of rooms must be a non-negative value");
-		}
-
-		// Add validation for design ID
-
-		return true;
+	    return true;
 	}
 
-	// Helper method to validate email format
-	public static boolean isValidEmail(String email) throws InvalidDesignException {
-		boolean isMatch = true;
-
-		if (email == null)
-			return false;
-		String regex = "^.*@.*\\..*$";
-		isMatch = Pattern.matches(regex, email);
-		if (isMatch) {
-			System.out.println("The email address is: Valid");
-		} else {
-			throw new InvalidDesignException("The email address is: Invalid");
-		}
-		return isMatch;
+	public static void validateDesignNull(Design design) throws InvalidDesignException {
+		 if (design == null) {
+		        throw new InvalidDesignException("Design is null");
+		    }
+	}
+	
+	public static void validateDesignName(String designName) throws InvalidDesignException {
+	    if (designName == null || designName.trim().isEmpty()) {
+	        throw new InvalidDesignException("Design name is required");
+	    }
 	}
 
-	// Helper method to validate design ID
-	public static boolean isValidDesignId(int designId) throws InvalidDesignException {
-		if (designId < 0) {
-			System.out.println();
-			throw new InvalidDesignException("The design ID is invalid: Null or negative value.");
-		}
-
-		System.out.println("The design ID is valid.");
-		return true;
+	public static void validateDesignUrl(String designUrl) throws InvalidDesignException {
+	    if (designUrl == null || designUrl.trim().isEmpty()) {
+	        throw new InvalidDesignException("Design URL is required");
+	    }
 	}
+
+	public static void validatePrice(double price) throws InvalidDesignException {
+	    if (price < 0) {
+	        throw new InvalidDesignException("Price must be a non-negative value");
+	    }
+	}
+
+
+	public static void validateNoOfRooms(int noOfRooms) throws InvalidDesignException {
+	    if (noOfRooms < 0) {
+	        throw new InvalidDesignException("Number of rooms must be a non-negative value");
+	    }
+	}
+
+	public static void validateDesignId(int designId) throws InvalidDesignException {
+	    if (designId < 0) {
+	        throw new InvalidDesignException("Invalid design ID: Null or negative value.");
+	    }
+	}
+	
+	public static void validateArchitectId(int architectId) throws InvalidDesignException {
+	    if (architectId < 0) {
+	        throw new InvalidDesignException("Invalid architect ID: Null or negative value.");
+	    }
+	}
+	
+
 
 }

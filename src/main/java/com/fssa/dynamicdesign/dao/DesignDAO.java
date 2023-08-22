@@ -15,18 +15,20 @@ public class DesignDAO {
 
 	// Add new design to DB - Create
 	public boolean createDesign(Design design) throws DAOException {
-		String query = "INSERT INTO designs ( designName, designUrl, price, email, noOfRooms) VALUES ( ?, ?, ?, ?, ?)";
+
+		String query = "INSERT INTO designs (designName, designUrl, price, noOfRooms, architectID) VALUES (?, ?, ?, ?, ?)";
 
 		try (Connection connection = ConnectionDb.getConnection();
-				PreparedStatement pmt = connection.prepareStatement(query);) {
-
-			pmt.setString(1, design.getDesignName());
-			pmt.setString(2, design.getDesignUrl());
-			pmt.setDouble(3, design.getPrice());
-			pmt.setString(4, design.getEmail());
-			pmt.setInt(5, design.getNoOfRoom());
-
+				PreparedStatement pmt = connection.prepareStatement(query)) {
+			if (checkIdExistsInArchitect(design.getArchitectId())) {
+				pmt.setString(1, design.getDesignName());
+				pmt.setString(2, design.getDesignUrl());
+				pmt.setDouble(3, design.getPrice());
+				pmt.setInt(4, design.getNoOfRooms());
+				pmt.setInt(5, design.getArchitectId());
+			}
 			int rows = pmt.executeUpdate();
+
 			return rows == 1;
 
 		} catch (SQLException e) {
@@ -36,48 +38,63 @@ public class DesignDAO {
 
 	// List all designs from the DB
 	public List<Design> listDesigns() throws SQLException {
-		List<Design> designs = new ArrayList<>();
-		String query = "SELECT * FROM designs";
-		try (Connection connection = ConnectionDb.getConnection();
+	    List<Design> designs = new ArrayList<>();
+	    String query = "SELECT designs.designId, designs.designName, designs.designUrl, designs.price,  designs.noOfRooms, "
+	            + "architect.architectID "
+	            + "FROM designs "
+	            + "INNER JOIN architect ON designs.architect_id = architect.architectID";
 
-				PreparedStatement pmt = connection.prepareStatement(query);
-				ResultSet resultSet = pmt.executeQuery()) {
+	    try (Connection connection = ConnectionDb.getConnection();
+	            PreparedStatement pmt = connection.prepareStatement(query);
+	            ResultSet resultSet = pmt.executeQuery()) {
 
-			while (resultSet.next()) {
-				// Use the correct column name here
+	        while (resultSet.next()) {
+	            int designId = resultSet.getInt("designId");
+	            String designName = resultSet.getString("designName");
+	            String designUrl = resultSet.getString("designUrl");
+	            double price = resultSet.getDouble("price");
+	            int noOfRooms = resultSet.getInt("noOfRooms");
+	            int architectID = resultSet.getInt("architectID");
 
-				String designName = resultSet.getString("designname");
-				String designUrl = resultSet.getString("designurl");
-				double price = resultSet.getDouble("price");
-				String email = resultSet.getString("email");
-				int noOfRoom = resultSet.getInt("noofrooms");
+	            Design design = new Design(designName, designUrl, price, noOfRooms, architectID);
+	            designs.add(design);
+	        }
 
-				Design design = new Design(designName, designUrl, price, email, noOfRoom);
-				designs.add(design);
-			}
-
-			return designs;
-		}
+	        return designs;
+	    }
 	}
 
 	// Other methods and constructor
 
+	public boolean checkIdExistsInArchitect(int architectId) throws DAOException {
+		String query = "SELECT * FROM architect where architectID=?";
+		try (Connection connection = ConnectionDb.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(query)) {
+			pmt.setInt(1, architectId);
+			ResultSet resultSet = pmt.executeQuery();
+			return resultSet.next();
+
+		} catch (SQLException e) {
+			throw new DAOException(e);		
+			}
+
+	}
+
 	public boolean updateDesign(Design design) throws SQLException {
 
-		String query = "UPDATE designs SET designName=?, designUrl=?, price=?, email=?, noOfRooms =? WHERE designid=?";
+		String query = "UPDATE designs SET designName=?, designUrl=?, price=?, noOfRooms =? WHERE designid=?";
 
 		try (Connection connection = ConnectionDb.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setString(1, design.getDesignName());
 			pmt.setString(2, design.getDesignUrl());
 			pmt.setDouble(3, design.getPrice());
-			pmt.setString(4, design.getEmail());
-			pmt.setInt(5, design.getNoOfRoom());
-			pmt.setInt(6, design.getDesignId());
+			pmt.setInt(4, design.getNoOfRooms());
+			pmt.setInt(5, design.getDesignId());
 
 			int rows = pmt.executeUpdate();
 			return rows == 1;
-			
+
 		}
 	}
 

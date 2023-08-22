@@ -7,31 +7,29 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.Design;
-import com.fssa.dynamicdesign.service.DesignService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
- class TestDesignCreateFeature {
+class TestDesignCreateFeature {
 
 	@Test
-	 void testCreateDesignSuccess() {
+	void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
-		//designName, designUrl, price, email, noOfRooms
-		Design design1 = new Design( "Living Room Design", "https://example.com/design1", 100.0, "user@example.com",
-				1);
+		// (designName, designUrl, price, noOfRooms, architectID)
+		Design design1 = new Design("Living Room Design", "https://example.com/design1", 100.0, 4,13);
 		try {
 			assertTrue(designService.createDesign(design1));
 			System.out.println("Your Design Added Successfully ");
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();  
+			fail();
 		}
+
 	}
 
 	@Test
-	 void testNegativePriceValue() {
+	void testNegativePriceValue() {
 		DesignService designService = new DesignService();
-		Design design = new Design("Modern design", "https://example.com/negative_price", -50.0, "user@example.com",
-				3);
+		Design design = new Design("Modern design", "https://example.com/negative_price", -50.0,1, 3);
 		try {
 			assertFalse(designService.createDesign(design));
 			fail("Expected ServiceException for negative price value");
@@ -41,9 +39,9 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	}
 
 	@Test
-	 void testNegativeRooms() {
+	void testNegativeRoomsValue() {
 		DesignService designService = new DesignService();
-		Design design = new Design( "Modern design", "https://example.com/negative_id", 80.0, "user@example.com", -5);
+		Design design = new Design("Modern design", "https://example.com/negative_id", 80.0,-5, 5);
 		try {
 			assertFalse(designService.createDesign(design));
 			fail("Expected ServiceException for negative number of rooms");
@@ -53,7 +51,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	}
 
 	@Test
-	 void testNullDesignObject() {
+	void testNullDesignObject() {
 		DesignService designService = new DesignService();
 		Design design = null;
 		try {
