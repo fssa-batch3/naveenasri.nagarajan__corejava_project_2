@@ -15,6 +15,12 @@ public class Architect {
 	private String degreeCertificate;
 	private String NATACertificate;
 	private boolean isDeleted;
+	
+	
+
+	public Architect() {
+		super();
+	}
 
 	public Architect(int architectID, String profilePhoto, String name, String gender, String phoneNumber,
 			String address, String coverPhoto, String email, String password, String education, int experience,

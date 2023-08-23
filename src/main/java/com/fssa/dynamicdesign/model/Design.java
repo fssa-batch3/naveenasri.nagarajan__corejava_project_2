@@ -19,7 +19,9 @@ public class Design {
 	
 	
 	//constructors
-	
+	public Design() {
+		super();
+	}
 	
 	// create Design 
 	public Design(String designName, String designUrl, double price, int noOfRooms, int architectID) {
@@ -63,6 +65,9 @@ public class Design {
 		this.price = price;
 		this.noOfRooms = noOfRooms;
 	}
+
+
+
 
 
 	// getters and setters
