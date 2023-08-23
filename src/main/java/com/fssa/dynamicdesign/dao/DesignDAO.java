@@ -38,30 +38,31 @@ public class DesignDAO {
 
 	// List all designs from the DB
 	public List<Design> listDesigns() throws SQLException {
-	    List<Design> designs = new ArrayList<>();
-	    String query = "SELECT designs.designId, designs.designName, designs.designUrl, designs.price,  designs.noOfRooms, "
-	            + "architect.architectID "
-	            + "FROM designs "
-	            + "INNER JOIN architect ON designs.architect_id = architect.architectID";
+		List<Design> designs = new ArrayList<>();
+		String query = "SELECT designs.designId, designs.designName, designs.designUrl, designs.price,  designs.noOfRooms, "
+				+ "architect.architectID " + "FROM designs "
+				+ "INNER JOIN architect ON designs.architectID = architect.architectID";
 
-	    try (Connection connection = ConnectionDb.getConnection();
-	            PreparedStatement pmt = connection.prepareStatement(query);
-	            ResultSet resultSet = pmt.executeQuery()) {
+		try (Connection connection = ConnectionDb.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(query);
+				ResultSet resultSet = pmt.executeQuery()) {
 
-	        while (resultSet.next()) {
-	            int designId = resultSet.getInt("designId");
-	            String designName = resultSet.getString("designName");
-	            String designUrl = resultSet.getString("designUrl");
-	            double price = resultSet.getDouble("price");
-	            int noOfRooms = resultSet.getInt("noOfRooms");
-	            int architectID = resultSet.getInt("architectID");
+			while (resultSet.next()) {
 
-	            Design design = new Design(designName, designUrl, price, noOfRooms, architectID);
-	            designs.add(design);
-	        }
+				// This is not necessary while creating it will auto it will shows ( "int
+				// designId = resultSet.getInt("designId");")
+				String designName = resultSet.getString("designName");
+				String designUrl = resultSet.getString("designUrl");
+				double price = resultSet.getDouble("price");
+				int noOfRooms = resultSet.getInt("noOfRooms");
+				int architectID = resultSet.getInt("architectID");
 
-	        return designs;
-	    }
+				Design design = new Design(designName, designUrl, price, noOfRooms, architectID);
+				designs.add(design);
+			}
+
+			return designs;
+		}
 	}
 
 	// Other methods and constructor
@@ -75,8 +76,8 @@ public class DesignDAO {
 			return resultSet.next();
 
 		} catch (SQLException e) {
-			throw new DAOException(e);		
-			}
+			throw new DAOException(e);
+		}
 
 	}
 

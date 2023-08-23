@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.dynamicdesign.dao.DesignDAO;
 import com.fssa.dynamicdesign.model.Design;
 
-public class TestDesignListFeature {
+  class TestDesignListFeature {
 //	public static void main(String[] args) {
 //
 //		String selectQuery = "SELECT * FROM designs"; // Change the table name to 'designs'

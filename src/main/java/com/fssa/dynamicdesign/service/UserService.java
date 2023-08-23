@@ -15,7 +15,7 @@ public class UserService {
 
 		try {
 			if (user == null) {
-				throw new InvalidUserException("User is null");
+				throw new InvalidUserException("User is null while creating");
 			}
 
 			if (userDAO.isEmailExists(user.getEmail())) {
@@ -58,7 +58,7 @@ public class UserService {
 
 		try {
 			if (user == null) {
-				throw new InvalidUserException("User is null");
+				throw new InvalidUserException("User is null while updating");
 			}
 
 			if (!userDAO.isEmailExists(email)) {
@@ -76,7 +76,7 @@ public class UserService {
 	        UserDAO userDAO = new UserDAO();
 	        try {
 	            if (user == null) {
-	                throw new InvalidUserException("User is null");
+	                throw new InvalidUserException("User is null while deleting ");
 	            }
 
 	            if (!userDAO.isEmailExists(user.getEmail())) {
