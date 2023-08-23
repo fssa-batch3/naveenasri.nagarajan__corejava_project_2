@@ -57,7 +57,7 @@ public class UserValidator {
     }
 
     public static boolean validatePhoneNumber(String phoneNumber) throws InvalidUserException {
-        if (phoneNumber == null || !Pattern.matches("^(\\+?91|91)?[6-9]\\d{9}$", phoneNumber)) {
+        if (phoneNumber == null || !Pattern.matches("^(\\+?91)?[6-9]\\d{9}$", phoneNumber)) {
             throw new InvalidUserException("Phone number is not valid");
         }
         return true;

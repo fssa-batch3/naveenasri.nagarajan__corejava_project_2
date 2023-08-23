@@ -63,7 +63,7 @@ public class ArchitectValidator {
     }
 
     public static boolean validatePhoneNumber(String phoneNumber) throws InvalidArchitectException {
-        if (phoneNumber == null || !Pattern.matches("^(\\+?91|91)?[6-9]\\d{9}$", phoneNumber)) {
+        if (phoneNumber == null || !Pattern.matches("^(\\+?91)?[6-9]\\d{9}$", phoneNumber)) {
             throwError("Phone number is not valid");
         }
         return true;
