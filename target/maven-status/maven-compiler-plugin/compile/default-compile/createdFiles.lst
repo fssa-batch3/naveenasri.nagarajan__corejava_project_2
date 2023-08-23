@@ -1,8 +1,0 @@
-dynamicDesign\service\UserService.class
-dynamicDesign\model\User.class
-dynamicDesign\validation\UserValidator.class
-dynamicDesign\Myapp.class
-dynamicDesign\validation\exception\InvalidUserException.class
-dynamicDesign\service\exception\ServiceException.class
-dynamicDesign\dao\UserDAO.class
-dynamicDesign\dao\exception\DAOException.class

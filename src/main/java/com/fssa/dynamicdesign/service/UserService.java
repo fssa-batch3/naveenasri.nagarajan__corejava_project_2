@@ -89,4 +89,9 @@ public class UserService {
 	            throw new ServiceException(e);
 	        }
 	    }
+
+	public boolean loginUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
