@@ -40,7 +40,7 @@ public class DesignDAO {
 	public List<Design> listDesigns() throws SQLException {
 		List<Design> designs = new ArrayList<>();
 		String query = "SELECT designs.designId, designs.designName, designs.designUrl, designs.price,  designs.noOfRooms, "
-				+ "architect.architectID " + "FROM designs "
+				+ "architect.architectID,architect.name,architect.phoneNumber,architect.email,architect.experience" + "FROM designs "
 				+ "INNER JOIN architect ON designs.architectID = architect.architectID";
 
 		try (Connection connection = ConnectionDb.getConnection();

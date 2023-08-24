@@ -24,7 +24,6 @@ public class DesignService {
 			DesignValidator.validateDesign(design);
 			designDAO.checkIdExistsInArchitect(design.getArchitectId());
 			if (designDAO.createDesign(design)) {
-				System.out.println("Design " + design.getDesignName() + " created successfully.");
 				return true;
 			} else {
 				return false;

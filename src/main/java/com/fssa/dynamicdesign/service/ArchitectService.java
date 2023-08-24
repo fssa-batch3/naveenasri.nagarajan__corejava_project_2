@@ -42,7 +42,6 @@ public class ArchitectService {
 			}
 
 			if (architectDAO.login(architect, email)) {
-				System.out.println(email + " Successfully logged in");
 				return true;
 			} else {
 				return false;

@@ -41,7 +41,6 @@ public class UserService {
 			}
 
 			if (userDAO.login(user, email)) {
-				System.out.println(email + " Successfully logged in");
 				return true;
 			} else {
 				return false;

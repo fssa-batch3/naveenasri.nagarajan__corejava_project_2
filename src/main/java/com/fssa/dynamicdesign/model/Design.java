@@ -16,7 +16,7 @@ public class Design {
 	private int architectID;
 	private Architect architect;
 	
-	
+
 	
 	//constructors
 	public Design() {
@@ -209,7 +209,4 @@ public class Design {
 				+ ", experience=" + experience + ", designId=" + designId + ", architectId=" + architectID
 				+ ", architect=" + architect + "]";
 	}
-
-	
-	
 }
