@@ -4,17 +4,18 @@ import java.util.regex.Pattern;
 
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class ArchitectValidator {
 
     public static boolean validateArchitect(Architect architect) throws InvalidArchitectException {
         if (architect == null || !isValidArchitect(architect)) {
-            throw new InvalidArchitectException("Architect details are not valid");
+            throw new InvalidArchitectException("Architect is null");
         }
         return true;
     }
 
-    private static boolean isValidArchitect(Architect architect) {
+    private static boolean isValidArchitect(Architect architect) throws InvalidArchitectException {
         try {
             return validateArchitectID(architect.getArchitectID())
                     && validateName(architect.getName())
@@ -30,9 +31,7 @@ public class ArchitectValidator {
                     && validateURL(architect.getDegreeCertificate())
                     && validateURL(architect.getNATACertificate());
         } catch (InvalidArchitectException e) {
-            // Handle the exception or re-throw it as necessary
-            e.printStackTrace(); // Just printing the stack trace as an example
-            return false;
+			throw new InvalidArchitectException("Architect details not valid");
         }
     }
 

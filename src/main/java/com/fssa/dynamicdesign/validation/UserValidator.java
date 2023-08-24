@@ -3,18 +3,19 @@ package com.fssa.dynamicdesign.validation;
 import java.util.regex.Pattern;
 
 import com.fssa.dynamicdesign.model.User;
+import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class UserValidator {
 
     public static boolean validateUser(User user) throws InvalidUserException {
         if (user == null || !isValidUser(user)) {
-            throw new InvalidUserException("User details are not valid");
+            throw new InvalidUserException("User is null");
         }
         return true;
     }
 
-    private static boolean isValidUser(User user) {
+    private static boolean isValidUser(User user) throws InvalidUserException {
         try {
             return validateUserID(user.getUserId())
                     && validateName(user.getUsername())
@@ -22,9 +23,7 @@ public class UserValidator {
                     && validateEmail(user.getEmail())
                     && validatePhoneNumber(user.getPhonenumber());
         } catch (InvalidUserException e) {
-            // Handle the exception or re-throw it as necessary
-            e.printStackTrace(); // Just printing the stack trace as an example
-            return false;
+			throw new InvalidUserException("User details not valid");
         }
     }
 
