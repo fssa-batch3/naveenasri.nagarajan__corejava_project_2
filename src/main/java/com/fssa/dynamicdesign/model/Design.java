@@ -33,28 +33,6 @@ public class Design {
 		this.architectID = architectID;
 	}
 
-
-	//List
-	public Design(String designName, String designUrl, double price, int noOfRooms, boolean isDeleted,
-			String coverPhoto, String architectName, String phoneNumber, String architectEmail, int experience,
-			int designId, int architectID) {
-		super();
-		this.designName = designName;
-		this.designUrl = designUrl;
-		this.price = price;
-		this.noOfRooms = noOfRooms;
-		this.isDeleted = isDeleted;
-		this.coverPhoto = coverPhoto;
-		this.architectName = architectName;
-		this.phoneNumber = phoneNumber;
-		this.architectEmail = architectEmail;
-		this.experience = experience;
-		this.designId = designId;
-		this.architectID = architectID;
-	}
-
-
-	
 	//Update and Delete
 
 	public Design(int designId,String designName, String designUrl, double price, int noOfRooms) {
