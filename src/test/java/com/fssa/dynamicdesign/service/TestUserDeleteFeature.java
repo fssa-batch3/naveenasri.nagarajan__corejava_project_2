@@ -14,9 +14,9 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testDeleteUserSuccess() {
 		UserService userService = new UserService();
 		// Assuming a user with the email "babu@gmail.com" exists in the database
+		String emailToDelete = "sri@gmail.com";
 		try {
-			User user = new User(3, "maha122@gmail.com", "Mahasenthil", "Navee@123", "9888844056", "user", false);
-			boolean isDeleted = userService.deleteUser(user);
+			boolean isDeleted = userService.deleteUser(emailToDelete);
 			assertTrue(isDeleted, "User deletion failed.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -29,9 +29,9 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 		UserService userService = new UserService();
 		// Assuming a user with the email "nonexisting@example.com" does not exist in
 		// the database
-		User user = new User(2, "nonexisting@example.com", "NonExistingUser", "Navee@123", "9876543123", "user", false);
+		String emailToDelete = "nonexisting@example.com";
 		try {
-			userService.deleteUser(user);
+			userService.deleteUser(emailToDelete);	
 			fail("User with non-existing email should not be deleted, but method succeeded.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -39,12 +39,12 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	}
 
 	@Test
-	 void testDeleteUserWithInvalidUserId() {
+	 void testDeleteUserWithInvalidUserEmail() {
 		UserService userService = new UserService();
-		User user = new User(-1, "babu@gmail.com", "Babu", "Navee@123", "9876543123", "user", false);
+		String emailToDelete = "babugmail.com";
 		try {
-			boolean isDeleted = userService.deleteUser(user);
-			assertFalse(isDeleted, "User should not be deleted.");
+			boolean isDeleted = userService.deleteUser(emailToDelete);;
+			assertFalse(isDeleted, "User Email should not be valid.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

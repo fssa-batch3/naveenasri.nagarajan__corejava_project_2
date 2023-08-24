@@ -111,12 +111,6 @@ public class ArchitectValidator {
         return true;
     }
 
-    public static boolean validateDeleteArchitect(Architect architect) throws InvalidArchitectException {
-        if (architect != null && architect.getArchitectID() > 0 && validateEmail(architect.getEmail())) {
-            return true;
-        } else {
-            throwError("Invalid Architect details for deletion");
-        }
-        return false;
-    }
+
+ 
 }

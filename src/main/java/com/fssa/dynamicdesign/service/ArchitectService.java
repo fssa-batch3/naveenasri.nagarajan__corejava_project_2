@@ -41,15 +41,10 @@ public class ArchitectService {
 				throw new ServiceException("Before logging in, you have to register");
 			}
 
-			if (architectDAO.login(architect, email)) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (ServiceException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new ServiceException(e.getLocalizedMessage());
+			return architectDAO.login(architect, email);
+
+		} catch (SQLException | InvalidArchitectException e) {
+			throw new ServiceException(e);
 		}
 	}
 
@@ -84,19 +79,19 @@ public class ArchitectService {
 		}
 	}
 
-	public boolean deleteArchitect(Architect architect) throws ServiceException {
+	public boolean deleteArchitect(String email) throws ServiceException {
 	    ArchitectDAO architectDAO = new ArchitectDAO();
 	    try {
-	        if (architect == null) {
+	        if (email == null) {
 	            throw new InvalidArchitectException("Delete Architect is null");
 	        }
 
-	        if (!architectDAO.isEmailExists(architect.getEmail())) {
+	        if (!architectDAO.isEmailExists(email)) {
 	            throw new ServiceException("Architect with this email does not exist");
 	        }
 
-	        ArchitectValidator.validateDeleteArchitect(architect);
-	        return architectDAO.deleteArchitect(architect);
+	        ArchitectValidator.validateEmail(email);
+	        return architectDAO.deleteArchitect(email);
 	    } catch (InvalidArchitectException | SQLException e) {
 	        throw new ServiceException(e);
 	    }

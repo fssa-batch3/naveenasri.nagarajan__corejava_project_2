@@ -116,12 +116,12 @@ public class ArchitectDAO {
 	}
 
 	// Delete architect based on architect ID
-	public boolean deleteArchitect(Architect architect) throws SQLException {
+	public boolean deleteArchitect(String email) throws SQLException {
 		String query = "UPDATE architect SET isDeleted = ? WHERE email = ?";
 
 		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setBoolean(1, true); // Set isDeleted to true to mark the architect as deleted
-			pmt.setString(2, architect.getEmail());
+			pmt.setString(2, email);
 			int rows = pmt.executeUpdate();
 			return rows == 1;
 		}

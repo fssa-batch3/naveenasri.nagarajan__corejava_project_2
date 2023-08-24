@@ -63,11 +63,11 @@ public class UserValidator {
         return true;
     }
 
-    public static boolean validateDeleteUser(User user) throws InvalidUserException {
-        if (user != null && user.getUserId() > 0 && validateEmail(user.getEmail())) {
-            return true;
-        } else {
-            throw new InvalidUserException("Invalid user details for deletion");
-        }
-    }
+//    public static boolean validateDeleteUser(User user) throws InvalidUserException {
+//        if (user != null && user.getUserId() > 0 && validateEmail(user.getEmail())) {
+//            return true;
+//        } else {
+//            throw new InvalidUserException("Invalid user details for deletion");
+//        }
+//    }
 }

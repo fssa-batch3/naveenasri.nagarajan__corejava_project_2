@@ -13,9 +13,6 @@ public class UserDAO {
 
 	// Add new user to DB - Register
 	public boolean register(User user) throws SQLException {
-		
-		
-
 		String query = "INSERT INTO USER ( email, userName, password, phoneNumber, type) VALUES (?, ?, ?, ?, ?)";
 
 		try (Connection connection = ConnectionDb.getConnection();
@@ -67,11 +64,11 @@ public class UserDAO {
 	}
 
 	// Delete user based on email
-	public boolean deleteUser(User user) throws SQLException {
+	public boolean deleteUser(String email) throws SQLException {
 		String query = "UPDATE USER SET isDeleted = ? WHERE email = ?";
 		try (Connection connection = ConnectionDb.getConnection(); PreparedStatement pmt = connection.prepareStatement(query)) {
 			pmt.setBoolean(1, true); // Set isDeleted to true to mark the user as deleted
-			pmt.setString(2, user.getEmail());
+			pmt.setString(2, email);
 			int rows = pmt.executeUpdate();
 			return rows == 1;
 		}

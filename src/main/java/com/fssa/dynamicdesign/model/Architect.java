@@ -13,33 +13,13 @@ public class Architect {
 	private String education;
 	private int experience;
 	private String degreeCertificate;
-	private String NATACertificate;
+	private String nataCertificate;
 	private boolean isDeleted;
 	
 	
 
 	public Architect() {
 		super();
-	}
-
-	public Architect(int architectID, String profilePhoto, String name, String gender, String phoneNumber,
-			String address, String coverPhoto, String email, String password, String education, int experience,
-			String degreeCertificate, String nATACertificate, boolean isDeleted) {
-		super();
-		this.architectID = architectID;
-		this.profilePhoto = profilePhoto;
-		this.name = name;
-		this.gender = gender;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.coverPhoto = coverPhoto;
-		this.email = email;
-		this.password = password;
-		this.education = education;
-		this.experience = experience;
-		this.degreeCertificate = degreeCertificate;
-		this.NATACertificate = nATACertificate;
-		this.isDeleted = isDeleted;
 	}
 
 	public Architect(int architectID, String profilePhoto, String name, String gender, String phoneNumber,
@@ -58,9 +38,10 @@ public class Architect {
 		this.education = education;
 		this.experience = experience;
 		this.degreeCertificate = degreeCertificate;
-		this.NATACertificate = nATACertificate;
+		this.nataCertificate = nATACertificate;
 	}
 	
+	// Create Architect Constructor
 	public Architect( String profilePhoto, String name, String gender, String phoneNumber,
 			String address, String coverPhoto, String email, String password, String education, int experience,
 			String degreeCertificate, String nATACertificate) {
@@ -76,21 +57,17 @@ public class Architect {
 		this.education = education;
 		this.experience = experience;
 		this.degreeCertificate = degreeCertificate;
-		this.NATACertificate = nATACertificate;
+		this.nataCertificate = nATACertificate;
 	}
 	
+	
+	// login Architect Constructor
 	public Architect(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
 
-	public Architect(String email, boolean isDeleted) {
-		super();
-		this.email = email;
-		this.isDeleted = isDeleted;
-	}
-	
 	public int getArchitectID() {
 		return architectID;
 	}
@@ -188,11 +165,11 @@ public class Architect {
 	}
 
 	public String getNATACertificate() {
-		return NATACertificate;
+		return nataCertificate;
 	}
 
 	public void setNATACertificate(String nATACertificate) {
-		this.NATACertificate = nATACertificate;
+		this.nataCertificate = nATACertificate;
 	}
 
 	public boolean isDeleted() {
@@ -209,7 +186,7 @@ public class Architect {
 				+ ", gender=" + gender + ", phoneNumber=" + phoneNumber + ", address=" + address + ", coverPhoto="
 				+ coverPhoto + ", email=" + email + ", password=" + password + ", education=" + education
 				+ ", experience=" + experience + ", degreeCertificate=" + degreeCertificate + ", NATACertificate="
-				+ NATACertificate + ", isDeleted=" + isDeleted + "]";
+				+ nataCertificate + ", isDeleted=" + isDeleted + "]";
 	}
 
 }

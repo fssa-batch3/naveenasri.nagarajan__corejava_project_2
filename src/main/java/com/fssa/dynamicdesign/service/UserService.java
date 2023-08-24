@@ -40,11 +40,7 @@ public class UserService {
 				throw new ServiceException("Before logging in, you have to register");
 			}
 
-			if (userDAO.login(user, email)) {
-				return true;
-			} else {
-				return false;
-			}
+			return userDAO.login(user, email);
 		} catch (ServiceException e) {
 			throw e;
 		} catch (Exception e) {
@@ -71,19 +67,19 @@ public class UserService {
 		}
 	}
 
-	 public boolean deleteUser(User user) throws ServiceException {
+	 public boolean deleteUser(String email) throws ServiceException {
 	        UserDAO userDAO = new UserDAO();
 	        try {
-	            if (user == null) {
+	            if (email == null) {
 	                throw new InvalidUserException("User is null while deleting ");
 	            }
 
-	            if (!userDAO.isEmailExists(user.getEmail())) {
+	            if (!userDAO.isEmailExists(email)) {
 	                throw new ServiceException("User with this email does not exist");
 	            }
 
-	            UserValidator.validateDeleteUser(user);
-	            return userDAO.deleteUser(user);
+	            UserValidator.validateEmail(email);
+	            return userDAO.deleteUser(email);
 	        } catch (InvalidUserException | SQLException e) {
 	            throw new ServiceException(e);
 	        }

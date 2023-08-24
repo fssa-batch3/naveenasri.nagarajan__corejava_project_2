@@ -11,8 +11,8 @@ import com.fssa.dynamicdesign.validation.DesignValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 public class DesignService {
-	
-	// Create design Service code 
+
+	// Create design Service code
 	public boolean createDesign(Design design) throws ServiceException {
 
 		DesignDAO designDAO = new DesignDAO();
@@ -22,19 +22,16 @@ public class DesignService {
 			}
 
 			DesignValidator.validateDesign(design);
+			
 			designDAO.checkIdExistsInArchitect(design.getArchitectId());
-			if (designDAO.createDesign(design)) {
-				return true;
-			} else {
-				return false;
-			}
+			
+			return designDAO.createDesign(design);
+			
 		} catch (DAOException | InvalidDesignException e) {
 			throw new ServiceException(e);
 		}
 	}
 
-	
-	
 	public List<Design> listDesigns() throws ServiceException {
 		DesignDAO designDAO = new DesignDAO();
 

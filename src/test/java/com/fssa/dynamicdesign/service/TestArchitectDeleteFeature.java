@@ -18,10 +18,9 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 		ArchitectService architectService = new ArchitectService();
 		// Assuming an architect with the email "architect@gmail.com" exists in the
 		// database
+		String emailToDelete = "john.doe@example.com";
 		try {
-			Architect architect = new Architect(3, "profile.jpg", "Architect Name", "Male", "9876543210", "Address",
-					"cover.jpg", "ajai@example.com", "Architect@123", "B.Arch", 5, "degree.pdf", "nata.pdf", false);
-			boolean isDeleted = architectService.deleteArchitect(architect);
+			boolean isDeleted = architectService.deleteArchitect(emailToDelete);
 			assertTrue(isDeleted, "Architect deletion failed.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -34,10 +33,9 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 		ArchitectService architectService = new ArchitectService();
 		// Assuming an architect with the email "nonexisting@example.com" does not exist
 		// in the database
-		Architect architect = new Architect(2, "profile.jpg", "Non Existing Architect", "Male", "9876543210", "Address",
-				"cover.jpg", "nonexisting@example.com", "Architect@123", "B.Arch", 5, "degree.pdf", "nata.pdf", false);
-		try {
-			architectService.deleteArchitect(architect);
+		String emailToDelete = "nonexisting@example.com";
+			try {
+			architectService.deleteArchitect(emailToDelete);
 			fail("Architect with non-existing email should not be deleted, but method succeeded.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -45,12 +43,11 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	}
 
 	@Test
-	 void testDeleteArchitectWithInvalidArchitectId() {
+	 void testDeleteArchitectWithInvalidArchitectEmail() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(-1, "profile.jpg", "Architect Name", "Male", "9876543210", "Address",
-				"cover.jpg", "architect@gmail.com", "Architect@123", "B.Arch", 5, "degree.pdf", "nata.pdf", false);
+		String emailToDelete = "babugmail.com";
 		try {
-			boolean isDeleted = architectService.deleteArchitect(architect);
+			boolean isDeleted = architectService.deleteArchitect(emailToDelete);
 			assertFalse(isDeleted, "Architect should not be deleted.");
 		} catch (ServiceException e) {
 			e.printStackTrace();
