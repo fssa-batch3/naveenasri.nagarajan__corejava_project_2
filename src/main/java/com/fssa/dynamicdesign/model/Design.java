@@ -18,12 +18,22 @@ public class Design {
 	
 
 	
-	//constructors
+	/**
+	 * Default constructor
+	 */
 	public Design() {
 		super();
 	}
 	
-	// create Design 
+	
+	/**
+	 *  Constructor without designId (used for creating design)
+	 * @param designName
+	 * @param designUrl
+	 * @param price
+	 * @param noOfRooms
+	 * @param architectID
+	 */
 	public Design(String designName, String designUrl, double price, int noOfRooms, int architectID) {
 		super();
 		this.designName = designName;
@@ -33,8 +43,14 @@ public class Design {
 		this.architectID = architectID;
 	}
 
-	//Update and Delete
-
+	/**
+	 * Constructor without ArchitectId (used for updating and deleting design)
+	 * @param designId
+	 * @param designName
+	 * @param designUrl
+	 * @param price
+	 * @param noOfRooms
+	 */
 	public Design(int designId,String designName, String designUrl, double price, int noOfRooms) {
 		super();
 		this.designId = designId;
@@ -45,10 +61,10 @@ public class Design {
 	}
 
 
-
-
-
-	// getters and setters
+	/**
+	 * getters and setters
+	 * @return
+	 */
 	public String getDesignName() {
 		return designName;
 	}

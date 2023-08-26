@@ -15,7 +15,7 @@ class TestDesignCreateFeature {
 	void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
 		// (designName, designUrl, price, noOfRooms, architectID)
-		Design design1 = new Design("Living Room Design", "https://example.com/design1", 100.0, 4,13);
+		Design design1 = new Design("bedroom Room Design", "https://example.com/design1", 100.0, 4,13);
 		try {
 			assertTrue(designService.createDesign(design1));
 			System.out.println("Your Design Added Successfully ");

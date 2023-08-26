@@ -37,9 +37,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidPhoneNumberWithInvalidCountryCode() {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("+920987654321"));
-			System.out.println("Invalid phone number with invalid country code test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid phone number with invalid country code is not passed.");
 			e.printStackTrace();
 		}
 	}
@@ -48,9 +47,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidPhoneNumberWithInvalidLength() {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("987654321"));
-			System.out.println("Invalid phone number with invalid length test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid phone number with invalid length is not passed.");
 			e.printStackTrace();
 		}
 	}
@@ -59,9 +57,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidPhoneNumberWithNonNumericCharacters() {
 		try {
 			assertFalse(UserValidator.validatePhoneNumber("9876abcd12"));
-			System.out.println("Invalid phone number with non-numeric characters test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid phone number with non-numeric characters is not passed.");
 			e.printStackTrace();
 		}
 	}

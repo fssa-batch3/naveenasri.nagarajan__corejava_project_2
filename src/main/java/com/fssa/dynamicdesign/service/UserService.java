@@ -10,78 +10,124 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class UserService {
 
-	public boolean registerUser(User user) throws ServiceException {
-		UserDAO userDAO = new UserDAO();
+    /**
+     * Registers a new user.
+     *
+     * @param user The user to be registered.
+     * @return True if registration is successful, false otherwise.
+     * @throws ServiceException If an error occurs during registration.
+     */
+    public boolean registerUser(User user) throws ServiceException {
+        UserDAO userDAO = new UserDAO();
 
-		try {
-			if (user == null) {
-				throw new InvalidUserException("User is null while creating");
-			}
+        try {
+        	
+        	 // Check if the user is null
+            if (user == null) {
+                throw new InvalidUserException("User is null while updating");
+            }
+            
+            
+            // Check if the email already exists
+            if (userDAO.isEmailExists(user.getEmail())) {
+                throw new ServiceException("User with this email already exists");
+            }
 
-			if (userDAO.isEmailExists(user.getEmail())) {
-				throw new ServiceException("User with this email already exists");
-			}
+            // Validate the user's details using the UserValidator
+            UserValidator.validateUser(user);
 
-			UserValidator.validateUser(user);
-			return userDAO.register(user);
-		} catch (InvalidUserException | SQLException e) {
-			throw new ServiceException(e);
-		}
-	}
+            return userDAO.register(user);
+        } catch (InvalidUserException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-	public boolean loginUser(User user, String email) throws ServiceException {
-		try {
-			UserValidator.validateEmail(email);
-			UserValidator.validatePassword(user.getPassword());
+    /**
+     * Logs in a user.
+     *
+     * @param user  The user attempting to log in.
+     * @param email The user's email.
+     * @return True if login is successful, false otherwise.
+     * @throws ServiceException If an error occurs during login.
+     */
+    public boolean loginUser(User user, String email) throws ServiceException {
+        try {
+            // Validate the email and password using UserValidator
+            UserValidator.validateEmail(email);
+            UserValidator.validatePassword(user.getPassword());
 
-			UserDAO userDAO = new UserDAO();
+            UserDAO userDAO = new UserDAO();
 
-			if (!userDAO.isEmailExists(email)) {
-				throw new ServiceException("Before logging in, you have to register");
-			}
+            // Check if the user exists before attempting to log in
+            if (!userDAO.isEmailExists(email)) {
+                throw new ServiceException("Before logging in, you have to register");
+            }
 
-			return userDAO.login(user, email);
-		} catch (ServiceException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new ServiceException(e.getLocalizedMessage());
-		}
-	}
+            return userDAO.login(user, email);
+        } catch (ServiceException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ServiceException(e.getLocalizedMessage());
+        }
+    }
 
-	public boolean updateUser(User user, String email) throws ServiceException {
-		UserDAO userDAO = new UserDAO();
+    /**
+     * Updates user information.
+     *
+     * @param user  The updated user information.
+     * @param email The email of the user to be updated.
+     * @return True if update is successful, false otherwise.
+     * @throws ServiceException If an error occurs during update.
+     */
+    public boolean updateUser(User user, String email) throws ServiceException {
+        UserDAO userDAO = new UserDAO();
 
-		try {
-			if (user == null) {
-				throw new InvalidUserException("User is null while updating");
-			}
+        try {
+            // Check if the user is null
+            if (user == null) {
+                throw new InvalidUserException("User is null while updating");
+            }
 
-			if (!userDAO.isEmailExists(email)) {
-				throw new ServiceException("User with this email does not exist");
-			}
+            // Check if the user exists before attempting to update
+            if (!userDAO.isEmailExists(email)) {
+                throw new ServiceException("User with this email does not exist");
+            }
 
-			UserValidator.validateUser(user);
-			return userDAO.updateUser(user);
-		} catch (InvalidUserException | SQLException e) {
-			throw new ServiceException(e);
-		}
-	}
+            // Validate the user's details using the UserValidator
+            UserValidator.validateUser(user);
 
-	 public boolean deleteUser(String email) throws ServiceException {
-	        UserDAO userDAO = new UserDAO();
-	        try {
-	            if (email == null) {
-	                throw new InvalidUserException("User is null while deleting ");
-	            }
+            return userDAO.updateUser(user);
+        } catch (InvalidUserException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-	            if (!userDAO.isEmailExists(email)) {
-	                throw new ServiceException("User with this email does not exist");
-	            }
+    /**
+     * Deletes a user based on email.
+     *
+     * @param email The email of the user to be deleted.
+     * @return True if deletion is successful, false otherwise.
+     * @throws ServiceException If an error occurs during deletion.
+     */
+    public boolean deleteUser(String email) throws ServiceException {
+        UserDAO userDAO = new UserDAO();
+        try {
+            // Check if the email is null
+            if (email == null) {
+                throw new InvalidUserException("User is null while deleting ");
+            }
 
-	            UserValidator.validateEmail(email);
-	            return userDAO.deleteUser(email);
-	        } catch (InvalidUserException | SQLException e) {
-	            throw new ServiceException(e);
-	        }
-	    }
+            // Check if the user exists before attempting to delete
+            if (!userDAO.isEmailExists(email)) {
+                throw new ServiceException("User with this email does not exist");
+            }
+
+            // Validate the email using the UserValidator
+            UserValidator.validateEmail(email);
+
+            return userDAO.deleteUser(email);
+        } catch (InvalidUserException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

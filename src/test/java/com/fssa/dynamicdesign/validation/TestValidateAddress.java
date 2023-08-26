@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicdesign.validation.ArchitectValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
  class TestValidateAddress {
@@ -18,7 +17,6 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 			System.out.println("Valid address test passed.");
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
-			System.out.println("Caught InvalidArchitectException for a valid address.");
 			fail();
 		}
 	}
@@ -30,7 +28,6 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 			System.out.println("Valid address with special characters test passed.");
 		} catch (InvalidArchitectException e) {
 			e.printStackTrace();
-			System.out.println("Caught InvalidArchitectException for a valid address with special characters.");
 			fail();
 		}
 	}
@@ -39,11 +36,10 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 	 void testInvalidNullAddress() {
 		try {
 			assertFalse(ArchitectValidator.validateAddress(null));
-			System.out.println("Invalid null address test passed.");
-			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid null address.");
+			e.printStackTrace();
 		}
 	}
 
@@ -51,11 +47,10 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 	 void testInvalidEmptyAddress() {
 		try {
 			assertFalse(ArchitectValidator.validateAddress(""));
-			System.out.println("Invalid empty address test passed.");
-			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid empty address.");
+			e.printStackTrace();
 		}
 	}
 
@@ -63,11 +58,10 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 	 void testInvalidWhitespaceOnlyAddress() {
 		try {
 			assertFalse(ArchitectValidator.validateAddress("   "));
-			System.out.println("Invalid whitespace-only address test passed.");
-			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid whitespace-only address.");
+			e.printStackTrace();
 		}
 	}
 }

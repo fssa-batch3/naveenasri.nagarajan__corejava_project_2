@@ -15,13 +15,31 @@ public class Architect {
 	private String degreeCertificate;
 	private String nataCertificate;
 	private boolean isDeleted;
-	
-	
 
+	/**
+	 * Default constructor
+	 */
 	public Architect() {
 		super();
 	}
 
+	/**
+	 * Constructor with architectID (used for Updating Architect)
+	 * 
+	 * @param architectID
+	 * @param profilePhoto
+	 * @param name
+	 * @param gender
+	 * @param phoneNumber
+	 * @param address
+	 * @param coverPhoto
+	 * @param email
+	 * @param password
+	 * @param education
+	 * @param experience
+	 * @param degreeCertificate
+	 * @param nATACertificate
+	 */
 	public Architect(int architectID, String profilePhoto, String name, String gender, String phoneNumber,
 			String address, String coverPhoto, String email, String password, String education, int experience,
 			String degreeCertificate, String nATACertificate) {
@@ -40,10 +58,25 @@ public class Architect {
 		this.degreeCertificate = degreeCertificate;
 		this.nataCertificate = nATACertificate;
 	}
-	
-	// Create Architect Constructor
-	public Architect( String profilePhoto, String name, String gender, String phoneNumber,
-			String address, String coverPhoto, String email, String password, String education, int experience,
+
+	/**
+	 * Constructor without architectID (used for creating Architect)
+	 * 
+	 * @param profilePhoto
+	 * @param name
+	 * @param gender
+	 * @param phoneNumber
+	 * @param address
+	 * @param coverPhoto
+	 * @param email
+	 * @param password
+	 * @param education
+	 * @param experience
+	 * @param degreeCertificate
+	 * @param nATACertificate
+	 */
+	public Architect(String profilePhoto, String name, String gender, String phoneNumber, String address,
+			String coverPhoto, String email, String password, String education, int experience,
 			String degreeCertificate, String nATACertificate) {
 		super();
 		this.profilePhoto = profilePhoto;
@@ -59,15 +92,24 @@ public class Architect {
 		this.degreeCertificate = degreeCertificate;
 		this.nataCertificate = nATACertificate;
 	}
-	
-	
-	// login Architect Constructor
+
+	/**
+	 * Constructor for login (email and password only)
+	 * 
+	 * @param email
+	 * @param password
+	 */
 	public Architect(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
 
+	/**
+	 * Getters and setters
+	 * 
+	 * @return
+	 */
 	public int getArchitectID() {
 		return architectID;
 	}

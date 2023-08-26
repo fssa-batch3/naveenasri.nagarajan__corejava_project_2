@@ -11,90 +11,129 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
 public class ArchitectService {
 
-	public boolean registerArchitect(Architect architect) throws ServiceException {
-		ArchitectDAO architectDAO = new ArchitectDAO();
+    /**
+     * Registers a new architect.
+     *
+     * @param architect The architect to be registered.
+     * @return True if registration is successful, false otherwise.
+     * @throws ServiceException If an error occurs during registration.
+     */
+    public boolean registerArchitect(Architect architect) throws ServiceException {
+        ArchitectDAO architectDAO = new ArchitectDAO();
 
-		try {
-			// Check if the Architect is null
-			if (architect == null) {
-				throw new InvalidArchitectException("Register Architect is null");
-			}
+        try {
+            // Validate the architect's details using the ArchitectValidator
+            ArchitectValidator.validateArchitect(architect);
 
-			// Validate the architect's details using the ArchitectValidator
-			ArchitectValidator.validateArchitect(architect);
+            // Call the DAO's arcRegister method to register the architect
+            return architectDAO.arcRegister(architect);
+        } catch (SQLException | InvalidArchitectException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-			// Call the DAO's arcRegister method to register the architect
-			return architectDAO.arcRegister(architect);
-		} catch (SQLException | InvalidArchitectException e) {
-			throw new ServiceException(e);
-		}
-	}
+    /**
+     * Logs in an architect.
+     *
+     * @param architect The architect attempting to log in.
+     * @param email The email of the architect.
+     * @return True if login is successful, false otherwise.
+     * @throws ServiceException If an error occurs during login.
+     */
+    public boolean loginArchitect(Architect architect, String email) throws ServiceException {
+        try {
+            // Validate email format and password using ArchitectValidator
+            ArchitectValidator.validateEmail(email);
+            ArchitectValidator.validatePassword(architect.getPassword());
 
-	public boolean loginArchitect(Architect architect, String email) throws ServiceException {
-		try {
-			ArchitectValidator.validateEmail(email);
-			ArchitectValidator.validatePassword(architect.getPassword());
+            ArchitectDAO architectDAO = new ArchitectDAO();
 
-			ArchitectDAO architectDAO = new ArchitectDAO();
+            // Check if the email exists in the database
+            if (!architectDAO.isEmailExists(email)) {
+                throw new ServiceException("Before logging in, you have to register");
+            }
 
-			if (!architectDAO.isEmailExists(email)) {
-				throw new ServiceException("Before logging in, you have to register");
-			}
+            return architectDAO.login(architect, email);
 
-			return architectDAO.login(architect, email);
+        } catch (SQLException | InvalidArchitectException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-		} catch (SQLException | InvalidArchitectException e) {
-			throw new ServiceException(e);
-		}
-	}
+    /**
+     * Retrieves a list of all architects.
+     *
+     * @return A list of architects.
+     * @throws ServiceException If an error occurs while fetching architects.
+     */
+    public List<Architect> listArchitects() throws ServiceException {
+        ArchitectDAO architectDAO = new ArchitectDAO();
 
-	public List<Architect> listArchitects() throws ServiceException {
-		ArchitectDAO architectDAO = new ArchitectDAO();
+        try {
+            return architectDAO.listArchitects();
+        } catch (SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-		try {
-			return architectDAO.listArchitects();
-		} catch (SQLException e) {
-			throw new ServiceException(e);
-		}
-	}
+    /**
+     * Updates architect information.
+     *
+     * @param architect The updated architect information.
+     * @param email The email of the architect to be updated.
+     * @return True if update is successful, false otherwise.
+     * @throws ServiceException If an error occurs during update.
+     */
+    public boolean updateArchitect(Architect architect, String email) throws ServiceException {
+        ArchitectDAO architectDAO = new ArchitectDAO();
 
-	public boolean updateArchitect(Architect architect, String email) throws ServiceException {
-		ArchitectDAO architectDAO = new ArchitectDAO();
+        try {
+            // Check if the architect is null
+            if (architect == null) {
+                throw new InvalidArchitectException("Update Architect is null");
+            }
 
-		try {
-			// Check if the architect is null
-			if (architect == null) {
-				throw new InvalidArchitectException("Update Architect is null");
-			}
+            // Check if the email exists before attempting to update
+            if (!architectDAO.isEmailExists(email)) {
+                throw new ServiceException("Architect with this email does not exist");
+            }
 
-			// Check if the email exists before attempting to update
-			if (!architectDAO.isEmailExists(email)) {
-				throw new ServiceException("Architect with this email does not exist");
-			}
+            // Validate the architect's details using the ArchitectValidator
+            ArchitectValidator.validateArchitect(architect);
+            
+            
+            return architectDAO.updateArchitect(architect, email);
+        } catch (InvalidArchitectException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-			ArchitectValidator.validateArchitect(architect);
-			return architectDAO.updateArchitect(architect, email);
-		} catch (InvalidArchitectException | SQLException e) {
-			throw new ServiceException(e);
-		}
-	}
+    /**
+     * Deletes an architect based on email.
+     *
+     * @param email The email of the architect to be deleted.
+     * @return True if deletion is successful, false otherwise.
+     * @throws ServiceException If an error occurs during deletion.
+     */
+    public boolean deleteArchitect(String email) throws ServiceException {
+        ArchitectDAO architectDAO = new ArchitectDAO();
+        try {
+            // Check if the architect is null
+            if (email == null) {
+                throw new InvalidArchitectException("Delete Architect is null");
+            }
 
-	public boolean deleteArchitect(String email) throws ServiceException {
-	    ArchitectDAO architectDAO = new ArchitectDAO();
-	    try {
-	        if (email == null) {
-	            throw new InvalidArchitectException("Delete Architect is null");
-	        }
+            // Check if the email exists before attempting to delete
+            if (!architectDAO.isEmailExists(email)) {
+                throw new ServiceException("Architect with this email does not exist");
+            }
 
-	        if (!architectDAO.isEmailExists(email)) {
-	            throw new ServiceException("Architect with this email does not exist");
-	        }
-
-	        ArchitectValidator.validateEmail(email);
-	        return architectDAO.deleteArchitect(email);
-	    } catch (InvalidArchitectException | SQLException e) {
-	        throw new ServiceException(e);
-	    }
-	}
-
+            // Validate the architect's details using the ArchitectValidator
+            ArchitectValidator.validateEmail(email);
+            
+            return architectDAO.deleteArchitect(email);
+        } catch (InvalidArchitectException | SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

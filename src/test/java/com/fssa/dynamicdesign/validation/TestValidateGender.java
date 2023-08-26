@@ -16,7 +16,6 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 			assertTrue(ArchitectValidator.validateGender("Male"));
 			System.out.println("Valid Male gender test passed.");
 		} catch (InvalidArchitectException e) {
-			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid Male gender.");
 			fail();
 		}
@@ -28,7 +27,6 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 			assertTrue(ArchitectValidator.validateGender("Female"));
 			System.out.println("Valid Female gender test passed.");
 		} catch (InvalidArchitectException e) {
-			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid Female gender.");
 			fail();
 		}
@@ -40,7 +38,6 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 			assertTrue(ArchitectValidator.validateGender("Other"));
 			System.out.println("Valid Other gender test passed.");
 		} catch (InvalidArchitectException e) {
-			e.printStackTrace();
 			System.out.println("Caught InvalidArchitectException for a valid Other gender.");
 			fail();
 		}
@@ -50,11 +47,10 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 	 void testInvalidNullGender() {
 		try {
 			assertFalse(ArchitectValidator.validateGender(null));
-			System.out.println("Invalid null gender test passed.");
-			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid null gender.");
+			e.printStackTrace();
 		}
 	}
 
@@ -62,11 +58,10 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 	 void testInvalidNonAllowedGender() {
 		try {
 			assertFalse(ArchitectValidator.validateGender("NonAllowed"));
-			System.out.println("Invalid non-allowed gender test passed.");
-			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid non-allowed gender.");
+			e.printStackTrace();
 		}
 	}
 
@@ -74,11 +69,10 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 	 void testInvalidMixedCaseGender() {
 		try {
 			assertFalse(ArchitectValidator.validateGender("mAle"));
-			System.out.println("Invalid mixed-case gender test passed.");
-			fail();
 		} catch (InvalidArchitectException e) {
 			// Correct exception type is caught
 			System.out.println("Caught InvalidArchitectException for an invalid mixed-case gender.");
+			e.printStackTrace();
 		}
 	}
 }

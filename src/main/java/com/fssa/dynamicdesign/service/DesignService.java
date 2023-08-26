@@ -12,61 +12,86 @@ import com.fssa.dynamicdesign.validation.exception.InvalidDesignException;
 
 public class DesignService {
 
-	// Create design Service code
-	public boolean createDesign(Design design) throws ServiceException {
+    /**
+     * Creates a new design.
+     *
+     * @param design The design to be created.
+     * @return True if creation is successful, false otherwise.
+     * @throws ServiceException If an error occurs during creation.
+     */
+    public boolean createDesign(Design design) throws ServiceException {
 
-		DesignDAO designDAO = new DesignDAO();
-		try {
-			if (design == null) {
-				throw new ServiceException("Design is null");
-			}
+        DesignDAO designDAO = new DesignDAO();
+        try {
 
-			DesignValidator.validateDesign(design);
-			
-			designDAO.checkIdExistsInArchitect(design.getArchitectId());
-			
-			return designDAO.createDesign(design);
-			
-		} catch (DAOException | InvalidDesignException e) {
-			throw new ServiceException(e);
-		}
-	}
+            // Validate the design's details using the DesignValidator
+            DesignValidator.validateDesign(design);
 
-	public List<Design> listDesigns() throws ServiceException {
-		DesignDAO designDAO = new DesignDAO();
+            // Check if the architect ID exists before creating the design
+            designDAO.checkIdExistsInArchitect(design.getArchitectId());
 
-		try {
-			return designDAO.listDesigns();
-		} catch (SQLException e) {
-			throw new ServiceException(e);
-		}
-	}
+            return designDAO.createDesign(design);
 
-	public boolean updateDesign(Design design) throws ServiceException {
-		DesignDAO designDAO = new DesignDAO();
+        } catch (DAOException | InvalidDesignException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-		try {
-			if (design == null) {
-				throw new InvalidDesignException("Design is null");
-			}
+    /**
+     * Retrieves a list of all designs.
+     *
+     * @return A list of designs.
+     * @throws ServiceException If an error occurs while fetching designs.
+     */
+    public List<Design> listDesigns() throws ServiceException {
+        DesignDAO designDAO = new DesignDAO();
 
-			DesignValidator.validateDesign(design);
+        try {
+            return designDAO.listDesigns();
 
-			return designDAO.updateDesign(design);
-		} catch (SQLException | InvalidDesignException e) {
-			throw new ServiceException(e);
-		}
-	}
+        } catch (SQLException e) {
+            throw new ServiceException(e);
+        }
+    }
 
-	public boolean deleteDesign(int designId) throws ServiceException {
-		DesignDAO designDAO = new DesignDAO();
+    /**
+     * Updates a design's information.
+     *
+     * @param design The updated design information.
+     * @return True if update is successful, false otherwise.
+     * @throws ServiceException If an error occurs during update.
+     */
+    public boolean updateDesign(Design design) throws ServiceException {
+        DesignDAO designDAO = new DesignDAO();
 
-		try {
-			DesignValidator.validateDesignId(designId);
-			return designDAO.deleteDesign(designId);
-		} catch (SQLException | InvalidDesignException e) {
-			throw new ServiceException(e);
-		}
-	}
+        try {
+            // Validate the design's details using the DesignValidator
+            DesignValidator.validateDesign(design);
 
+            return designDAO.updateDesign(design);
+
+        } catch (SQLException | InvalidDesignException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    /**
+     * Deletes a design based on design ID.
+     *
+     * @param designId The ID of the design to be deleted.
+     * @return True if deletion is successful, false otherwise.
+     * @throws ServiceException If an error occurs during deletion.
+     */
+    public boolean deleteDesign(int designId) throws ServiceException {
+        DesignDAO designDAO = new DesignDAO();
+
+        try {
+            // Validate the design ID using the DesignValidator
+            DesignValidator.validateDesignId(designId);
+
+            return designDAO.deleteDesign(designId);
+        } catch (SQLException | InvalidDesignException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

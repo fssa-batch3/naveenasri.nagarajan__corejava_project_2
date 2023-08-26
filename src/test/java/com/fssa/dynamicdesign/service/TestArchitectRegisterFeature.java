@@ -66,6 +66,21 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
+	 void testArchitectRegistrationNull() {
+		ArchitectService architectService = new ArchitectService();
+
+		// Create a sample architect with invalid details (missing required fields)
+		Architect architect = null;
+
+		try {
+			architectService.registerArchitect(architect);
+			fail("Architect is null");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	 void testArchitectRegistrationEmailExists() {

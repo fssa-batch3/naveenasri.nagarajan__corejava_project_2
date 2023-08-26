@@ -68,6 +68,7 @@ import com.fssa.dynamicdesign.model.Design;
 			fail("Exception occurred while fetching designs from the database.");
 		}
 	}
+	
 
 	@Test
 	void testListDesignsNotEmptyFailure() {

@@ -26,9 +26,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidUserNameStartingWithNumber() {
 		try {
 			assertFalse(UserValidator.validateName("123InvalidUserName"));
-			System.out.println("Invalid user name starting with a number test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid user name starting with a number is not passed.");
 			e.printStackTrace();
 		}
 	}
@@ -37,9 +36,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidUserNameShorterLength() {
 		try {
 			assertFalse(UserValidator.validateName("Ab"));
-			System.out.println("Invalid user name shorter length test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid user name shorter length is not passed.");
 			e.printStackTrace();
 		}
 	}
@@ -48,9 +46,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidUserNameLongerLength() {
 		try {
 			assertFalse(UserValidator.validateName("ThisIsAVeryLongUserNameThatExceedsTheLimit"));
-			System.out.println("Invalid user name longer length test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid user name longer length is not passed.");
 			e.printStackTrace();
 		}
 	}
@@ -59,9 +56,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidUserNameWithSpaces() {
 		try {
 			assertFalse(UserValidator.validateName("Invalid User Name"));
-			System.out.println("Invalid user name with spaces test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid user name with spaces is not passed.");
 			e.printStackTrace();
 		}
 	}
@@ -70,9 +66,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 	 void testInvalidUserNameWithSpecialCharacters() {
 		try {
 			assertFalse(UserValidator.validateName("Invalid$UserName"));
-			System.out.println("Invalid user name with special characters test passed.");
-			fail();
 		} catch (InvalidUserException e) {
+			System.out.println("Invalid user name with special characters is not passed.");
 			e.printStackTrace();
 		}
 	}

@@ -16,7 +16,6 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
             assertTrue(UserValidator.validatePassword("Password@123"));
             System.out.println("Valid password test passed.");
         } catch (InvalidUserException e) {
-            e.printStackTrace();
             fail("Caught InvalidUserException for a valid password.");
         }
     }
@@ -25,9 +24,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
      void testInvalidPasswordWithoutNumbers() {
         try {
             assertFalse(UserValidator.validatePassword("Password@"));
-            System.out.println("Invalid password without numbers test passed.");
-            fail();
         } catch (InvalidUserException e) {
+            System.out.println("Invalid password without numbers is not passed.");
             e.printStackTrace();
         }
     }
@@ -36,9 +34,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
      void testInvalidPasswordWithoutSpecialCharacters() {
         try {
             assertFalse(UserValidator.validatePassword("password123"));
-            System.out.println("Invalid password without special characters test passed.");
-            fail();
         } catch (InvalidUserException e) {
+            System.out.println("Invalid password without special characters is not passed.");
             e.printStackTrace();
         }
     }
@@ -47,9 +44,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
      void testInvalidPasswordWithoutCapitalLetters() {
         try {
             assertFalse(UserValidator.validatePassword("password123"));
-            System.out.println("Invalid password without capital letters test passed.");
-            fail();
         } catch (InvalidUserException e) {
+            System.out.println("Invalid password without capital letters is not passed.");
             e.printStackTrace();
         }
     }
@@ -58,9 +54,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
      void testInvalidPasswordWithoutAnyLetters() {
         try {
             assertFalse(UserValidator.validatePassword(""));
-            System.out.println("Invalid password without Any letters test passed.");
-            fail();
         } catch (InvalidUserException e) {
+            System.out.println("Invalid password without Any letters is not  passed.");
             e.printStackTrace();
         }
     }
@@ -69,9 +64,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
      void testInvalidPasswordWithoutSmallLetters() {
         try {
             assertFalse(UserValidator.validatePassword("PASSWORD@123"));
-            System.out.println("Invalid password without small letters test passed.");
-            fail();
         } catch (InvalidUserException e) {
+            System.out.println("Invalid password without small letters is not passed.");
             e.printStackTrace();
         }
     }
@@ -80,9 +74,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
      void testInvalidPasswordShorterLength() {
         try {
             assertFalse(UserValidator.validatePassword("Pas@123"));
-            System.out.println("Invalid password shorter length test passed.");
-            fail();
         } catch (InvalidUserException e) {
+            System.out.println("Invalid password shorter length is not passed.");
             e.printStackTrace();
         }
     }

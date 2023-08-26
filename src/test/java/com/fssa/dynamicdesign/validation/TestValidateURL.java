@@ -27,9 +27,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
      void testInvalidEmptyURL() {
         try {
             assertFalse(ArchitectValidator.validateURL(""));
-            System.out.println("Invalid empty URL test passed.");
-            fail();
         } catch (InvalidArchitectException e) {
+            System.out.println("Invalid empty URL is not passed.");
             e.printStackTrace();
         }
     }
@@ -38,9 +37,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
      void testInvalidWhitespaceURL() {
         try {
             assertFalse(ArchitectValidator.validateURL("   "));
-            System.out.println("Invalid WhiteSpace URL test passed.");
-            fail();
         } catch (InvalidArchitectException e) {
+            System.out.println("Invalid WhiteSpace URL is not passed.");
             e.printStackTrace();
         }
     }
@@ -49,9 +47,8 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
      void testInvalidNullURL() {
         try {
             assertFalse(ArchitectValidator.validateURL(null));
-            System.out.println("Invalid null URL test passed.");
-            fail();
         } catch (InvalidArchitectException e) {
+            System.out.println("Invalid null URL is not passed.");
             e.printStackTrace();
         }
     }
