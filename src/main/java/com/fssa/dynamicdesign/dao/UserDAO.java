@@ -18,7 +18,7 @@ public class UserDAO {
      * @throws SQLException if a database error occurs.
      */
     public boolean register(User user) throws SQLException {
-        String query = "INSERT INTO USER (email, userName, password, phoneNumber, type) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO USER (email, user_name, password, phone_number, type) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -79,7 +79,7 @@ public class UserDAO {
      * @throws SQLException if a database error occurs.
      */
     public boolean updateUser(User user) throws SQLException {
-        String query = "UPDATE USER SET username=?, phonenumber=? WHERE email=?";
+        String query = "UPDATE USER SET user_name=?, phone_number=? WHERE email=?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
             pmt.setString(1, user.getUsername());
@@ -98,7 +98,7 @@ public class UserDAO {
      * @throws SQLException if a database error occurs.
      */
     public boolean deleteUser(String email) throws SQLException {
-        String query = "UPDATE USER SET isDeleted = ? WHERE email = ?";
+        String query = "UPDATE USER SET is_deleted = ? WHERE email = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
             pmt.setBoolean(1, true); // Set isDeleted to true to mark the user as deleted

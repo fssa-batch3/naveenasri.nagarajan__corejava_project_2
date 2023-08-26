@@ -32,21 +32,16 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	}
 
 	@Test
-	 void testArchitectRegistrationValidURLs() {
+	 void testArchitectRegistrationInValidURLs() {
 		ArchitectService architectService = new ArchitectService();
-		// ********************** Important ******************
-		// change ArchitectID , Email , Architect Name
-		// ***************************************************
-		// Create a sample architect with valid URLs for profile photo, cover photo,
-		// degree certificate, and NATACertificate
-		Architect architect = new Architect( "https://example1.com/profile.jpg", "JohnDoy", "Male", "9876543210",
+		Architect architect = new Architect( "     ", "JohnDoy", "Male", "9876543210",
 				"123 Main Street", "https://example.com/cover.jpg", "johyuh@example.com", "Password@123",
 				"Bachelor of Architecture", 5, "https://example.com/degree.jpg", "https://example.com/NATACert.jpg");
 		try {
-			assertTrue(architectService.registerArchitect(architect));
+			architectService.registerArchitect(architect);
+			fail("The URL of the Architect is not Valid");
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
 		}
 	}
 
@@ -116,36 +111,36 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 		}
 	}
 
-//	@Test
-//	 void testArchitectRegistrationInvalidExperience() {
-//		ArchitectService architectService = new ArchitectService();
-//
-//		// Create a sample architect with negative experience
-//		Architect architect = new Architect(5, "profilePhoto.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
-//				"coverPhoto.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", -2,
-//				"degreeCertificate.jpg", "NATACertificate.jpg");
-//
-//		try {
-//			assertFalse(architectService.registerArchitect(architect));
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@Test
+	 void testArchitectRegistrationInvalidExperience() {
+		ArchitectService architectService = new ArchitectService();
 
-//    @Test
-//     void testArchitectRegistrationEmptyEmailExists() {
-//        ArchitectService architectService = new ArchitectService();
-//
-//        // Create a sample architect with an email that already exists in the database
-//        Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
-//                "coverPhoto.jpg", "", "Password@123", "Bachelor of Architecture", 5,
-//                "degreeCertificate.jpg", "NATACertificate.jpg");
-//
-//        try {
-//            architectService.registerArchitect(architect);
-//            fail();
-//        } catch (ServiceException e) {
-//            e.printStackTrace();
-//        }
-//    }
+		// Create a sample architect with negative experience
+		Architect architect = new Architect(5, "profilePhoto.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
+				"coverPhoto.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", -2,
+				"degreeCertificate.jpg", "NATACertificate.jpg");
+
+		try {
+			assertFalse(architectService.registerArchitect(architect));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
+
+    @Test
+     void testArchitectRegistrationEmptyEmailExists() {
+        ArchitectService architectService = new ArchitectService();
+
+        // Create a sample architect with an email that already exists in the database
+        Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
+                "coverPhoto.jpg", "", "Password@123", "Bachelor of Architecture", 5,
+                "degreeCertificate.jpg", "NATACertificate.jpg");
+
+        try {
+            architectService.registerArchitect(architect);
+            fail();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+    }
 }

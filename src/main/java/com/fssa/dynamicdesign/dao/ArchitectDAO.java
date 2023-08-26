@@ -21,7 +21,7 @@ public class ArchitectDAO {
 	 */
 	public boolean arcRegister(Architect architect) throws SQLException {
 
-		String query = "INSERT INTO architect ( profilePhoto, name, gender, phoneNumber, address, coverPhoto, email, password, education, experience, degreeCertificate, NATACertificate) "
+		String query = "INSERT INTO architect ( profile_photo, name, gender, phone_number, address, cover_photo, email, password, education, experience, degree_certificate, nata_certificate) "
 				+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
@@ -109,19 +109,19 @@ public class ArchitectDAO {
 
 			while (resultSet.next()) {
                 // Retrieve architect details from the result set
-				int architectID = resultSet.getInt("architectID");
-				String profilePhoto = resultSet.getString("profilePhoto");
+				int architectID = resultSet.getInt("architect_id");
+				String profilePhoto = resultSet.getString("profile_photo");
 				String name = resultSet.getString("name");
 				String gender = resultSet.getString("gender");
-				String phoneNumber = resultSet.getString("phoneNumber");
+				String phoneNumber = resultSet.getString("phone_number");
 				String address = resultSet.getString("address");
-				String coverPhoto = resultSet.getString("coverPhoto");
+				String coverPhoto = resultSet.getString("cover_photo");
 				String email = resultSet.getString("email");
 				String password = resultSet.getString("password");
 				String education = resultSet.getString("education");
 				int experience = resultSet.getInt("experience");
-				String degreeCertificate = resultSet.getString("degreeCertificate");
-				String nataCertificate = resultSet.getString("NATACertificate");
+				String degreeCertificate = resultSet.getString("degree_certificate");
+				String nataCertificate = resultSet.getString("nata_certificate");
 
                 // Create and add Architect object to the list
 				Architect architect = new Architect(architectID, profilePhoto, name, gender, phoneNumber, address,
@@ -145,8 +145,8 @@ public class ArchitectDAO {
 	 * @throws SQLException if a database error occurs
 	 */
 	public boolean updateArchitect(Architect architect, String email) throws SQLException {
-		String query = "UPDATE ARCHITECT SET profilePhoto=?, name=?, gender=?, phoneNumber=?, address=?, "
-				+ "coverPhoto=?, education=?, experience=?, degreeCertificate=?, NATACertificate=? " + "WHERE email=?";
+		String query = "UPDATE ARCHITECT SET profile_photo=?, name=?, gender=?, phone_number=?, address=?, "
+				+ "cover_photo=?, education=?, experience=?, degree_certificate=?, nata_certificate=? " + "WHERE email=?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
 
@@ -177,7 +177,7 @@ public class ArchitectDAO {
 	 */
 	public boolean deleteArchitect(String email) throws SQLException {
 
-		String query = "UPDATE architect SET isDeleted = ? WHERE email = ?";
+		String query = "UPDATE architect SET is_deleted = ? WHERE email = ?";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
