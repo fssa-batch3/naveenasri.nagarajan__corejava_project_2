@@ -2,6 +2,7 @@ package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.Design;
@@ -12,7 +13,7 @@ class TestDesignUpdateFeature {
 	@Test
 	void testUpdateDesignSuccess() {
 		DesignService designService = new DesignService();
-		Design designToUpdate = new Design(5, "Bedroom Design", "https://example.com/design11", 120.00, 3);
+		Design designToUpdate = new Design(12, "Living Room Design", "https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg", 110.00, 4);
 		try {
 			if (!designService.updateDesign(designToUpdate)) {
 				fail("Failed to update design.");

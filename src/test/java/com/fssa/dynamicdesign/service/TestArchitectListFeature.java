@@ -18,13 +18,13 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 	@Test
 	 void testListArchitectsNotEmptyTrue() {
-	    ArchitectDAO architectDAO = new ArchitectDAO();
+		ArchitectService architectService = new ArchitectService();
 
 	    try {
-	        List<Architect> architects = architectDAO.listArchitects();
+	        List<Architect> architects = architectService.listArchitects();
 	        Assertions.assertNotNull(architects, "List of architects is null.");
 	        Assertions.assertTrue(!architects.isEmpty(), "List of architects is empty."); 
-	    } catch (SQLException e) {
+	    } catch (ServiceException e) {
 	        e.printStackTrace();
 	        Assertions.fail("Exception occurred while fetching architects from the database.");
 	        fail();

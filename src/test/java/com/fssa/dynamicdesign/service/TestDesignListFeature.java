@@ -5,17 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicdesign.dao.DesignDAO;
 import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
+
 
   class TestDesignListFeature {
 //	public static void main(String[] args) {
@@ -57,13 +53,14 @@ import com.fssa.dynamicdesign.model.Design;
 
 	@Test
 	void testListDesignsNotEmptysuccess() {
-		DesignDAO designDAO = new DesignDAO();
+		DesignService designservice = new DesignService();
+
 
 		try {
-			List<Design> designs = designDAO.listDesigns();
+			List<Design> designs = designservice.listDesigns();
 			assertNotNull(designs, "List of designs is null.");
 			assertTrue(!designs.isEmpty(), "List of designs is empty.");
-		} catch (SQLException e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail("Exception occurred while fetching designs from the database.");
 		}
@@ -72,13 +69,13 @@ import com.fssa.dynamicdesign.model.Design;
 
 	@Test
 	void testListDesignsNotEmptyFailure() {
-		DesignDAO designDAO = new DesignDAO();
+		DesignService designservice = new DesignService();
 
 		try {
-			List<Design> designs = designDAO.listDesigns();
+			List<Design> designs = designservice.listDesigns();
 			assertNotNull(designs, "List of designs is null.");
 			assertFalse(designs.isEmpty(), "List of designs is empty.");
-		} catch (SQLException e) {
+		} catch (ServiceException e) {
 			fail("Exception occurred while fetching designs from the database.");
 		}
 	}
