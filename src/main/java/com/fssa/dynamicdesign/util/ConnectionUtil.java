@@ -9,63 +9,25 @@ public class ConnectionUtil {
 	// connect to database
 	public static Connection getConnection() throws SQLException {
 
-		// Database URL and credentials
-//		final String DB_URL;
-//		final String DB_USER;
-//		final String DB_PASSWORD;
+		// local host
+		final String dbUrl = System.getenv("jdbc:mysql://localhost:3306/project");
+		final String dbUser = System.getenv("root");
+		final String dbPassword = System.getenv("123456");
 
-//		final String DB_URL = System.getenv("DB_URL");
-//		final String DB_USER = System.getenv("DB_USER");
-//		final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-//
-//		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("Unable to connect Database", e);
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("Database driver class not found", e);
-//
-//		}
+		// Cloud DB
+//		final String dbUrl = System.getenv("DB_URL");
+//		final String dbUser = System.getenv("DB_USER");
+//		final String dbPassword = System.getenv("DB_PASSWORD");
 
-//	
-//		String DB_URL;
-//		String DB_USER;
-//		String DB_PASSWORD;
-//		
-//		if (System.getenv("CI") != null) {
-//			DB_URL = System.getenv("DB_URL");
-//			DB_USER = System.getenv("DB_USER");
-//			DB_PASSWORD = System.getenv("DB_PASSWORD");
-//		} else {
-//			Dotenv env = Dotenv.load();
-//			DB_URL = env.get("DB_URL");
-//			DB_USER = env.get("DB_USER");
-//			DB_PASSWORD = env.get("DB_PASSWORD");
-//		}
-//
-		
-		// local host 
-		final String DB_URL = System.getenv("jdbc:mysql://localhost:3306/project");
-		final String DB_USER = System.getenv("root");
-		final String DB_PASSWORD = System.getenv("123456");
-		
-		// Cloud DB 
-//		final String DB_URL = System.getenv("DB_URL");
-//		final String DB_USER = System.getenv("DB_USER");
-//		final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-		
-		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Database driver class not found", e);
 		}
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "123456");
-	//	return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+		// return DriverManager.getConnection("jdbc:mysql://localhost:3306/project",
+		// "root", "123456");
+		return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
 	}
 }
