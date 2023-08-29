@@ -14,7 +14,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testUpdateSuccess() {
 		UserService userService = new UserService();
 		// check the userID , give valid details
-		User user1 = new User("maha@gmail.com", "Mahasenthil", "Naveena@123", "9888844056", "user");
+		User user1 = new User("maha@gmail.com", "Maha", "Naveena@123", "9876543215", "user");
 		try {
 			assertTrue(userService.updateUser(user1, "maha@gmail.com"));
 		} catch (ServiceException e) {
