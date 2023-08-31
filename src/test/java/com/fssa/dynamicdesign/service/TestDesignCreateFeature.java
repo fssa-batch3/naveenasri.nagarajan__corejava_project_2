@@ -15,7 +15,9 @@ class TestDesignCreateFeature {
 	void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
 		// (designName, designUrl, price, noOfRooms, architectID)
-		Design design1 = new Design("bedroom Room Design", "https://example.com/design1", 100.0, 4,13);
+		Design design1 = new Design("bedroom Room Design", "https://example.com/design1", 100.0,
+				"Interior design helps one elevate their existence,their lifestyle and their perception of the world.It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				4, 13);
 		try {
 			assertTrue(designService.createDesign(design1));
 			System.out.println("Your Design Added Successfully ");
@@ -29,7 +31,9 @@ class TestDesignCreateFeature {
 	@Test
 	void testNegativePriceValue() {
 		DesignService designService = new DesignService();
-		Design design = new Design("Modern design", "https://example.com/negative_price", -50.0,1, 3);
+		Design design = new Design("Modern design", "https://example.com/negative_price", -50.0,
+				"Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				1, 3);
 		try {
 			assertFalse(designService.createDesign(design));
 			fail("Expected ServiceException for negative price value");
@@ -41,7 +45,9 @@ class TestDesignCreateFeature {
 	@Test
 	void testNegativeRoomsValue() {
 		DesignService designService = new DesignService();
-		Design design = new Design("Modern design", "https://example.com/negative_id", 80.0,-5, 5);
+		Design design = new Design("Modern design", "https://example.com/negative_id", 80.0,
+				"Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				-5, 5);
 		try {
 			assertFalse(designService.createDesign(design));
 			fail("Expected ServiceException for negative number of rooms");

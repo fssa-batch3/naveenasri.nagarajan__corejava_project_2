@@ -5,6 +5,7 @@ public class Design {
 	private String designName;
 	private String designUrl;
 	private double price;
+	private String description;
 	private int noOfRooms;
 	private boolean isDeleted;
 	private String coverPhoto;
@@ -31,14 +32,16 @@ public class Design {
 	 * @param designName
 	 * @param designUrl
 	 * @param price
+	 * @param description
 	 * @param noOfRooms
 	 * @param architectID
 	 */
-	public Design(String designName, String designUrl, double price, int noOfRooms, int architectID) {
+	public Design(String designName, String designUrl, double price,String description, int noOfRooms, int architectID) {
 		super();
 		this.designName = designName;
 		this.designUrl = designUrl;
 		this.price = price;
+		this.description = description;
 		this.noOfRooms = noOfRooms;
 		this.architectID = architectID;
 	}
@@ -49,14 +52,16 @@ public class Design {
 	 * @param designName
 	 * @param designUrl
 	 * @param price
+	 * @param description
 	 * @param noOfRooms
 	 */
-	public Design(int designId,String designName, String designUrl, double price, int noOfRooms) {
+	public Design(int designId,String designName, String designUrl, double price,String description, int noOfRooms) {
 		super();
 		this.designId = designId;
 		this.designName = designName;
 		this.designUrl = designUrl;
 		this.price = price;
+		this.description = description;
 		this.noOfRooms = noOfRooms;
 	}
 
@@ -92,6 +97,16 @@ public class Design {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 
@@ -197,10 +212,13 @@ public class Design {
 
 	@Override
 	public String toString() {
-		return "NewDesign [designName=" + designName + ", designUrl=" + designUrl + ", price=" + price + ", noOfRooms="
-				+ noOfRooms + ", isDeleted=" + isDeleted + ", coverPhoto=" + coverPhoto + ", architectName="
-				+ architectName + ", phoneNumber=" + phoneNumber + ", architectEmail=" + architectEmail
-				+ ", experience=" + experience + ", designId=" + designId + ", architectId=" + architectID
-				+ ", architect=" + architect + "]";
+		return "Design [designName=" + designName + ", designUrl=" + designUrl + ", price=" + price + ", description="
+				+ description + ", noOfRooms=" + noOfRooms + ", isDeleted=" + isDeleted + ", coverPhoto=" + coverPhoto
+				+ ", architectName=" + architectName + ", phoneNumber=" + phoneNumber + ", architectEmail="
+				+ architectEmail + ", experience=" + experience + ", designId=" + designId + ", architectID="
+				+ architectID + ", architect=" + architect + "]";
 	}
+
+
+	
 }

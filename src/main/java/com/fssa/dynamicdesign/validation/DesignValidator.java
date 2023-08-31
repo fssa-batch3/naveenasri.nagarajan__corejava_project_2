@@ -17,6 +17,7 @@ public class DesignValidator {
 		validateDesignName(design.getDesignName());
 		validateDesignUrl(design.getDesignUrl());
 		validatePrice(design.getPrice());
+		validateDesignDescription(design.getDescription());
 		validateNoOfRooms(design.getNoOfRooms());
 		validateDesignId(design.getDesignId());
 		validateArchitectId(design.getArchitectId());
@@ -71,6 +72,21 @@ public class DesignValidator {
 			throw new InvalidDesignException("Price must be a non-negative value");
 		}
 	}
+	
+	
+	/**
+	 * Validates the design's description.
+	 *
+	 * @param designDescription The description of the design to be validated.
+	 * @throws InvalidDesignException If the design description is null, empty, or doesn't meet length requirements.
+	 */
+	public static void validateDesignDescription(String description) throws InvalidDesignException {
+	    if (description == null || description.trim().isEmpty() || description.length() < 45 || description.length() > 180) {
+	        throw new InvalidDesignException("Design description must not be empty and must be between 45 and 180 characters");
+	    }
+	}
+
+
 
 	/**
 	 * Validates the number of rooms in the design.

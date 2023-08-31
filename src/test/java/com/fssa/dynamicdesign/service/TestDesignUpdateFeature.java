@@ -2,7 +2,6 @@ package com.fssa.dynamicdesign.service;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.Design;
@@ -13,7 +12,10 @@ class TestDesignUpdateFeature {
 	@Test
 	void testUpdateDesignSuccess() {
 		DesignService designService = new DesignService();
-		Design designToUpdate = new Design(12, "Living Room Design", "https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg", 110.00, 4);
+		Design designToUpdate = new Design(12, "Living Room Design",
+				"https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg", 110.00,
+				"Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				4);
 		try {
 			if (!designService.updateDesign(designToUpdate)) {
 				fail("Failed to update design.");
@@ -28,7 +30,9 @@ class TestDesignUpdateFeature {
 	@Test
 	void testUpdateNonExistentDesign() {
 		DesignService designService = new DesignService();
-		Design nonExistentDesign = new Design(1000, "Updated Design", "https://example.com/updated", 150.0, 4);
+		Design nonExistentDesign = new Design(1000, "Updated Design", "https://example.com/updated", 150.0,
+				"Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				4);
 		try {
 			if (designService.updateDesign(nonExistentDesign)) {
 				fail("Successfully updated non-existent design.");
@@ -41,7 +45,7 @@ class TestDesignUpdateFeature {
 	@Test
 	void testUpdateWithNegativePrice() {
 		DesignService designService = new DesignService();
-		Design designToUpdate = new Design(3, "Updated Design", "https://example.com/updated", -50.0, 2);
+		Design designToUpdate = new Design(3, "Updated Design", "https://example.com/updated", -50.0, "", 2);
 		try {
 			if (designService.updateDesign(designToUpdate)) {
 				fail("Successfully updated design with negative price.");
@@ -54,7 +58,9 @@ class TestDesignUpdateFeature {
 	@Test
 	void testUpdateWithNegativeRooms() {
 		DesignService designService = new DesignService();
-		Design designToUpdate = new Design(4, "Updated Design", "https://example.com/updated", 150.0, -3);
+		Design designToUpdate = new Design(4, "Updated Design", "https://example.com/updated", 150.0,
+				"Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				-3);
 		try {
 			if (designService.updateDesign(designToUpdate)) {
 				fail("Successfully updated design with invalid email.");

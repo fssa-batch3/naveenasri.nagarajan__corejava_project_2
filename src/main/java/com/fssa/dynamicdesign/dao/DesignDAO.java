@@ -21,7 +21,7 @@ public class DesignDAO {
      * @throws DAOException if a database error occurs
      */
     public boolean createDesign(Design design) throws DAOException {
-        String query = "INSERT INTO designs (design_name, design_url, price, no_of_rooms, architect_id) VALUES (?, ?, ?, ?, ?)";
+    	String query = "INSERT INTO designs (design_name, design_url, price, description, no_of_rooms, architect_id) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -31,8 +31,9 @@ public class DesignDAO {
                 pmt.setString(1, design.getDesignName());
                 pmt.setString(2, design.getDesignUrl());
                 pmt.setDouble(3, design.getPrice());
-                pmt.setInt(4, design.getNoOfRooms());
-                pmt.setInt(5, design.getArchitectId());
+                pmt.setString(4, design.getDescription());
+                pmt.setInt(5, design.getNoOfRooms());
+                pmt.setInt(6, design.getArchitectId());
             }
 
             int rows = pmt.executeUpdate();
@@ -51,7 +52,7 @@ public class DesignDAO {
      */
     public List<Design> listDesigns() throws SQLException {
         List<Design> designs = new ArrayList<>();
-        String query = "SELECT designs.design_id, designs.design_name, designs.design_url, designs.price, designs.no_of_rooms, "
+        String query = "SELECT designs.design_id, designs.design_name, designs.design_url, designs.price,designs.description, designs.no_of_rooms, "
                 + "architect.architect_id, architect.name, architect.phone_number, architect.email, architect.experience "
                 + "FROM designs "
                 + "INNER JOIN architect ON designs.architect_id = architect.architect_id";
@@ -65,10 +66,11 @@ public class DesignDAO {
                 String designName = resultSet.getString("design_name");
                 String designUrl = resultSet.getString("design_url");
                 double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
                 int noOfRooms = resultSet.getInt("no_of_rooms");
                 int architectID = resultSet.getInt("architect_id");
 
-                Design design = new Design(designName, designUrl, price, noOfRooms, architectID);
+                Design design = new Design(designName, designUrl, price,description, noOfRooms, architectID);
                 designs.add(design);
             }
 
@@ -104,15 +106,16 @@ public class DesignDAO {
      * @throws SQLException if a database error occurs
      */
     public boolean updateDesign(Design design) throws SQLException {
-        String query = "UPDATE designs SET design_name=?, design_url=?, price=?, no_of_rooms=? WHERE design_id=?";
+        String query = "UPDATE designs SET design_name=?, design_url=?, price=?,description=?, no_of_rooms=? WHERE design_id=?";
         
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query)) {
             pmt.setString(1, design.getDesignName());
             pmt.setString(2, design.getDesignUrl());
             pmt.setDouble(3, design.getPrice());
-            pmt.setInt(4, design.getNoOfRooms());
-            pmt.setInt(5, design.getDesignId());
+            pmt.setString(4, design.getDescription());
+            pmt.setInt(5, design.getNoOfRooms());
+            pmt.setInt(6, design.getDesignId());
 
             int rows = pmt.executeUpdate();
             return rows == 1;
