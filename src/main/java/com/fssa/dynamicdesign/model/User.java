@@ -83,6 +83,20 @@ public class User {
 	}
 
 	/**
+	 * Constructor for getAlldetails (email and getAllData)
+	 *
+	 */
+	public User(int userId, String email, String username, String password, String phonenumber, String type) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.phonenumber = phonenumber;
+		this.type = type;
+	}
+
+	/**
 	 * Getters and setters
 	 * 
 	 * @return

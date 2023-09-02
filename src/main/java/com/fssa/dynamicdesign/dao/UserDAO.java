@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.User;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class UserDAO {
@@ -106,5 +108,39 @@ public class UserDAO {
             int rows = pmt.executeUpdate();
             return rows == 1; // Return true if one row was affected (deletion successful)
         }
+    }
+    
+    
+    /**
+     * Get a user by their email address.
+     *
+     * @param email The email address of the user to retrieve.
+     * @return The User object if found, or null if not found.
+     * @throws ServiceException If a database error occurs.
+     */
+    public User getUserByEmail(String email) throws DAOException {
+        String query = "SELECT * FROM users WHERE email = ?";
+        User user = null;
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Create a User object with the retrieved data
+                int userId = resultSet.getInt("user_id");
+                String userName = resultSet.getString("user_name");
+                String password = resultSet.getString("password");
+                String phoneNumber = resultSet.getString("phone_number");
+                String type = resultSet.getString("type");
+
+                user = new User(userId, email, userName, password, phoneNumber, type);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Error fetching user by email: " + e.getMessage());
+        }
+
+        return user;
     }
 }

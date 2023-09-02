@@ -15,9 +15,9 @@ class TestDesignCreateFeature {
 	void testCreateDesignSuccess() {
 		DesignService designService = new DesignService();
 		// (designName, designUrl, price, noOfRooms, architectID)
-		Design design1 = new Design("bedroom Room Design", "https://example.com/design1", 100.0,
+		Design design1 = new Design("fansy Living Room ", "https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_1280.jpg", 100.0,
 				"Interior design helps one elevate their existence,their lifestyle and their perception of the world.It is a fundamental human desire to seek and identify beauty in the surrounding.",
-				4, 13);
+				4, 75);
 		try {
 			assertTrue(designService.createDesign(design1));
 			System.out.println("Your Design Added Successfully ");

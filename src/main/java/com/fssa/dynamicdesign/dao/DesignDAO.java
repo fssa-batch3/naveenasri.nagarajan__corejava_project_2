@@ -9,40 +9,44 @@ import java.util.List;
 
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class DesignDAO {
 
-    /**
-     * Create a new design and store it in the database.
-     *
-     * @param design The Design object to be created
-     * @return true if creation is successful, false otherwise
-     * @throws DAOException if a database error occurs
-     */
-    public boolean createDesign(Design design) throws DAOException {
-    	String query = "INSERT INTO designs (design_name, design_url, price, description, no_of_rooms, architect_id) VALUES (?, ?, ?, ?, ?, ?)";
+	/**
+	 * Create a new design and store it in the database.
+	 *
+	 * @param design The Design object to be created
+	 * @return true if creation is successful, false otherwise
+	 * @throws DAOException if a database error occurs or if architectId doesn't exist
+	 */
+	public boolean createDesign(Design design) throws DAOException {
+	    String query = "INSERT INTO designs (design_name, design_url, price, description, no_of_rooms, architect_id) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pmt = connection.prepareStatement(query)) {
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pmt = connection.prepareStatement(query)) {
 
-            // Check if architectId exists before inserting
-            if (checkIdExistsInArchitect(design.getArchitectId())) {
-                pmt.setString(1, design.getDesignName());
-                pmt.setString(2, design.getDesignUrl());
-                pmt.setDouble(3, design.getPrice());
-                pmt.setString(4, design.getDescription());
-                pmt.setInt(5, design.getNoOfRooms());
-                pmt.setInt(6, design.getArchitectId());
-            }
+	        // Check if architectId exists before inserting
+	        if (!checkIdExistsInArchitect(design.getArchitectId())) {
+	            throw new DAOException("Architect with ID " + design.getArchitectId() + " does not exist.");
+	        }
 
-            int rows = pmt.executeUpdate();
-            return rows == 1;
+	        pmt.setString(1, design.getDesignName());
+	        pmt.setString(2, design.getDesignUrl());
+	        pmt.setDouble(3, design.getPrice());
+	        pmt.setString(4, design.getDescription());
+	        pmt.setInt(5, design.getNoOfRooms());
+	        pmt.setInt(6, design.getArchitectId());
 
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
+	        int rows = pmt.executeUpdate();
+	        return rows == 1;
+
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
+	}
+
 
     /**
      * Retrieve a list of all designs from the database.
@@ -139,5 +143,48 @@ public class DesignDAO {
             int rows = pmt.executeUpdate();
             return rows == 1;
         }
+    }
+    
+    /**
+     * Method to get a design by its ID
+     * @param designId
+     * @return
+     * @throws ServiceException
+     */
+    public Design getDesignById(int designId) throws ServiceException {
+        String query = "SELECT * FROM designs WHERE design_id = ?";
+        Design design = null;
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, designId);
+            
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                if (resultSet.next()) {
+                    design = extractDesignFromResultSet(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            throw new ServiceException("Error retrieving design by ID: " + e.getMessage());
+        }
+
+        return design;
+    }
+
+    /**
+     * Helper method to extract a Design object from a ResultSet
+     * @param resultSet
+     * @return
+     * @throws SQLException
+     */
+    private Design extractDesignFromResultSet(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("design_id");
+        String designName = resultSet.getString("design_name");
+        String designUrl = resultSet.getString("design_url");
+        double price = resultSet.getDouble("price");
+        String description = resultSet.getString("description");
+        int noOfRooms = resultSet.getInt("no_of_rooms");
+
+        return new Design(id, designName, designUrl, price, description, noOfRooms);
     }
 }

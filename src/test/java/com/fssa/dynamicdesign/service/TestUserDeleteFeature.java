@@ -14,7 +14,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testDeleteUserSuccess() {
 		UserService userService = new UserService();
 		// Assuming a user with the email "babu@gmail.com" exists in the database
-		String emailToDelete = "sri@gmail.com";
+		String emailToDelete = "maha@gmail.com";
 		try {
 			boolean isDeleted = userService.deleteUser(emailToDelete);
 			assertTrue(isDeleted, "User deletion failed.");

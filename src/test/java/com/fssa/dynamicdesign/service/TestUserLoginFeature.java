@@ -13,8 +13,8 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void loginSuccess() {
 		UserService userService = new UserService();
-		String email = "maha122@gmail.com";
-		String password = "Navee@123";
+		String email = "maha@gmail.com";
+		String password = "Maha@123";
 		User user1 = new User(email, password);
 		try {
 			assertTrue(userService.loginUser(user1, email));
@@ -44,7 +44,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testLoginEmailCheck() {
 		UserService userService = new UserService();
 		String email = "invalidemail"; // Invalid email format
-		String password = "Navee@123";
+		String password = "Maha@123";
 		User user1 = new User(email, password);
 		try {
 			userService.loginUser(user1, email); // Expecting login failure
@@ -58,23 +58,23 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testLoginNullUser() {
 		UserService userService = new UserService();
 		try {
-			userService.loginUser(null, "maha12@gmail.com"); // Expecting login failure
+			userService.loginUser(null, "maha@gmail.com"); // Expecting login failure
 			fail();
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}
 	
-//	@Test
-//	 void testLoginPasswordCheck() {
-//		UserService userService = new UserService();
-//		String email = "maha12@gmail.com";
-//		String password = "navee@123"; // Incorrect password format
-//		User user1 = new User(email, password);
-//		try {
-//			assertFalse(userService.loginUser(user1, email));
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@Test
+	 void testLoginPasswordCheck() {
+		UserService userService = new UserService();
+		String email = "maha@gmail.com";
+		String password = "maha@123"; // Incorrect password format
+		User user1 = new User(email, password);
+		try {
+			assertFalse(userService.loginUser(user1, email));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 }

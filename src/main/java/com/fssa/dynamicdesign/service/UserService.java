@@ -3,6 +3,7 @@ package com.fssa.dynamicdesign.service;
 import java.sql.SQLException;
 
 import com.fssa.dynamicdesign.dao.UserDAO;
+import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.User;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.validation.UserValidator;
@@ -130,4 +131,27 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+    
+    
+    /**
+     * Retrieves a user by their email address.
+     *
+     * @param email The email address of the user to retrieve.
+     * @return The User object if found, or null if not found.
+     * @throws ServiceException If an error occurs while retrieving the user.
+     */
+    public User getUserByEmail(String email) throws ServiceException {
+        try {
+            // Validate the email (if needed)
+            UserValidator.validateEmail(email);
+
+            UserDAO userDAO = new UserDAO(); // Assuming you have a UserDAO implementation
+
+            // Retrieve the user by email from the DAO
+            return userDAO.getUserByEmail(email);
+        } catch (InvalidUserException | DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 }

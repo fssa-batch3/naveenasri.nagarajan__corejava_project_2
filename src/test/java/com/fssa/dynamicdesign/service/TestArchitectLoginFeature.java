@@ -14,7 +14,7 @@ class TestArchitectLoginFeature {
     @Test
     void testLoginSuccess() {
         ArchitectService architectService = new ArchitectService();
-        String email = "ajai@example.com";
+        String email = "ajaiii@example.com";
         String password = "Navee@123";
         Architect architect1 = new Architect(email, password);
         try {

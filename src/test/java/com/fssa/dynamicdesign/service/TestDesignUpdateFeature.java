@@ -12,9 +12,9 @@ class TestDesignUpdateFeature {
 	@Test
 	void testUpdateDesignSuccess() {
 		DesignService designService = new DesignService();
-		Design designToUpdate = new Design(12, "Living Room Design",
+		Design designToUpdate = new Design(29, "fansy living Room",
 				"https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg", 110.00,
-				"Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
+				"Interior design helps one elevate their existence,their lifestyle and their perception of the world.It is a fundamental human desire to seek and identify beauty in the surrounding.",
 				4);
 		try {
 			if (!designService.updateDesign(designToUpdate)) {
@@ -24,6 +24,7 @@ class TestDesignUpdateFeature {
 			}
 		} catch (ServiceException e) {
 			e.printStackTrace();
+			fail("Failed to update design.");
 		}
 	}
 

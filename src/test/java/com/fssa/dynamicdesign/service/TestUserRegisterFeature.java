@@ -17,7 +17,7 @@ class TestUserRegisterFeature {
 		// ********************** Important ******************
 		// change userID , Email
 		// ***************************************************
-		User user1 = new User("braggi@gmail.com", "Naveen264a", "Navee@123", "8072404562", "user");
+		User user1 = new User("maha@gmail.com", "Maha", "Maha@123", "9876212345", "user");
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
@@ -29,7 +29,7 @@ class TestUserRegisterFeature {
 	@Test
 	void testRegistrationNullPassword() {
 		UserService userService = new UserService();
-		User user = new User("john@example.com", "JohnDoe", null, "8565473543", "user");
+		User user = new User("maha@gmail.com", "Maha", null, "9876212345", "user");
 		try {
 			userService.registerUser(user);
 			fail("Expected ServiceException for null password, but none was thrown.");
@@ -52,7 +52,7 @@ class TestUserRegisterFeature {
 	@Test
 	void testRegistrationEmailEmpty() {
 		UserService userService = new UserService();
-		User user1 = new User("", "Babu", "Babu@123", "9876543123", "user");
+		User user1 = new User("", "Maha", "Maha@123", "9876212345", "user");
 		try {
 			userService.registerUser(user1);
 			fail();
@@ -64,7 +64,7 @@ class TestUserRegisterFeature {
 	@Test
 	void testRegistrationPhoneNumberInvalid() {
 		UserService userService = new UserService();
-		User user1 = new User("babu@gmail.com", "Babu", "Babu@123", "987654h123", "user");
+		User user1 = new User("maha@gmail.com", "Maha", "Maha@123", "98762h12345", "user");
 		try {
 			userService.registerUser(user1);
 			fail();
@@ -76,7 +76,7 @@ class TestUserRegisterFeature {
 	@Test
 	void testRegistrationEmptyPassword() {
 		UserService userService = new UserService();
-		User user = new User("JohnDoe", "", "john@example.com", "8565473543", "user");
+		User user = new User("maha@gmail.com", "Maha", "", "9876212345", "user");
 		try {
 			userService.registerUser(user);
 			fail("Expected ServiceException for empty password, but none was thrown.");
@@ -88,7 +88,7 @@ class TestUserRegisterFeature {
 	@Test
 	void testRegistrationEmptyUsername() {
 		UserService userService = new UserService();
-		User user = new User("", "P@ssw0rd", "john@example.com", "8565473543", "user");
+		User user = new User("maha@gmail.com", "", "Maha@123", "9876212345", "user");
 		try {
 			userService.registerUser(user);
 			fail("Expected ServiceException for empty username, but none was thrown.");

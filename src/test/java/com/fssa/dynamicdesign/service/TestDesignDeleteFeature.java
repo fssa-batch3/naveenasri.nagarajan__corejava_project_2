@@ -14,7 +14,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testDeleteDesignSuccess() {
 		DesignService designService = new DesignService();
 		// Assume you have a valid designId for an existing design
-		int designIdToDelete = 12;
+		int designIdToDelete = 29;
 
 		try {
 			assertTrue(designService.deleteDesign(designIdToDelete));

@@ -14,7 +14,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateSuccess() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(1,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect(73,"profileeePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
