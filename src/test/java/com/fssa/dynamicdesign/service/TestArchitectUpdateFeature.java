@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.Architect;
-import com.fssa.dynamicdesign.service.ArchitectService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
  class TestArchitectUpdateFeature {
@@ -14,7 +13,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateSuccess() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(73,"profileeePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect("profileeePhoto.jpg", "Mahasenthil", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -28,8 +27,8 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateEmailNotFound() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(2,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
-				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
+		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+				"coverPhoto.jpg", "maha987@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
 			// Assuming the architect with email "maha@example.com" does not exist in the
@@ -44,7 +43,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateInvalidEmailFormat() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -60,7 +59,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	 void testUpdateMissingRequiredField() {
 		ArchitectService architectService = new ArchitectService();
 		// Leaving the name field empty
-		Architect architect = new Architect(4,"profilePhoto.jpg", "", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect("profilePhoto.jpg", "", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -86,7 +85,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateNullEmail() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(5,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
@@ -100,7 +99,7 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 	@Test
 	 void testUpdateEmptyEmail() {
 		ArchitectService architectService = new ArchitectService();
-		Architect architect = new Architect(6,"profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
+		Architect architect = new Architect("profilePhoto.jpg", "Maha", "Female", "9876543210", "123 Main Street",
 				"coverPhoto.jpg", "maha@example.com", "Navee@123", "Bachelor of Architecture", 5,
 				"degreeCertificate.jpg", "NATACertificate.jpg");
 		try {
