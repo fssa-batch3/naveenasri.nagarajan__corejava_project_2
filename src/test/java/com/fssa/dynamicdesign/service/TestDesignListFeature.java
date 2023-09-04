@@ -56,33 +56,29 @@ class TestDesignListFeature {
 		}
 	}
 
-	@Test
-	void testListDesignsNotEmptysuccess() {
-		DesignService designservice = new DesignService();
+	 @Test
+	    void testListDesignsNotEmptySuccess() {
+	        DesignService designService = new DesignService();
+	        try {
+	            List<Design> designs = designService.listDesigns();
+	            assertNotNull(designs, "List of designs is null.");
+	            assertTrue(!designs.isEmpty(), "List of designs is empty.");
+	        } catch (ServiceException e) {
+	            e.printStackTrace();
+	            fail("Exception occurred while fetching designs from the database.");
+	        }
+	    }
 
-
-		try {
-			List<Design> designs = designservice.listDesigns();
-			assertNotNull(designs, "List of designs is null.");
-			assertTrue(!designs.isEmpty(), "List of designs is empty.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail("Exception occurred while fetching designs from the database.");
-		}
-	}
-	
-
-	@Test
-	void testListDesignsNotEmptyFailure() {
-		DesignService designservice = new DesignService();
-
-		try {
-			List<Design> designs = designservice.listDesigns();
-			assertNotNull(designs, "List of designs is null.");
-			assertFalse(designs.isEmpty(), "List of designs is empty.");
-		} catch (ServiceException e) {
-			fail("Exception occurred while fetching designs from the database.");
-		}
-	}
+	    @Test
+	    void testListDesignsNotEmptyFailure() {
+	        DesignService designService = new DesignService();
+	        try {
+	            List<Design> designs = designService.listDesigns();
+	            assertNotNull(designs, "List of designs is null.");
+	            assertFalse(designs.isEmpty(), "List of designs is empty.");
+	        } catch (ServiceException e) {
+	            fail("Exception occurred while fetching designs from the database.");
+	        }
+	    }
 
 }
