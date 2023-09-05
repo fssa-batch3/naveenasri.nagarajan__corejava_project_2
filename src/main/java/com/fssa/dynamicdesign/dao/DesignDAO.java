@@ -56,10 +56,7 @@ public class DesignDAO {
      */
     public List<Design> listDesigns() throws SQLException {
         List<Design> designs = new ArrayList<>();
-        String query = "SELECT designs.design_id, designs.design_name, designs.design_url, designs.price,designs.description, designs.no_of_rooms, "
-                + "architect.architect_id, architect.name, architect.phone_number, architect.email, architect.experience "
-                + "FROM designs "
-                + "INNER JOIN architect ON designs.architect_id = architect.architect_id";
+        String query = "SELECT designs.design_id, designs.design_name, designs.design_url, designs.price, designs.description, designs.no_of_rooms,architect.architect_id, architect.name, architect.phone_number, architect.email, architect.experience FROM designs INNER JOIN architect ON designs.architect_id = architect.architect_id WHERE designs.is_deleted = 0";
 
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pmt = connection.prepareStatement(query);
@@ -67,14 +64,14 @@ public class DesignDAO {
 
             while (resultSet.next()) {
                 // Retrieve design details from the result set
-                String designName = resultSet.getString("design_name");
-                String designUrl = resultSet.getString("design_url");
-                double price = resultSet.getDouble("price");
-                String description = resultSet.getString("description");
-                int noOfRooms = resultSet.getInt("no_of_rooms");
-                int architectID = resultSet.getInt("architect_id");
+            	  Design design = new Design();
+                design.setDesignName(resultSet.getString("design_name"));
+                design.setDesignUrl(resultSet.getString("design_url"));
+                design.setPrice(resultSet.getDouble("price"));
+                design.setDescription(resultSet.getString("description"));
+                design.setNoOfRooms(resultSet.getInt("no_of_rooms"));
+                design.setArchitectId(resultSet.getInt("architect_id"));
 
-                Design design = new Design(designName, designUrl, price,description, noOfRooms, architectID);
                 designs.add(design);
             }
 

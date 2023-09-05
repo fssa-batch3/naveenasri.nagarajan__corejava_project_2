@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Architect;
+import com.fssa.dynamicdesign.model.User;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class ArchitectDAO {
@@ -101,7 +104,7 @@ public class ArchitectDAO {
 	 */
 	public List<Architect> listArchitects() throws SQLException {
 		List<Architect> architects = new ArrayList<>();
-		String query = "SELECT * FROM ARCHITECT";
+		String query = "SELECT * FROM ARCHITECT WHERE is_deleted = 0";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
 
@@ -191,5 +194,46 @@ public class ArchitectDAO {
 			return rows == 1; // Return true if one row was affected (deletion successful)
 		}
 	}
+	
+	
+	/**
+	 * Get an architect by their email address.
+	 *
+	 * @param email The email address of the architect to retrieve.
+	 * @return The Architect object if found, or null if not found.
+	 * @throws DAOException If a database error occurs.
+	 */
+	public Architect getArchitectByEmail(String email) throws DAOException {
+	    String query = "SELECT * FROM architect WHERE email = ?";
+	    Architect architect = new Architect();
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+	        preparedStatement.setString(1, email);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            // Create an Architect object with the retrieved data
+	            architect.setArchitectID(resultSet.getInt("architect_id"));
+	            architect.setName(resultSet.getString("name"));
+	            architect.setGender(resultSet.getString("gender"));
+	            architect.setPhoneNumber(resultSet.getString("phone_number"));
+	            architect.setAddress(resultSet.getString("address"));
+	            architect.setProfilePhoto(resultSet.getString("profile_photo"));
+	            architect.setCoverPhoto(resultSet.getString("cover_photo"));
+	            architect.setEmail(resultSet.getString("email"));
+	            architect.setPassword(resultSet.getString("password"));
+	            architect.setEducation(resultSet.getString("education"));
+	            architect.setExperience(resultSet.getInt("experience"));
+	            architect.setDegreeCertificate(resultSet.getString("degree_certificate"));
+	            architect.setNATACertificate(resultSet.getString("nata_certificate"));
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException("Error fetching architect by email: " + e.getMessage());
+	    }
+
+	    return architect;
+	}
+
 
 }

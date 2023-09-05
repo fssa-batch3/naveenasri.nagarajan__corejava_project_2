@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.fssa.dynamicdesign.dao.ArchitectDAO;
+import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.validation.ArchitectValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
+import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class ArchitectService {
 
@@ -136,4 +138,27 @@ public class ArchitectService {
             throw new ServiceException(e);
         }
     }
+    
+    
+    /**
+     * Retrieves an architect by their email address.
+     *
+     * @param email The email address of the architect to retrieve.
+     * @return The Architect object if found, or null if not found.
+     * @throws ServiceException If an error occurs while retrieving the architect.
+     */
+    public Architect getArchitectByEmail(String email) throws ServiceException {
+        try {
+            // Validate the email (if needed)
+            ArchitectValidator.validateEmail(email);
+
+            ArchitectDAO architectDAO = new ArchitectDAO(); // Assuming you have an ArchitectDAO implementation
+
+            // Retrieve the architect by email from the DAO
+            return architectDAO.getArchitectByEmail(email);
+        }catch (InvalidArchitectException | DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 }

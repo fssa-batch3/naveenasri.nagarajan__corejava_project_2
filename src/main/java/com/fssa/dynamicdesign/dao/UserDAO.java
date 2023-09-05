@@ -119,8 +119,8 @@ public class UserDAO {
      * @throws ServiceException If a database error occurs.
      */
     public User getUserByEmail(String email) throws DAOException {
-        String query = "SELECT * FROM users WHERE email = ?";
-        User user = null;
+        String query = "SELECT * FROM user WHERE email = ?";
+        User user = new User();
 
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -129,13 +129,13 @@ public class UserDAO {
 
             if (resultSet.next()) {
                 // Create a User object with the retrieved data
-                int userId = resultSet.getInt("user_id");
-                String userName = resultSet.getString("user_name");
-                String password = resultSet.getString("password");
-                String phoneNumber = resultSet.getString("phone_number");
-                String type = resultSet.getString("type");
+                user.setUserId(resultSet.getInt("user_id"));
+                user.setUsername(resultSet.getString("user_name"));
+                user.setPassword(resultSet.getString("password"));
+                user.setPhonenumber(resultSet.getString("phone_number"));
+                user.setType(resultSet.getString("type"));
 
-                user = new User(userId, email, userName, password, phoneNumber, type);
+        
             }
         } catch (SQLException e) {
             throw new DAOException("Error fetching user by email: " + e.getMessage());
