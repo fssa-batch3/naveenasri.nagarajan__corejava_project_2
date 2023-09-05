@@ -15,32 +15,24 @@ public class ArchitectValidator {
      * @throws InvalidArchitectException If the architect is not valid or null.
      */
     public static boolean validateArchitect(Architect architect) throws InvalidArchitectException {
-        if (architect == null || !isValidArchitect(architect)) {
-            throw new InvalidArchitectException("Architect is not valid or null");
-        }
-        return true;
+    	validateArchitectNotNull(architect);
+    	validateArchitectID(architect.getArchitectID());
+    	validateName(architect.getName());
+    	validateGender(architect.getGender());
+    	validatePhoneNumber(architect.getPhoneNumber());
+    	validateAddress(architect.getAddress());
+    	validateEmail(architect.getEmail());
+    	validatePassword(architect.getPassword());
+    	validateEducation(architect.getEducation());
+    	validateExperience(architect.getExperience());
+    	validateURL(architect.getProfilePhoto());
+    	validateURL(architect.getCoverPhoto());
+    	validateURL(architect.getDegreeCertificate());
+    	validateURL(architect.getNATACertificate());
+    	
+    	return true;
+       
     }
-
-    private static boolean isValidArchitect(Architect architect) throws InvalidArchitectException {
-        try {
-            return validateArchitectID(architect.getArchitectID())
-                    && validateName(architect.getName())
-                    && validateGender(architect.getGender())
-                    && validatePhoneNumber(architect.getPhoneNumber())
-                    && validateAddress(architect.getAddress())
-                    && validateEmail(architect.getEmail())
-                    && validatePassword(architect.getPassword())
-                    && validateEducation(architect.getEducation())
-                    && validateExperience(architect.getExperience())
-                    && validateURL(architect.getProfilePhoto())
-                    && validateURL(architect.getCoverPhoto())
-                    && validateURL(architect.getDegreeCertificate())
-                    && validateURL(architect.getNATACertificate());
-        } catch (InvalidArchitectException e) {
-			throw new InvalidArchitectException("Architect details not valid");
-        }
-    }
-
 
     /**
      * Throws an InvalidArchitectException with the provided error message.
@@ -65,6 +57,21 @@ public class ArchitectValidator {
             throwError("Architect ID is invalid: Negative value");
         }
         return Pattern.matches("^\\d+$", Integer.toString(architectID));
+    }
+
+    
+    /**
+     * Validates the architect object for null.
+     *
+     * @param architect The architect object to be validated.
+     * @return True if the architect object is not null, false otherwise.
+     * @throws InvalidArchitectException If the architect object is null.
+     */
+    private static boolean validateArchitectNotNull(Architect architect) throws InvalidArchitectException {
+        if (architect == null) {
+            throwError("Architect is null");
+        }
+        return true;
     }
 
     

@@ -9,7 +9,7 @@ public class InvalidUserException extends Exception {
 		super(msg);
 	}
 
-	public InvalidUserException(Throwable e) {
-		super(e);
+	public InvalidUserException(Throwable msg) {
+		super(msg);
 	}
 }
