@@ -9,7 +9,6 @@ import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.validation.ArchitectValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
-import com.fssa.dynamicdesign.validation.exception.InvalidUserException;
 
 public class ArchitectService {
 

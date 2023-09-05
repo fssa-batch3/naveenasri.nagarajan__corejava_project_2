@@ -9,8 +9,6 @@ import java.util.List;
 
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Architect;
-import com.fssa.dynamicdesign.model.User;
-import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class ArchitectDAO {
