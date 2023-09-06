@@ -11,11 +11,6 @@ public class ConnectionUtil {
 	// connect to database
 	public static Connection getConnection() throws SQLException {
 
-		// local host
-//		final String dbUrl = "jdbc:mysql://localhost:3306/project";
-//		final String dbUser = "root";
-//		final String dbPassword ="123456";
-
 		// Cloud DB
 		final String DB_URL = System.getenv("DB_URL_1");
 		final String DB_USER = System.getenv("DB_USER_1");
