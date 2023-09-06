@@ -23,6 +23,7 @@ public class Architect {
 		super();
 	}
 
+	
 	/**
 	 * Constructor with architectID (used for Updating Architect)
 	 * 

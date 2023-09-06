@@ -31,7 +31,7 @@ public class ArchitectValidator {
     	validateURL(architect.getNATACertificate());
     	
     	return true;
-       
+    	
     }
 
     /**
