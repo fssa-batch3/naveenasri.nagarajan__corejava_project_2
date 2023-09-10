@@ -26,12 +26,14 @@ import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
     @Test
      void testInvalidEmptyURL() {
         try {
-            assertFalse(ArchitectValidator.validateURL(""));
+        	boolean valid = ArchitectValidator.validateURL("");
+            assertFalse(valid);
         } catch (InvalidArchitectException e) {
             System.out.println("Invalid empty URL is not passed.");
             e.printStackTrace();
         }
     }
+    
 
     @Test
      void testInvalidWhitespaceURL() {

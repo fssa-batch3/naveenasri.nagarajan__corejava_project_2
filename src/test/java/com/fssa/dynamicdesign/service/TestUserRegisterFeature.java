@@ -84,7 +84,7 @@ class TestUserRegisterFeature {
 			e.printStackTrace();
 		}
 	}
-
+  
 	@Test
 	void testRegistrationEmptyUsername() {
 		UserService userService = new UserService();
