@@ -8,8 +8,8 @@ public class InvalidDesignException extends Exception {
 		super(msg);
 	}
 
-	public InvalidDesignException(Throwable e) {
-		super(e);
-	}
+//	public InvalidDesignException(Throwable e) {
+//		super(e);
+//	}
 }
 

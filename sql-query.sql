@@ -49,6 +49,8 @@ CREATE TABLE `user` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ;
 
+SELECT * FROM project.architect;
+SELECT designs.design_id, designs.design_name, designs.design_url, designs.price, designs.description, designs.no_of_rooms,architect.architect_id, architect.name, architect.phone_number, architect.email, architect.experience FROM designs INNER JOIN architect ON designs.architect_id = architect.architect_id WHERE designs.is_deleted = 0;
 
-
+SELECT * FROM USER WHERE email ,is_deleted = 0;
 

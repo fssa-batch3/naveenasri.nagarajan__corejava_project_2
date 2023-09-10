@@ -12,104 +12,117 @@ import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class UserDAO {
 
-    /**
-     * Register a new user in the database.
-     *
-     * @param user The User object containing registration details.
-     * @return true if registration is successful, false otherwise.
-     * @throws SQLException if a database error occurs.
-     */
-    public boolean register(User user) throws SQLException {
-        String query = "INSERT INTO USER (email, user_name, password, phone_number, type) VALUES (?, ?, ?, ?, ?)";
+	/**
+	 * Registers a new user in the database.
+	 *
+	 * @param user The User object containing registration details.
+	 * @return true if registration is successful, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public boolean register(User user) throws DAOException {
+	    String query = "INSERT INTO USER (email, user_name, password, phone_number, type) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pmt = connection.prepareStatement(query)) {
-            // Set parameters for the prepared statement
-            pmt.setString(1, user.getEmail());
-            pmt.setString(2, user.getUsername());
-            pmt.setString(3, user.getPassword());
-            pmt.setString(4, user.getPhonenumber());
-            pmt.setString(5, user.getType());
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pmt = connection.prepareStatement(query)) {
+	        // Set parameters for the prepared statement
+	        pmt.setString(1, user.getEmail());
+	        pmt.setString(2, user.getUsername());
+	        pmt.setString(3, user.getPassword());
+	        pmt.setString(4, user.getPhonenumber()); // corrected method name to getPhoneNumber
+	        pmt.setString(5, user.getType());
 
-            int rows = pmt.executeUpdate();
-            return rows == 1; // Return true if one row was affected (registration successful)
-        }
-    }
+	        int rows = pmt.executeUpdate();
+	        return rows == 1; // Return true if one row was affected (registration successful)
+	    } catch (SQLException e) {
+	        throw new DAOException("Error while registering the user: " + e.getMessage());
+	    }
+	}
 
-    /**
-     * Check if a user with the given email exists in the database.
-     *
-     * @param email The email to check for existence.
-     * @return true if the email exists, false otherwise.
-     * @throws SQLException if a database error occurs.
-     */
-    public boolean isEmailExists(String email) throws SQLException {
-        String query = "SELECT * FROM USER WHERE email = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pmt = connection.prepareStatement(query)) {
-            pmt.setString(1, email);
-            ResultSet rs = pmt.executeQuery();
-            return rs.next(); // Return true if a row is found (email exists in the database)
-        }
-    }
 
-    /**
-     * Authenticate the user with the provided email and password.
-     *
-     * @param user  The User object containing the provided email and password.
-     * @param email The email of the user to be authenticated.
-     * @return true if authentication is successful, false otherwise.
-     * @throws SQLException if a database error occurs.
-     */
-    public boolean login(User user, String email) throws SQLException {
-        String query = "SELECT * FROM USER WHERE email = ? AND password = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pmt = connection.prepareStatement(query)) {
-            pmt.setString(1, email); // Use provided email for the query
-            pmt.setString(2, user.getPassword());
-            try (ResultSet rs = pmt.executeQuery()) {
-                return rs.next(); // Return true if a row is found (authentication successful)
-            }
-        }
-    }
+	/**
+	 * Checks if a user with the given email exists in the database.
+	 *
+	 * @param email The email to check for existence.
+	 * @return true if the email exists, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public boolean isEmailExists(String email) throws DAOException {
+	    String query = "SELECT * FROM USER WHERE email = ? AND is_deleted = 0";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(query)) {
+	        pstmt.setString(1, email);
+	        ResultSet rs = pstmt.executeQuery();
+	        return rs.next(); // Returns true if a row is found (email exists in the database)
+	    } catch (SQLException e) {
+	        throw new DAOException("Error while checking if the email exists for the user: " + e.getMessage());
+	    }
+	}
 
-    /**
-     * Update user information based on email.
-     *
-     * @param user The User object containing updated information.
-     * @return true if update is successful, false otherwise.
-     * @throws SQLException if a database error occurs.
-     */
-    public boolean updateUser(User user) throws SQLException {
-        String query = "UPDATE USER SET user_name=?, phone_number=? WHERE email=?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pmt = connection.prepareStatement(query)) {
-            pmt.setString(1, user.getUsername());
-            pmt.setString(2, user.getPhonenumber());
-            pmt.setString(3, user.getEmail());
-            int rows = pmt.executeUpdate();
-            return rows == 1; // Return true if one row was affected (update successful)
-        }
-    }
+	/**
+	 * Authenticates the user with the provided email and password.
+	 *
+	 * @param user  The User object representing the user to be authenticated.
+	 * @param email The email of the user to be authenticated.
+	 * @return true if authentication is successful, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public boolean login(User user, String email) throws DAOException {
+	    String query = "SELECT * FROM USER WHERE email = ? AND password = ? AND is_deleted = 0";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(query)) {
+	        pstmt.setString(1, email); // Use the provided email for the query
+	        pstmt.setString(2, user.getPassword());
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            return rs.next(); // Return true if a row is found (authentication successful)
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException("Error while authenticating the user: " + e.getMessage());
+	    }
+	}
 
-    /**
-     * Delete user based on email.
-     *
-     * @param email The email of the user to be deleted.
-     * @return true if deletion is successful, false otherwise.
-     * @throws SQLException if a database error occurs.
-     */
-    public boolean deleteUser(String email) throws SQLException {
-        String query = "UPDATE USER SET is_deleted = ? WHERE email = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pmt = connection.prepareStatement(query)) {
-            pmt.setBoolean(1, true); // Set isDeleted to true to mark the user as deleted
-            pmt.setString(2, email);
-            int rows = pmt.executeUpdate();
-            return rows == 1; // Return true if one row was affected (deletion successful)
-        }
-    }
-    
+
+	/**
+	 * Updates user information based on email.
+	 *
+	 * @param user The User object containing the updated information.
+	 * @return true if the update is successful, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public boolean updateUser(User user) throws DAOException {
+	    String query = "UPDATE USER SET user_name=?, phone_number=? WHERE email=? AND is_deleted = 0";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(query)) {
+	        pstmt.setString(1, user.getUsername());
+	        pstmt.setString(2, user.getPhonenumber());
+	        pstmt.setString(3, user.getEmail());
+	        int rows = pstmt.executeUpdate();
+	        return rows == 1; // Return true if one row was affected (update successful)
+	    } catch (SQLException e) {
+	        throw new DAOException("Error while updating user information: " + e.getMessage());
+	    }
+	}
+
+
+	/**
+	 * Deletes a user based on email by marking them as deleted in the database.
+	 *
+	 * @param email The email of the user to be deleted.
+	 * @return true if the deletion is successful, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public boolean deleteUser(String email) throws DAOException {
+	    String query = "UPDATE USER SET is_deleted = ? WHERE email = ? AND is_deleted = 0";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(query)) {
+	        pstmt.setBoolean(1, true); // Set isDeleted to true to mark the user as deleted
+	        pstmt.setString(2, email);
+	        int rows = pstmt.executeUpdate();
+	        return rows == 1; // Return true if one row was affected (deletion successful)
+	    } catch (SQLException e) {
+	        throw new DAOException("Error while deleting the user: " + e.getMessage());
+	    }
+	}
+
     
     /**
      * Get a user by their email address.
@@ -134,8 +147,6 @@ public class UserDAO {
                 user.setPassword(resultSet.getString("password"));
                 user.setPhonenumber(resultSet.getString("phone_number"));
                 user.setType(resultSet.getString("type"));
-
-        
             }
         } catch (SQLException e) {
             throw new DAOException("Error fetching user by email: " + e.getMessage());

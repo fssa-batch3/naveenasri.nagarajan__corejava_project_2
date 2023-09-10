@@ -15,31 +15,28 @@ public class UserValidator {
 	 * 
 	 */
 	public static boolean validateUser(User user) throws InvalidUserException {
-		   validateUserNull(user); // Check for null user
-		   validateUserID(user.getUserId());
-		   validateName(user.getUsername());
-		   validatePassword(user.getPassword());
-		   validateEmail(user.getEmail());
-		   validatePhoneNumber(user.getPhonenumber());
-		   
+		validateUserNull(user); // Check for null user
+		validateUserID(user.getUserId());
+		validateName(user.getUsername());
+		validatePassword(user.getPassword());
+		validateEmail(user.getEmail());
+		validatePhoneNumber(user.getPhonenumber());
+		
 		return true;
 	}
-
-	
 
 	/**
 	 * Validates the user is null.
 	 *
 	 * @param The user to be validated.
-	 * @return True if the user not null  is valid, false otherwise.
+	 * @return True if the user not null is valid, false otherwise.
 	 * @throws InvalidUserException If the user is null.
 	 */
 	public static void validateUserNull(User user) throws InvalidUserException {
-	    if (user == null) {
-	        throw new InvalidUserException("User is null");
-	    }
+		if (user == null) {
+			throw new InvalidUserException("User is null");
+		}
 	}
-
 
 	/**
 	 * Validates the user's ID.
@@ -111,4 +108,6 @@ public class UserValidator {
 		}
 		return true;
 	}
+	
+	
 }

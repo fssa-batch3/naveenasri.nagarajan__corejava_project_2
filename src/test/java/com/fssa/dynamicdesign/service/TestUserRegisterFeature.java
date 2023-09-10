@@ -17,7 +17,7 @@ class TestUserRegisterFeature {
 		// ********************** Important ******************
 		// change userID , Email
 		// ***************************************************
-		User user1 = new User("maha@gmail.com", "Maha", "Maha@123", "9876212345", "user");
+		User user1 = new User("kishore@gmail.com", "Maha", "Kishore@123", "9876212345", "user");
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {

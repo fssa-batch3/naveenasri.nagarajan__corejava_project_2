@@ -120,7 +120,7 @@ public class DesignValidator {
 	 * @throws InvalidDesignException If the architect ID is negative.
 	 */
 	public static void validateArchitectId(int architectId) throws InvalidDesignException {
-		if (architectId < 0) {
+		if (architectId < 0) { 
 			throw new InvalidDesignException("Invalid architect ID: Null or negative value.");
 		}
 	}

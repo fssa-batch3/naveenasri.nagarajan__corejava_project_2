@@ -1,7 +1,5 @@
 package com.fssa.dynamicdesign.service;
 
-import java.sql.SQLException;
-
 import com.fssa.dynamicdesign.dao.UserDAO;
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.User;
@@ -38,7 +36,7 @@ public class UserService {
             UserValidator.validateUser(user);
 
             return userDAO.register(user);
-        } catch (InvalidUserException | SQLException e) {
+        } catch (InvalidUserException | DAOException e) {
             throw new ServiceException(e);
         }
     }
@@ -65,10 +63,8 @@ public class UserService {
             }
 
             return userDAO.login(user, email);
-        } catch (ServiceException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ServiceException(e.getLocalizedMessage());
+        } catch (InvalidUserException | DAOException e) {
+            throw new ServiceException(e);
         }
     }
 
@@ -98,7 +94,7 @@ public class UserService {
             UserValidator.validateUser(user);
 
             return userDAO.updateUser(user);
-        } catch (InvalidUserException | SQLException e) {
+        } catch (InvalidUserException | DAOException e) {
             throw new ServiceException(e);
         }
     }
@@ -127,7 +123,7 @@ public class UserService {
             UserValidator.validateEmail(email);
 
             return userDAO.deleteUser(email);
-        } catch (InvalidUserException | SQLException e) {
+        } catch (InvalidUserException | DAOException e) {
             throw new ServiceException(e);
         }
     }
