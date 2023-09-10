@@ -1,8 +1,8 @@
 package com.fssa.dynamicdesign.service;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +17,7 @@ class TestArchitectLoginFeature {
         String email = "ajaiii@example.com";
         String password = "Navee@123";
         Architect architect1 = new Architect(email, password);
-        try {
-            assertTrue(architectService.loginArchitect(architect1, email), "Login should succeed.");
-        } catch (ServiceException e) {
-            fail("Unexpected ServiceException: " + e.getMessage());
-        }
+        assertDoesNotThrow(() -> assertTrue(architectService.loginArchitect(architect1, email)));
     }
 
     @Test
@@ -30,11 +26,7 @@ class TestArchitectLoginFeature {
         String email = "nonexisting@gmail.com";
         String password = "Password@796";
         Architect architect2 = new Architect(email, password);
-        try {
-            assertFalse(architectService.loginArchitect(architect2, email), "Login should fail for non-existing email.");
-        } catch (ServiceException e) {
-        	e.printStackTrace();
-        }
+        assertThrows(ServiceException.class, () -> architectService.loginArchitect(architect2, email));
     }
 
     @Test
@@ -43,11 +35,7 @@ class TestArchitectLoginFeature {
         String email = "invalidemail"; // Invalid email format
         String password = "Architect@123";
         Architect architect1 = new Architect(email, password);
-        try {
-            assertFalse(architectService.loginArchitect(architect1, email), "Login should fail for invalid email format.");
-        } catch (ServiceException e) {
-        	e.printStackTrace();
-        }
+        assertThrows(ServiceException.class, () -> architectService.loginArchitect(architect1, email));
     }
 
     @Test
@@ -56,10 +44,6 @@ class TestArchitectLoginFeature {
         String email = null; // Invalid email format
         String password = "Architect@123";
         Architect architect1 = new Architect(email, password);
-        try {
-            assertFalse(architectService.loginArchitect(architect1, email), "Login should fail for null architect.");
-        } catch (ServiceException e) {
-        	e.printStackTrace();
-        }
+        assertThrows(ServiceException.class, () -> architectService.loginArchitect(architect1, email));
     }
 }

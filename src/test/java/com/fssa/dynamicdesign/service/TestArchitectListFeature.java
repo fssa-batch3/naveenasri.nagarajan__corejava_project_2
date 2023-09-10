@@ -1,51 +1,36 @@
 package com.fssa.dynamicdesign.service;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.dynamicdesign.dao.ArchitectDAO;
 import com.fssa.dynamicdesign.model.Architect;
-import com.fssa.dynamicdesign.service.ArchitectService;
-import com.fssa.dynamicdesign.service.exception.ServiceException;
 
- class TestArchitectListFeature {
+class TestArchitectListFeature {
 
+    @Test
+    void testListArchitectsNotEmptyTrue() {
+        ArchitectService architectService = new ArchitectService();
 
-	@Test
-	 void testListArchitectsNotEmptyTrue() {
-		ArchitectService architectService = new ArchitectService();
+        assertDoesNotThrow(() -> {
+            List<Architect> architects = architectService.listArchitects();
+            assertNotNull(architects, "List of architects is null.");
+            assertTrue(!architects.isEmpty(), "List of architects is empty.");
+        }, "Exception occurred while fetching architects from the database.");
+    }
 
-	    try {
-	        List<Architect> architects = architectService.listArchitects();
-	        Assertions.assertNotNull(architects, "List of architects is null.");
-	        Assertions.assertTrue(!architects.isEmpty(), "List of architects is empty."); 
-	    } catch (ServiceException e) {
-	        e.printStackTrace();
-	        Assertions.fail("Exception occurred while fetching architects from the database.");
-	        fail();
-	    }
-	}
+    @Test
+    void testListArchitects() {
+        ArchitectService architectService = new ArchitectService();
 
-
-	@Test
-	 void testListArchitects() {
-		ArchitectService architectService = new ArchitectService();
-
-		try {
-			List<Architect> architects = architectService.listArchitects();
-			Assertions.assertNotNull(architects, "List of architects is null.");
-			Assertions.assertFalse(architects.isEmpty(), "List of architects is not empty.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail("Exception occurred while fetching architects from the service.");
-		}
-	}
-
-
-
+        assertDoesNotThrow(() -> {
+            List<Architect> architects = architectService.listArchitects();
+            assertNotNull(architects, "List of architects is null.");
+            assertFalse(architects.isEmpty(), "List of architects is not empty.");
+        }, "Exception occurred while fetching architects from the service.");
+    }
 }

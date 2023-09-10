@@ -1,64 +1,43 @@
 package com.fssa.dynamicdesign.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import com.fssa.dynamicdesign.model.User;
-import com.fssa.dynamicdesign.service.UserService;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 
- class TestUserUpdateFeature {
+class TestUserUpdateFeature {
 
-	@Test
-	 void testUpdateSuccess() {
-		UserService userService = new UserService();
-		// check the userID , give valid details
-		User user1 = new User("maha@gmail.com", "Mahasenthil", "Maha@123", "9876543215", "user");
-		try {
-			assertTrue(userService.updateUser(user1, "maha@gmail.com"));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
+    @Test
+    void testUpdateSuccess() {
+        UserService userService = new UserService();
+        // check the userID, give valid details
+        User user1 = new User("maha@gmail.com", "Mahasenthil", "Maha@123", "9876543215", "user");
+        assertDoesNotThrow(() -> assertTrue(userService.updateUser(user1, "maha@gmail.com")));
+    }
 
-	@Test
-	 void testUpdateEmailNotFound() {
-		UserService userService = new UserService();
-		User user1 = new User( "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
-		try {
-			// Assuming the user with email "maha12@gmail.com" does not exist in the system
-			userService.updateUser(user1, "noemail@gmail.com");
-			fail("Expected ServiceException for email not found, but none was thrown.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-	}
+    @Test
+    void testUpdateEmailIsNotFound() {
+        UserService userService = new UserService();
+        User user1 = new User("noemail@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
+        assertThrows(ServiceException.class, () -> userService.updateUser(user1, "noemail@gmail.com"));
+    }
 
-	@Test
-	 void testUpdateInvalidEmailFormat() {
-		UserService userService = new UserService();
-		User user1 = new User( "maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
-		try {
-			// Assuming "invalid_email_format" is not a valid email format
-			userService.updateUser(user1, "invalidemailformat");
-			fail("Expected ServiceException for invalid email format, but none was thrown.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-	}
+    @Test
+    void testUpdateInvalidEmailFormat() {
+        UserService userService = new UserService();
+        User user1 = new User("maha12@gmail.com", "MahaKanmani", "Navee@123", "8072444056", "user");
+        assertThrows(ServiceException.class, () -> userService.updateUser(user1, "invalidemailformat"));
+    }
 
-	@Test
-	 void testUpdateMissingRequiredField() {
-		UserService userService = new UserService();
-		// Leaving the name field empty
-		User user1 = new User("maha12@gmail.com", "", "Navee@123", "8072444056", "user");
-		try {
-			userService.updateUser(user1, "maha12@gmail.com");
-			fail("Expected ServiceException for missing required field, but none was thrown.");
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
-	}
+    @Test
+    void testUpdateMissingRequiredField() {
+        UserService userService = new UserService();
+        // Leaving the name field empty
+        User user1 = new User("maha12@gmail.com", "", "Navee@123", "8072444056", "user");
+        assertThrows(ServiceException.class, () -> userService.updateUser(user1, "maha12@gmail.com"));
+    }
 }
