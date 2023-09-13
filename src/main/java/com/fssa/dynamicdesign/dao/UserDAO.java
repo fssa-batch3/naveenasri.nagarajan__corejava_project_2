@@ -111,7 +111,7 @@ public class UserDAO {
 	 * @throws DAOException if a database error occurs.
 	 */
 	public boolean deleteUser(String email) throws DAOException {
-	    String query = "UPDATE USER SET is_deleted = ? WHERE email = ?";
+	    String query = "UPDATE USER SET is_deleted = ? WHERE email = ? AND is_deleted = 0";
 	    try (Connection connection = ConnectionUtil.getConnection();
 	         PreparedStatement pstmt = connection.prepareStatement(query)) {
 	        pstmt.setBoolean(1, true); // Set isDeleted to true to mark the user as deleted
