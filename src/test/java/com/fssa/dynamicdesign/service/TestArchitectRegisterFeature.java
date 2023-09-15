@@ -11,6 +11,19 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 class TestArchitectRegisterFeature {
 
+//
+//	architect.setProfilePhoto("profilePhoto.jpg");
+//	architect.setName(resultSet.getString("name"));
+//	architect.setGender(resultSet.getString("gender"));
+//	architect.setPhoneNumber(resultSet.getString("phone_number"));
+//	architect.setAddress(resultSet.getString("address"));
+//	architect.setCoverPhoto(resultSet.getString("address"));
+//	architect.setEmail(resultSet.getString("email"));
+//	architect.setPassword(resultSet.getString("password"));
+//	architect.setEducation(resultSet.getString("education"));
+//	architect.setExperience(resultSet.getInt("experience"));
+//	architect.setDegreeCertificate(resultSet.getString("degree_certificate"));
+//	architect.setNATACertificate(resultSet.getString("nata_certificate"));
     @Test
     void testArchitectRegistrationSuccess() {
         ArchitectService architectService = new ArchitectService();
@@ -76,7 +89,7 @@ class TestArchitectRegisterFeature {
     void testArchitectRegistrationInvalidExperience() {
         ArchitectService architectService = new ArchitectService();
         // Create a sample architect with negative experience
-        Architect architect = new Architect(5, "profilePhoto.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect("profilePhoto.jpg", "JohnDoe", "Male", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "john.doe@example.com", "Password@123", "Bachelor of Architecture", -2,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
         assertThrows(ServiceException.class, () -> architectService.registerArchitect(architect));
@@ -86,7 +99,7 @@ class TestArchitectRegisterFeature {
     void testArchitectRegistrationEmptyEmailExists() {
         ArchitectService architectService = new ArchitectService();
         // Create a sample architect with an empty email
-        Architect architect = new Architect(3,"profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
+        Architect architect = new Architect("profilePhoto.jpg", "Maha", "Male", "9876543210", "123 Main Street",
                 "coverPhoto.jpg", "", "Password@123", "Bachelor of Architecture", 5,
                 "degreeCertificate.jpg", "NATACertificate.jpg");
         assertThrows(ServiceException.class, () -> architectService.registerArchitect(architect));

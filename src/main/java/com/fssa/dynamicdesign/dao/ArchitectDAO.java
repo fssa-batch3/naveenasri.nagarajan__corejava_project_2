@@ -109,24 +109,26 @@ public class ArchitectDAO {
 			ResultSet resultSet = pmt.executeQuery();
 
 			while (resultSet.next()) {
-                // Retrieve architect details from the result set
-				int architectID = resultSet.getInt("architect_id");
-				String profilePhoto = resultSet.getString("profile_photo");
-				String name = resultSet.getString("name");
-				String gender = resultSet.getString("gender");
-				String phoneNumber = resultSet.getString("phone_number");
-				String address = resultSet.getString("address");
-				String coverPhoto = resultSet.getString("cover_photo");
-				String email = resultSet.getString("email");
-				String password = resultSet.getString("password");
-				String education = resultSet.getString("education");
-				int experience = resultSet.getInt("experience");
-				String degreeCertificate = resultSet.getString("degree_certificate");
-				String nataCertificate = resultSet.getString("nata_certificate");
-
+				
+				// Retrieve architect details from the result set
+				Architect architect =  new Architect();
+				architect.setArchitectID(resultSet.getInt("architect_id"));
+				architect.setProfilePhoto(resultSet.getString("profile_photo"));
+				architect.setName(resultSet.getString("name"));
+				architect.setGender(resultSet.getString("gender"));
+				architect.setPhoneNumber(resultSet.getString("phone_number"));
+				architect.setAddress(resultSet.getString("address"));
+	            architect.setCoverPhoto(resultSet.getString("cover_photo"));
+				architect.setEmail(resultSet.getString("email"));
+				architect.setPassword(resultSet.getString("password"));
+				architect.setEducation(resultSet.getString("education"));
+				architect.setExperience(resultSet.getInt("experience"));
+				architect.setDegreeCertificate(resultSet.getString("degree_certificate"));
+				architect.setNATACertificate(resultSet.getString("nata_certificate"));
+				
+				
                 // Create and add Architect object to the list
-				Architect architect = new Architect(architectID, profilePhoto, name, gender, phoneNumber, address,
-						coverPhoto, email, password, education, experience, degreeCertificate, nataCertificate);
+				
 				architects.add(architect);
 			}
 

@@ -41,24 +41,24 @@ public class Architect {
 	 * @param degreeCertificate
 	 * @param nATACertificate
 	 */
-	public Architect(int architectID, String profilePhoto, String name, String gender, String phoneNumber,
-			String address, String coverPhoto, String email, String password, String education, int experience,
-			String degreeCertificate, String nATACertificate) {
-		super();
-		this.architectID = architectID;
-		this.profilePhoto = profilePhoto;
-		this.name = name;
-		this.gender = gender;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.coverPhoto = coverPhoto;
-		this.email = email;
-		this.password = password;
-		this.education = education;
-		this.experience = experience;
-		this.degreeCertificate = degreeCertificate;
-		this.nataCertificate = nATACertificate;
-	}
+//	public Architect(int architectID, String profilePhoto, String name, String gender, String phoneNumber,
+//			String address, String coverPhoto, String email, String password, String education, int experience,
+//			String degreeCertificate, String nATACertificate) {
+//		super();
+//		this.architectID = architectID;
+//		this.profilePhoto = profilePhoto;
+//		this.name = name;
+//		this.gender = gender;
+//		this.phoneNumber = phoneNumber;
+//		this.address = address;
+//		this.coverPhoto = coverPhoto;
+//		this.email = email;
+//		this.password = password;
+//		this.education = education;
+//		this.experience = experience;
+//		this.degreeCertificate = degreeCertificate;
+//		this.nataCertificate = nATACertificate;
+//	}
 
 	/**
 	 * Constructor without architectID (used for creating Architect)

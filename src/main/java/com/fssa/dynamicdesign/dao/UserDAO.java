@@ -132,7 +132,7 @@ public class UserDAO {
      * @throws ServiceException If a database error occurs.
      */
     public User getUserByEmail(String email) throws DAOException {
-        String query = "SELECT * FROM user WHERE email = ?";
+        String query = "SELECT * FROM user WHERE email = ? AND is_deleted = 0";
         User user = new User();
 
         try (Connection connection = ConnectionUtil.getConnection();
