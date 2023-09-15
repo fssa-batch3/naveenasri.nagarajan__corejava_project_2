@@ -232,6 +232,7 @@ public class ArchitectDAO {
 	        throw new DAOException("Error fetching architect by email: " + e.getMessage());
 	    }
 
+	    
 	    return architect;
 	}
 
