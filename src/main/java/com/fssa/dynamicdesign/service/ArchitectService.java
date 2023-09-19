@@ -159,5 +159,28 @@ public class ArchitectService {
             throw new ServiceException(e);
         }
     }
+    
+    
+    /**
+     * Get an architect by their ID.
+     *
+     * @param architectId The ID of the architect to retrieve.
+     * @return The Architect object if found, or null if not found.
+     * @throws ServiceException If an error occurs while retrieving the architect.
+     */
+    public Architect getArchitectById(int architectId) throws ServiceException {
+        try {
+            // Validate the architectId (if needed)
+            ArchitectValidator.validateArchitectID(architectId);
+
+            ArchitectDAO architectDAO = new ArchitectDAO(); // Assuming you have an ArchitectDAO implementation
+
+            // Retrieve the architect by ID from the DAO
+            return architectDAO.getArchitectById(architectId);
+        } catch (InvalidArchitectException | DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 
 }

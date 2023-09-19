@@ -1,224 +1,148 @@
 package com.fssa.dynamicdesign.model;
 
-public class Design {
-	
-	private String designName;
-	private String designUrl;
-	private double price;
-	private String description;
-	private int noOfRooms;
-	private boolean isDeleted;
-	private String coverPhoto;
-	private String architectName;
-	private String phoneNumber;
-	private String architectEmail;
-	private int experience;
-	private int designId;
-	private int architectID;
-	private Architect architect;
-	
+import java.util.List;
 
-	
-	/**
-	 * Default constructor
-	 */
+public class Design {
+
+	private String designName;
+	private List<String> designUrls; // Use a List to store design URLs
+	private String style;
+	private double pricePerSqFt;
+	private int squareFeet;
+	private String category;
+	private String floorPlan;
+	private int timeRequired;
+	private String bio;
+	private String brief;
+	private boolean isDeleted;
+	private int designId;
+	private int architectId;
+	private Architect architect;
+	private long uniqueId;
+
+	// Constructors, getters, setters, and other methods here...
+
 	public Design() {
 		super();
 	}
-	
-	
-	/**
-	 *  Constructor without designId (used for creating design)
-	 * @param designName
-	 * @param designUrl
-	 * @param price
-	 * @param description
-	 * @param noOfRooms
-	 * @param architectID
-	 */
-	public Design(String designName, String designUrl, double price,String description, int noOfRooms, int architectID) {
-		super();
-		this.designName = designName;
-		this.designUrl = designUrl;
-		this.price = price;
-		this.description = description;
-		this.noOfRooms = noOfRooms;
-		this.architectID = architectID;
-	}
 
-	/**
-	 * Constructor without ArchitectId (used for updating and deleting design)
-	 * @param designId
-	 * @param designName
-	 * @param designUrl
-	 * @param price
-	 * @param description
-	 * @param noOfRooms
-	 */
-	public Design(int designId,String designName, String designUrl, double price,String description, int noOfRooms) {
-		super();
-		this.designId = designId;
-		this.designName = designName;
-		this.designUrl = designUrl;
-		this.price = price;
-		this.description = description;
-		this.noOfRooms = noOfRooms;
-	}
-
-
-	/**
-	 * getters and setters
-	 * @return
-	 */
 	public String getDesignName() {
 		return designName;
 	}
-
 
 	public void setDesignName(String designName) {
 		this.designName = designName;
 	}
 
-
-	public String getDesignUrl() {
-		return designUrl;
+	public List<String> getDesignUrls() {
+		return designUrls;
 	}
 
-
-	public void setDesignUrl(String designUrl) {
-		this.designUrl = designUrl;
+	public void setDesignUrls(List<String> designUrls) {
+		this.designUrls = designUrls;
 	}
 
-
-	public double getPrice() {
-		return price;
+	public String getStyle() {
+		return style;
 	}
 
-
-	public void setPrice(double price) {
-		this.price = price;
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
-	
-	public String getDescription() {
-		return description;
+	public double getPricePerSqFt() {
+		return pricePerSqFt;
 	}
 
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPricePerSqFt(double pricePerSqFt) {
+		this.pricePerSqFt = pricePerSqFt;
 	}
 
-
-	public int getNoOfRooms() {
-		return noOfRooms;
+	public int getSquareFeet() {
+		return squareFeet;
 	}
 
-
-	public void setNoOfRooms(int noOfRooms) {
-		this.noOfRooms = noOfRooms;
+	public void setSquareFeet(int squareFeet) {
+		this.squareFeet = squareFeet;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getFloorPlan() {
+		return floorPlan;
+	}
+
+	public void setFloorPlan(String floorPlan) {
+		this.floorPlan = floorPlan;
+	}
+
+	public int getTimeRequired() {
+		return timeRequired;
+	}
+
+	public void setTimeRequired(int timeRequired) {
+		this.timeRequired = timeRequired;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getBrief() {
+		return brief;
+	}
+
+	public void setBrief(String brief) {
+		this.brief = brief;
+	}
 
 	public boolean isDeleted() {
 		return isDeleted;
 	}
 
-
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
-
-	public String getCoverPhoto() {
-		return coverPhoto;
-	}
-
-
-	public void setCoverPhoto(String coverPhoto) {
-		this.coverPhoto = coverPhoto;
-	}
-
-
-	public String getArchitectName() {
-		return architectName;
-	}
-
-
-	public void setArchitectName(String architectName) {
-		this.architectName = architectName;
-	}
-
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-
-	public String getArchitectEmail() {
-		return architectEmail;
-	}
-
-
-	public void setArchitectEmail(String architectEmail) {
-		this.architectEmail = architectEmail;
-	}
-
-
-	public int getExperience() {
-		return experience;
-	}
-
-
-	public void setExperience(int experience) {
-		this.experience = experience;
-	}
-
 
 	public int getDesignId() {
 		return designId;
 	}
 
-
 	public void setDesignId(int designId) {
 		this.designId = designId;
 	}
 
-
 	public int getArchitectId() {
-		return architectID;
+		return architectId;
 	}
 
-
-	public void setArchitectId(int architectID) {
-		this.architectID = architectID;
+	public void setArchitectId(int architectId) {
+		this.architectId = architectId;
 	}
-
 
 	public Architect getArchitect() {
 		return architect;
 	}
 
-
 	public void setArchitect(Architect architect) {
 		this.architect = architect;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Design [designName=" + designName + ", designUrl=" + designUrl + ", price=" + price + ", description="
-				+ description + ", noOfRooms=" + noOfRooms + ", isDeleted=" + isDeleted + ", coverPhoto=" + coverPhoto
-				+ ", architectName=" + architectName + ", phoneNumber=" + phoneNumber + ", architectEmail="
-				+ architectEmail + ", experience=" + experience + ", designId=" + designId + ", architectID="
-				+ architectID + ", architect=" + architect + "]";
+	public long getUniqueId() {
+		return uniqueId;
 	}
 
-
-	
+	public void setUniqueId(long uniqueId) {
+		this.uniqueId = uniqueId;
+	}
 }

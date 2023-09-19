@@ -52,5 +52,29 @@ CREATE TABLE `user` (
 SELECT * FROM project.architect;
 SELECT designs.design_id, designs.design_name, designs.design_url, designs.price, designs.description, designs.no_of_rooms,architect.architect_id, architect.name, architect.phone_number, architect.email, architect.experience FROM designs INNER JOIN architect ON designs.architect_id = architect.architect_id WHERE designs.is_deleted = 0;
 
-SELECT * FROM USER WHERE email ,is_deleted = 0;
+SELECT * FROM USER WHERE email AND is_deleted = 0;
+
+CREATE TABLE assets (
+    asset_id INT NOT NULL AUTO_INCREMENT,
+    design_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (design_id) REFERENCES designs(design_id),
+    PRIMARY KEY (asset_id)
+);
+
+CREATE TABLE designs (
+    design_id INT PRIMARY KEY AUTO_INCREMENT,
+    design_name VARCHAR(255) NOT NULL,
+    style VARCHAR(255) NOT NULL,
+    price_per_sqFt DOUBLE NOT NULL,
+    square_feet INT NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    floorplan VARCHAR(255) NOT NULL,
+    time_required VARCHAR(255) NOT NULL,
+    bio VARCHAR(255) NOT NULL,
+    brief TEXT NOT NULL,
+    is_deleted BOOLEAN NOT NULL,
+    architect_id INT NOT NULL,
+    FOREIGN KEY (architect_id) REFERENCES architect(architect_id)
+);
 

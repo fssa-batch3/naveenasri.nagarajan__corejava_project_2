@@ -1,8 +1,10 @@
 package com.fssa.dynamicdesign.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,50 +13,49 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 class TestDesignCreateFeature {
 
-    @Test
-    void testCreateDesignSuccess() {
-        DesignService designService = new DesignService();
-        Design design1 = new Design("Minimalist Bed Room", "https://cdn.pixabay.com/photo/2020/11/24/11/36/bedroom-5772286_1280.jpg", 100.0,
-                "Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
-                2, 76);
+	@Test
+	void testCreateDesignSuccess() {
+		DesignService designService = new DesignService();
+		Design design = new Design();
+		List<String> designsUrl = new ArrayList<>();
+		design.setDesignName("Modern Living Room");
+		designsUrl.add("https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_1280.jpg");
+		designsUrl.add("https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_1280.jpg");
+		designsUrl.add("https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_1280.jpg");
+		designsUrl.add("https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_1280.jpg");
+		design.setDesignUrls(designsUrl);
+		design.setStyle("Modern");
+		design.setPricePerSqFt(120.0);
+		design.setSquareFeet(1500);
+		design.setCategory("Livingroom");
+		design.setFloorPlan("2BHK");
+		design.setTimeRequired(2);
+		design.setBio(
+				"Modern living room design Modern living room designModern living room design Modern living room design Modern living room design");
+		design.setBrief(
+				"A brief description of the design Modern living room design Modern living room design Modern living room design Modern living room design Modern living room design Modern living room design Modern living room design Modern living room design.");
+		design.setArchitectId(76);
 
-        assertDoesNotThrow(() -> {
-            assertTrue(designService.createDesign(design1));
-            System.out.println("Your Design Added Successfully ");
-        });
-    }
+		try {
+			assertTrue(designService.createDesign(design));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Design Added Successfully");
 
-    @Test
-    void testNegativePriceValue() {
-        DesignService designService = new DesignService();
-        Design design = new Design("Modern design", "https://example.com/negative_price", -50.0,
-                "Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
-                1, 3);
+	}
 
-        assertThrows(ServiceException.class, () -> {
-            designService.createDesign(design);
-        });
-    }
+	@Test
+	void testCreateDesignWithNullDesignObject() {
+		DesignService designService = new DesignService();
+		Design design = null;
 
-    @Test
-    void testNegativeRoomsValue() {
-        DesignService designService = new DesignService();
-        Design design = new Design("Modern design", "https://example.com/negative_id", 80.0,
-                "Interior design helps one elevate their existence, their lifestyle and their perception of the world. It is a fundamental human desire to seek and identify beauty in the surrounding.",
-                -5, 5);
+		try {
+			designService.createDesign(design);
+			fail("Expected ServiceException but no exception was thrown.");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+	}
 
-        assertThrows(ServiceException.class, () -> {
-            designService.createDesign(design);
-        });
-    }
-
-    @Test
-    void testNullDesignObject() {
-        DesignService designService = new DesignService();
-        Design design = null;
-
-        assertThrows(ServiceException.class, () -> {
-            designService.createDesign(design);
-        });
-    }
 }

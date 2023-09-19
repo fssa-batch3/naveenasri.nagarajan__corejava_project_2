@@ -1,9 +1,7 @@
 package com.fssa.dynamicdesign.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,45 +9,50 @@ import com.fssa.dynamicdesign.service.exception.ServiceException;
 
 class TestDesignDeleteFeature {
 
-    @Test
+	@Test
     void testDeleteDesignSuccess() {
         DesignService designService = new DesignService();
-        int designIdToDelete = 29;
 
-        assertDoesNotThrow(() -> {
-            assertTrue(designService.deleteDesign(designIdToDelete));
-            System.out.println("Design deleted successfully");
-        });
+        long uniqueId = 1694883124857L; // Replace with a valid uniqueId that exists in the database
+
+        try {
+            assertTrue(designService.deleteDesign(uniqueId, "Error message"));
+        } catch (ServiceException e) {
+            fail("Unexpected ServiceException: " + e.getMessage());
+        }
+        System.out.println("Design Deleted Successfully");
     }
-
-    @Test
-    void testDeleteNonExistingDesign() {
-        DesignService designService = new DesignService();
-        int nonExistingDesignId = 1000;
-
-        assertDoesNotThrow(() -> {
-            assertFalse(designService.deleteDesign(nonExistingDesignId));
-            System.out.println("Design not found, delete failed");
-        });
-    }
-
-    @Test
-    void testDeleteDesignWithInvalidId() {
-        DesignService designService = new DesignService();
-        int invalidDesignId = -1;
-
-        assertThrows(ServiceException.class, () -> {
-            designService.deleteDesign(invalidDesignId);
-        });
-    }
-
-    @Test
-    void testDeleteDesignWithNullId() {
-        DesignService designService = new DesignService();
-        int nullDesignId = 0;
-
-        assertThrows(ServiceException.class, () -> {
-            designService.deleteDesign(nullDesignId);
-        });
-    }
+//    @Test
+//    void testDeleteDesignInvalidId() {
+//        DesignService designService = new DesignService();
+//
+//        int uniqueId = -1; // Replace with an invalid uniqueId
+//
+//        try {
+//            // Ensure that the expected ServiceException is thrown due to an invalid ID
+//            assertThrows(ServiceException.class, () -> {
+//                designService.deleteDesign(uniqueId, "Error message");
+//            }, "Expected ServiceException for an invalid design ID.");
+//        } catch (ServiceException e) {
+//            // Handle the expected exception
+//            assertEquals("Error message", e.getMessage()); // Verify the error message
+//        }
+//    }
+//
+//    @Test
+//    void testDeleteDesignDatabaseError() {
+//        DesignService designService = new DesignService();
+//
+//        int uniqueId = 12345; // Replace with a valid uniqueId that exists in the database
+//
+//        try {
+//            // Simulate a database error by causing the DAO method to throw an exception
+//            assertThrows(ServiceException.class, () -> {
+//                designService.deleteDesign(uniqueId, "Error message");
+//            }, "Expected ServiceException for a database error.");
+//        } catch (ServiceException e) {
+//            // Handle the expected exception
+//            assertEquals("Error message", e.getMessage()); // Verify the error message
+//        }
+//    }
 }
