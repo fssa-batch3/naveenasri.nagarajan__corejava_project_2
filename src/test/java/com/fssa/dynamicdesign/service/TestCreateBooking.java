@@ -30,4 +30,28 @@ class TestCreateBooking {
 		}
 		System.out.println("Design Added Successfully");
 	}
+	
+	 @Test
+	    void testCreateBookingSuccess1() {
+			BookingService bookingService = new BookingService();
+
+	        Booking booking = new Booking();
+	        // Set up booking details
+	        booking.setDesignName("Sample Design");
+	        booking.setDesignUrl("http://example.com/sample.jpg");
+	        booking.setExpectedAmount(1000);
+	        booking.setExpectedMonths(6);
+	        booking.setMessage("Test message");
+	        booking.setUserId(1);
+	        booking.setArchitectId(2);
+
+	        try {
+				assertTrue(bookingService.createBooking(booking));
+
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Booking should be created successfully.");
+	    }
+
 }

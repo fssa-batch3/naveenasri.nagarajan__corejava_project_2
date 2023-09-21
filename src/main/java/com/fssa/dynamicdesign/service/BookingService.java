@@ -20,7 +20,7 @@ public class BookingService {
 			}
 
 			// Validate the booking using the BookingValidator
-		//	 BookingValidator.validateBooking(booking);
+			 BookingValidator.validateBooking(booking);
 
 			// Check if the user ID exists before creating the design
 			if (!bookingDAO.checkIdExistsInUser(booking.getUserId())) {

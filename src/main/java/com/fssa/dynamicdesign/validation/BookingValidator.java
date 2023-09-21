@@ -1,7 +1,5 @@
 package com.fssa.dynamicdesign.validation;
 
-import java.util.regex.Pattern;
-
 import com.fssa.dynamicdesign.model.Booking;
 import com.fssa.dynamicdesign.validation.exception.InvalidBookingException;
 
@@ -16,15 +14,12 @@ public class BookingValidator {
      */
     public static boolean validateBooking(Booking booking) throws InvalidBookingException {
         validateBookingNotNull(booking);
-        validatePositiveInt(booking.getBookingId(), "Booking ID is not valid");
         validatePositiveInt(booking.getExpectedAmount(), "Expected amount is not valid");
         validatePositiveInt(booking.getExpectedMonths(), "Expected months is not valid");
         validatePositiveInt(booking.getArchitectId(), "Architect ID is not valid");
         validateDesignName(booking.getDesignName());
         validateDesignUrl(booking.getDesignUrl());
         validateMessage(booking.getMessage());
-        validateStatus(booking.getStatus());
-
         return true;
     }
 
@@ -42,6 +37,8 @@ public class BookingValidator {
         return true;
     }
 
+   
+    
     /**
      * Validates a positive integer.
      *
@@ -50,7 +47,7 @@ public class BookingValidator {
      * @throws InvalidBookingException If the value is not a positive integer.
      */
     public static void validatePositiveInt(int value, String errorMessage) throws InvalidBookingException {
-        if (value > 0) {
+        if (value <= 0) {
             throw new InvalidBookingException(errorMessage);
         }
     }
