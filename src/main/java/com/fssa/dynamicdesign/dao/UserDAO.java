@@ -57,6 +57,25 @@ public class UserDAO {
 	        throw new DAOException("Error while checking if the email exists for the user: " + e.getMessage());
 	    }
 	}
+	
+	/**
+	 * Checks if a user with the given ID exists in the database.
+	 *
+	 * @param userId The ID of the user to check for existence.
+	 * @return true if the user with the given ID exists, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+//	public boolean isUserIdExists(int userId) throws DAOException {
+//	    String query = "SELECT * FROM USER WHERE user_id = ? AND is_deleted = 0";
+//	    try (Connection connection = ConnectionUtil.getConnection();
+//	         PreparedStatement pstmt = connection.prepareStatement(query)) {
+//	        pstmt.setInt(1, userId);
+//	        ResultSet rs = pstmt.executeQuery();
+//	        return rs.next(); // Returns true if a row is found (user with the given ID exists in the database)
+//	    } catch (SQLException e) {
+//	        throw new DAOException("Error while checking if the user with ID exists: " + e.getMessage());
+//	    }
+//	}
 
 	/**
 	 * Authenticates the user with the provided email and password.
@@ -150,6 +169,31 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             throw new DAOException("Error fetching user by email: " + e.getMessage());
+        }
+
+        return user;
+    }
+    
+    
+    public User getUserById(int userid) throws DAOException {
+        String query = "SELECT * FROM user WHERE user_id = ? AND is_deleted = 0";
+        User user = new User();
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Create a User object with the retrieved data
+                user.setUserId(resultSet.getInt("user_id"));
+                user.setUsername(resultSet.getString("user_name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPhonenumber(resultSet.getString("phone_number"));
+                user.setType(resultSet.getString("type"));
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Error fetching user by Id: " + e.getMessage());
         }
 
         return user;

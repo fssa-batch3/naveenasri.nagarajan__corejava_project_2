@@ -309,7 +309,7 @@ public class DesignDAO {
 
 	// list design by architect Id 
 	public List<Design> listDesignsByArchitectId(int architectId) throws DAOException {
-	    String query = "SELECT * FROM designs WHERE architect_id = ?";
+	    String query = "SELECT * FROM designs WHERE architect_id = ? AND is_deleted = 0";
 	    
 	    try (Connection connection = ConnectionUtil.getConnection();
 	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -346,7 +346,7 @@ public class DesignDAO {
 	    }
 	}
 
-	private List<String> getDesignUrlsByUniqueId(long uniqueId) throws SQLException {
+	public List<String> getDesignUrlsByUniqueId(long uniqueId) throws SQLException {
 	    String urlQuery = "SELECT image_url FROM assets WHERE unique_id = ?";
 	    List<String> designUrls = new ArrayList<>();
 

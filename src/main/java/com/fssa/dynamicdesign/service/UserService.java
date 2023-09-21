@@ -149,5 +149,20 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+    
+    
+    public User getUserById(int userId) throws ServiceException {
+        try {
+            // Validate the email (if needed)
+            UserValidator.validateUserID(userId);
+
+            UserDAO userDAO = new UserDAO(); // Assuming you have a UserDAO implementation
+
+            // Retrieve the user by Id from the DAO
+            return userDAO.getUserById(userId);
+        } catch (InvalidUserException | DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 
 }

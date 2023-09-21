@@ -22,10 +22,10 @@ public class DesignValidator {
         validateNotNegative(design.getSquareFeet(), "Square feet must be a non-negative value");
         validateCategory(design.getCategory());
         validateFloorPlan(design.getFloorPlan());
-        validateLength(design.getBio(), "Design bio must be between 45 and 180 characters", 45, 180);
-        validateLength(design.getBrief(), "Design brief must be more than 100 characters", 100,2000);
+        validateLength(design.getBio(), "bio must be between 45 and 180 characters", 45, 180);
+        validateLength(design.getBrief(), "Brief must be more than 100 characters", 100,2000);
         validateNotNegative(design.getDesignId(), "Invalid design ID: Null or negative value.");
-        validateNotNegative(design.getArchitectId(), "Invalid architect ID: Null or negative value.");
+        validateNotNegative(design.getArchitectId(), "Architect ID is Null or negative value.");
        
 
         return true;

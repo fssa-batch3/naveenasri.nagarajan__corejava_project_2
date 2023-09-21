@@ -77,4 +77,9 @@ CREATE TABLE designs (
     architect_id INT NOT NULL,
     FOREIGN KEY (architect_id) REFERENCES architect(architect_id)
 );
+CREATE TABLE booking (
+   booking_id  INT PRIMARY KEY AUTO_INCREMENT,
+	design_name VARCHAR(255) NOT NULL,
+    design_url VARCHAR(255) NOT NULL
 
+);
