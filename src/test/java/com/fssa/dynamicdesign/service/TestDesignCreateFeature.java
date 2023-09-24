@@ -30,6 +30,7 @@ class TestDesignCreateFeature {
 		design.setCategory("Livingroom");
 		design.setFloorPlan("2BHK");
 		design.setTimeRequired(2);
+		
 		design.setBio(
 				"Modern living room design Modern living room designModern living room design Modern living room design Modern living room design");
 		design.setBrief(
