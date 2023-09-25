@@ -55,6 +55,23 @@ public class DesignService {
         }
     }
 
+    /**
+     * Search for designs by name.
+     *
+     * @param searchQuery The search query to match design names.
+     * @return List of Design objects representing designs that match the search query.
+     * @throws ServiceException if a service-level error occurs.
+     */
+    public List<Design> searchDesignsByName(String searchQuery) throws ServiceException {
+        try {
+            DesignDAO designDAO = new DesignDAO();
+            // Call the DAO method to search for designs by name
+            return designDAO.searchDesignsByName(searchQuery);
+        } catch (DAOException e) {
+            // Handle the exception or rethrow it as a ServiceException if needed
+            throw new ServiceException("Error while searching designs by name");
+        }
+    }
     
     public List<Design> listDesignsByArchitectId(int architectId) throws ServiceException {
         DesignDAO designDAO = new DesignDAO();
@@ -124,6 +141,16 @@ public class DesignService {
     }
 
 
+    public List<Design> getDesignByCategory(String category) throws ServiceException {
+        DesignDAO designDAO = new DesignDAO();
+        try { 
+            return designDAO.listDesignsByCategory(category);
+
+        } catch (DAOException  e) {
+            throw new ServiceException(e);
+        }
+    }
+    
 
 
 }

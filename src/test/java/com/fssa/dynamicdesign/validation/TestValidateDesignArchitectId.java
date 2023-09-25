@@ -17,6 +17,7 @@ class TestValidateDesignArchitectId {
 	        assertDoesNotThrow(() -> DesignValidator.validateArchitectId(validArchitectId));
 	    }
 
+	 
 	    @Test
 	    void testNegativeArchitectId() {
 	        // Pass a negative architect ID, it should throw an InvalidDesignException

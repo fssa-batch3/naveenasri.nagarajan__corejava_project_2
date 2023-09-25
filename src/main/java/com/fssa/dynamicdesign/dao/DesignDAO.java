@@ -10,6 +10,8 @@ import java.util.List;
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.model.Design;
+import com.fssa.dynamicdesign.service.DesignService;
+import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class DesignDAO {
@@ -119,7 +121,108 @@ public class DesignDAO {
 		return designs;
 	}
 
+	/**
+	 * Search for designs by name in the database.
+	 *
+	 * @param searchQuery The search query to match design names.
+	 * @return List of Design objects representing designs that match the search query.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public List<Design> searchDesignsByName(String searchQuery) throws DAOException {
+	    List<Design> designs = new ArrayList<>();
+	    String query = "SELECT d.design_id, d.design_name, d.style, d.price_per_sqft, "
+	            + "d.square_feet, d.category, d.floor_plan, d.time_required, d.bio, "
+	            + "d.brief, d.architect_id, d.unique_id, "
+	            + "a.name AS architect_name, a.phone_number AS architect_phone, "
+	            + "a.email AS architect_email, a.experience AS architect_experience "
+	            + "FROM designs AS d "
+	            + "INNER JOIN architect AS a ON d.architect_id = a.architect_id "
+	            + "WHERE d.is_deleted = 0 AND d.design_name LIKE ?";
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+	        String likeQuery = "%" + searchQuery + "%";
+	        preparedStatement.setString(1, likeQuery);
+
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            // Retrieve design details from the result set (same as in listDesigns)
+	            Design design = new Design();
+	            design.setDesignId(resultSet.getInt("design_id"));
+	            design.setDesignName(resultSet.getString("design_name"));
+	            design.setStyle(resultSet.getString("style"));
+	            design.setPricePerSqFt(resultSet.getDouble("price_per_sqft"));
+	            design.setSquareFeet(resultSet.getInt("square_feet"));
+	            design.setCategory(resultSet.getString("category"));
+	            design.setFloorPlan(resultSet.getString("floor_plan"));
+	            design.setTimeRequired(resultSet.getInt("time_required"));
+	            design.setBio(resultSet.getString("bio"));
+	            design.setBrief(resultSet.getString("brief"));
+	            design.setArchitectId(resultSet.getInt("architect_id"));
+	            design.setUniqueId(resultSet.getLong("unique_id"));
+
+	            // Create an Architect object and set its properties (same as in listDesigns)
+	            Architect architect = new Architect();
+	            architect.setName(resultSet.getString("architect_name"));
+	            architect.setPhoneNumber(resultSet.getString("architect_phone"));
+	            architect.setEmail(resultSet.getString("architect_email"));
+	            architect.setExperience(resultSet.getInt("architect_experience"));
+
+	            // Set the Architect object in the Design (same as in listDesigns)
+	            design.setArchitect(architect);
+
+	            // Retrieve design URLs for the current design (same as in listDesigns)
+	            List<String> designUrls = getDesignUrlsByUniqueId(design.getUniqueId(), connection);
+	            design.setDesignUrls(designUrls);
+
+	            designs.add(design);
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
+
+	    return designs;
+	}
+
 	
+	
+	//main method for search feature
+	
+	class Main {
+	    public static void main(String[] args) {
+	        // Create an instance of your DesignDAO (you should replace this with your actual DAO instantiation)
+	        DesignDAO designDAO = new DesignDAO();
+
+	        // Create a DesignService instance, injecting the DesignDAO
+	        DesignService designService = new DesignService();
+
+	        // Define the search query
+	        String searchQuery = "Athena"; // Replace with your desired search query
+
+	        try {
+	            // Call the searchDesignsByName method to search for designs by name
+	            List<Design> searchResults = designService.searchDesignsByName(searchQuery);
+
+	            // Print the search results
+	            if (!searchResults.isEmpty()) {
+	                System.out.println("Search Results for '" + searchQuery + "':");
+	                for (Design design : searchResults) {
+	                    System.out.println("Design Name: " + design.getDesignName());
+	                    System.out.println("Architect: " + design.getArchitect().getName());
+	                    // Add more fields as needed
+	                    System.out.println(); // Separation line
+	                }
+	            } else {
+	                System.out.println("No designs found matching the search query: " + searchQuery);
+	            }
+	        } catch ( ServiceException e) {
+	            // Handle any exceptions that may occur during the search
+	            System.err.println("Error searching for designs: " + e.getMessage());
+	        }
+	    }
+	}
 	
 	
 	private List<String> getDesignUrlsByUniqueId(long uniqueId, Connection connection) throws SQLException {
@@ -386,5 +489,67 @@ public class DesignDAO {
 			throw new DAOException(e);
 		}
 	}
+	
+	
+	public List<Design> listDesignsByCategory(String category) throws DAOException {
+	    List<Design> designs = new ArrayList<>();
+	    String query = "SELECT d.design_id, d.design_name, d.style, d.price_per_sqft, "
+	            + "d.square_feet, d.category, d.floor_plan, d.time_required, d.bio, "
+	            + "d.brief, d.architect_id, d.unique_id, "
+	            + "a.name AS architect_name, a.phone_number AS architect_phone, "
+	            + "a.email AS architect_email, a.experience AS architect_experience "
+	            + "FROM designs AS d "
+	            + "INNER JOIN architect AS a ON d.architect_id = a.architect_id "
+	            + "WHERE d.is_deleted = 0 AND d.category = ?"; // Adjust the WHERE clause
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+	        preparedStatement.setString(1, category); // Set the category parameter
+
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            // Retrieve design details from the result set (same as in listDesigns)
+	            Design design = new Design();
+	            design.setDesignId(resultSet.getInt("design_id"));
+	            design.setDesignName(resultSet.getString("design_name"));
+	            design.setStyle(resultSet.getString("style"));
+	            design.setPricePerSqFt(resultSet.getDouble("price_per_sqft"));
+	            design.setSquareFeet(resultSet.getInt("square_feet"));
+	            design.setCategory(resultSet.getString("category"));
+	            design.setFloorPlan(resultSet.getString("floor_plan"));
+	            design.setTimeRequired(resultSet.getInt("time_required"));
+	            design.setBio(resultSet.getString("bio"));
+	            design.setBrief(resultSet.getString("brief"));
+	            design.setArchitectId(resultSet.getInt("architect_id"));
+	            design.setUniqueId(resultSet.getLong("unique_id"));
+
+	            // Create an Architect object and set its properties (same as in listDesigns)
+	            Architect architect = new Architect();
+	            architect.setName(resultSet.getString("architect_name"));
+	            architect.setPhoneNumber(resultSet.getString("architect_phone"));
+	            architect.setEmail(resultSet.getString("architect_email"));
+	            architect.setExperience(resultSet.getInt("architect_experience"));
+
+	            // Set the Architect object in the Design (same as in listDesigns)
+	            design.setArchitect(architect);
+
+	            // Retrieve design URLs for the current design
+	            List<String> designUrls = getDesignUrlsByUniqueId(design.getUniqueId(), connection);
+	            design.setDesignUrls(designUrls);
+
+	            designs.add(design);
+	            
+	            
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
+
+	    return designs;
+	}
+
+	
 	
 }

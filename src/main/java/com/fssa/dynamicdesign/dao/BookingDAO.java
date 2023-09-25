@@ -16,8 +16,8 @@ public class BookingDAO {
     public static final String CREATE_BOOKING = "INSERT INTO booking (design_name, design_url, expected_amount, expected_months, message, user_id, architect_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     public static final String CHECK_ID_EXISTS_IN_USER = "SELECT * FROM user WHERE user_id=? AND is_deleted = 0";
     public static final String CHECK_ID_EXISTS_IN_ARCHITECT = "SELECT * FROM architect WHERE architect_id=? AND is_deleted = 0";
-    public static final String LIST_BOOKINGS_BY_USER_ID = "SELECT * FROM booking WHERE user_id=?";
-    public static final String LIST_BOOKINGS_BY_ARCHITECT_ID = "SELECT * FROM booking WHERE architect_id = ?";
+    public static final String LIST_BOOKINGS_BY_USER_ID = "SELECT * FROM booking WHERE user_id=? ORDER BY booking_id DESC";
+    public static final String LIST_BOOKINGS_BY_ARCHITECT_ID = "SELECT * FROM booking WHERE architect_id = ?  ORDER BY booking_id DESC";
     public static final String UPDATE_BOOKING_STATUS = "UPDATE booking SET status = ? WHERE booking_id = ?";
 
     
