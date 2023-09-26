@@ -83,3 +83,11 @@ CREATE TABLE booking (
     design_url VARCHAR(255) NOT NULL
 
 );
+
+
+
+SELECT d.design_id, d.design_name, d.style, d.price_per_sqft, d.square_feet, d.category, d.floor_plan, d.time_required, d.bio, d.brief, d.architect_id, d.unique_id,a.name AS architect_name, a.phone_number AS architect_phone,a.email AS architect_email, a.experience AS architect_experience 
+FROM designs AS d 
+INNER JOIN architect AS a ON d.architect_id = a.architect_id 
+WHERE d.is_deleted = 0 AND d.category = "Livingroom";
+
