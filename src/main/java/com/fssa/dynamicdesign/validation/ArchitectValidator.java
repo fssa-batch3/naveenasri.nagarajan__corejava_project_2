@@ -32,6 +32,24 @@ public class ArchitectValidator {
 
         return true;
     }
+    
+    public static boolean validateUpdateArchitect(Architect architect) throws InvalidArchitectException {
+    	validateArchitectNotNull(architect);
+        validateArchitectID(architect.getArchitectID());
+        validateName(architect.getName());
+        validateGender(architect.getGender());
+        validatePhoneNumber(architect.getPhoneNumber());
+        validateAddress(architect.getAddress());
+        validateEmail(architect.getEmail());
+        validateEducation(architect.getEducation());
+        validateExperience(architect.getExperience());
+        validateURL(architect.getProfilePhoto(), "Profile photo URL is null or empty");
+        validateURL(architect.getCoverPhoto(), "Cover photo URL is null or empty");
+        validateURL(architect.getDegreeCertificate(), "Degree certificate URL is null or empty");
+        validateURL(architect.getNATACertificate(), "NATA certificate URL is null or empty");
+
+        return true;
+    }
 
     /**
      * Validates the architect object for null.

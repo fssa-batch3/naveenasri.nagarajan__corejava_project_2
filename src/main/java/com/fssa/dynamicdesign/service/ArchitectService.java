@@ -100,7 +100,7 @@ public class ArchitectService {
             }
 
             // Validate the architect's details using the ArchitectValidator
-            ArchitectValidator.validateArchitect(architect);
+            ArchitectValidator.validateUpdateArchitect(architect);
             
             
             return architectDAO.updateArchitect(architect, email);

@@ -91,7 +91,11 @@ public class UserService {
             }
 
             // Validate the user's details using the UserValidator
-            UserValidator.validateUser(user);
+            UserValidator.validateUserNull(user); // Check for null user
+            UserValidator.validateUserID(user.getUserId());
+            UserValidator.validateName(user.getUsername());
+            UserValidator.validateEmail(user.getEmail());
+            UserValidator.validatePhoneNumber(user.getPhonenumber());
 
             return userDAO.updateUser(user);
         } catch (InvalidUserException | DAOException e) {

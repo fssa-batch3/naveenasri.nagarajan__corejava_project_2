@@ -13,6 +13,7 @@ public class Booking {
 	private Architect architect;
 	private int userId;
 	private User user;
+	private String date;
 
 	public int getBookingId() {
 		return bookingId;
@@ -92,6 +93,14 @@ public class Booking {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public User getUser() {

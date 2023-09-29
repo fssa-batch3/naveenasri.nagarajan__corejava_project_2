@@ -109,7 +109,8 @@ public class BookingDAO {
                 booking.setUserId(resultSet.getInt("user_id"));
                 booking.setArchitectId(resultSet.getInt("architect_id"));
                 booking.setStatus(resultSet.getString("status"));
-                
+                booking.setDate(resultSet.getString("created_at"));
+               
               bookings.add(booking);
             }
 
@@ -147,6 +148,7 @@ public class BookingDAO {
                 booking.setUserId(resultSet.getInt("user_id"));
                 booking.setArchitectId(resultSet.getInt("architect_id"));
                 booking.setStatus(resultSet.getString("status")); 
+                booking.setDate(resultSet.getString("created_at"));
 
                 bookings.add(booking);
             }
