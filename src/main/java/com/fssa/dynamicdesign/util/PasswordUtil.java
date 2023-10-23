@@ -26,7 +26,7 @@ public class PasswordUtil {
 			}
 			generatedPassword = sb.toString();
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return generatedPassword;
 	}
