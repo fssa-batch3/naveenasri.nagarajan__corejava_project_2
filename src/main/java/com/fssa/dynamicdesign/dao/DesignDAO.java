@@ -18,51 +18,50 @@ import com.fssa.dynamicdesign.util.ConnectionUtil;
 
 public class DesignDAO {
 
+	
 	public boolean createDesign(Design design) throws DAOException {
-		String query = "INSERT INTO designs ( design_name, style, price_per_sqft, square_feet, "
-				+ "category, floor_plan, time_required, bio, brief, architect_id , unique_id) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    String query = "INSERT INTO designs ( design_name, style, price_per_sqft, square_feet, "
+	            + "category, floor_plan, time_required, bio, brief, architect_id, unique_id) "
+	            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pmt = connection.prepareStatement(query)) {
 
-		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement pmt = connection.prepareStatement(query)) {
+	        // Check if architectId exists before inserting
+	        if (!checkIdExistsInArchitect(design.getArchitectId())) {
+	            throw new DAOException("Architect with ID " + design.getArchitectId() + " does not exist.");
+	        }
+	        long uniqueID = System.currentTimeMillis();
+	        pmt.setString(1, design.getDesignName());
+	        pmt.setString(2, design.getStyle());
+	        pmt.setDouble(3, design.getPricePerSqFt());
+	        pmt.setInt(4, design.getSquareFeet());
+	        pmt.setString(5, design.getCategory());
+	        pmt.setString(6, design.getFloorPlan());
+	        pmt.setInt(7, design.getTimeRequired());
+	        pmt.setString(8, design.getBio());
+	        pmt.setString(9, design.getBrief());
+	        pmt.setInt(10, design.getArchitectId());
+	        pmt.setLong(11, uniqueID);
 
-			// Check if architectId exists before inserting
-			if (!checkIdExistsInArchitect(design.getArchitectId())) {
-				throw new DAOException("Architect with ID " + design.getArchitectId() + " does not exist.");
-			}
-			long uniqueID = System.currentTimeMillis();
-
-			pmt.setString(1, design.getDesignName());
-			pmt.setString(2, design.getStyle());
-			pmt.setDouble(3, design.getPricePerSqFt());
-			pmt.setInt(4, design.getSquareFeet());
-			pmt.setString(5, design.getCategory());
-			pmt.setString(6, design.getFloorPlan());
-			pmt.setInt(7, design.getTimeRequired());
-			pmt.setString(8, design.getBio());
-			pmt.setString(9, design.getBrief());
-			pmt.setInt(10, design.getArchitectId());
-			pmt.setLong(11, uniqueID);
-			int rows = pmt.executeUpdate();
-
-			// If the insert was successful, proceed to insert design URLs
-			if (rows == 1) {
-				for (String url : design.getDesignUrls()) {
-					String urlInsertSql = "INSERT INTO assets (unique_id, image_url) VALUES (?, ?)";
-					PreparedStatement urlStatement = connection.prepareStatement(urlInsertSql);
-					urlStatement.setLong(1, uniqueID); // Assuming you have a way to get the design ID
-					urlStatement.setString(2, url);
-					urlStatement.executeUpdate();
-				}
-				return true;
-			}
-
-			return false;
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	        int rows = pmt.executeUpdate();
+	        // If the insert was successful, proceed to insert design URLs
+	        if (rows == 1) {
+	            for (String url : design.getDesignUrls()) {
+	                String urlInsertSql = "INSERT INTO assets (unique_id, image_url) VALUES (?, ?)";
+	                try (PreparedStatement urlStatement = connection.prepareStatement(urlInsertSql)) {
+	                    urlStatement.setLong(1, uniqueID); // Assuming you have a way to get the design ID
+	                    urlStatement.setString(2, url);
+	                    urlStatement.executeUpdate();
+	                }
+	            }
+	            return true;
+	        }
+	        return false;
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 
 	/**
 	 * Retrieve a list of all designs from the database.
