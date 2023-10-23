@@ -40,6 +40,7 @@ public class UserService {
             throw new ServiceException(e);
         }
     }
+    
 
     /**
      * Logs in a user.

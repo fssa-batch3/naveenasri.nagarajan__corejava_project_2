@@ -38,45 +38,6 @@ public class UserDAO {
 	    }
 	}
 
-
-	/**
-	 * Checks if a user with the given email exists in the database.
-	 *
-	 * @param email The email to check for existence.
-	 * @return true if the email exists, false otherwise.
-	 * @throws DAOException if a database error occurs.
-	 */
-	public boolean isEmailExists(String email) throws DAOException {
-	    String query = "SELECT * FROM USER WHERE email = ? AND is_deleted = 0";
-	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement pstmt = connection.prepareStatement(query)) {
-	        pstmt.setString(1, email);
-	        ResultSet rs = pstmt.executeQuery();
-	        return rs.next(); // Returns true if a row is found (email exists in the database)
-	    } catch (SQLException e) {
-	        throw new DAOException("Error while checking if the email exists for the user: " + e.getMessage());
-	    }
-	}
-	
-	/**
-	 * Checks if a user with the given ID exists in the database.
-	 *
-	 * @param userId The ID of the user to check for existence.
-	 * @return true if the user with the given ID exists, false otherwise.
-	 * @throws DAOException if a database error occurs.
-	 */
-//	public boolean isUserIdExists(int userId) throws DAOException {
-//	    String query = "SELECT * FROM USER WHERE user_id = ? AND is_deleted = 0";
-//	    try (Connection connection = ConnectionUtil.getConnection();
-//	         PreparedStatement pstmt = connection.prepareStatement(query)) {
-//	        pstmt.setInt(1, userId);
-//	        ResultSet rs = pstmt.executeQuery();
-//	        return rs.next(); // Returns true if a row is found (user with the given ID exists in the database)
-//	    } catch (SQLException e) {
-//	        throw new DAOException("Error while checking if the user with ID exists: " + e.getMessage());
-//	    }
-//	}
-
 	/**
 	 * Authenticates the user with the provided email and password.
 	 *
@@ -120,6 +81,27 @@ public class UserDAO {
 	        throw new DAOException("Error while updating user information: " + e.getMessage());
 	    }
 	}
+
+	
+	/**
+	 * Checks if a user with the given email exists in the database.
+	 *
+	 * @param email The email to check for existence.
+	 * @return true if the email exists, false otherwise.
+	 * @throws DAOException if a database error occurs.
+	 */
+	public boolean isEmailExists(String email) throws DAOException {
+	    String query = "SELECT * FROM USER WHERE email = ? AND is_deleted = 0";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement pstmt = connection.prepareStatement(query)) {
+	        pstmt.setString(1, email);
+	        ResultSet rs = pstmt.executeQuery();
+	        return rs.next(); // Returns true if a row is found (email exists in the database)
+	    } catch (SQLException e) {
+	        throw new DAOException("Error while checking if the email exists for the user: " + e.getMessage());
+	    }
+	}
+	
 
 
 	/**

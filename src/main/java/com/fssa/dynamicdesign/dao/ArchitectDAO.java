@@ -72,24 +72,6 @@ public class ArchitectDAO {
 		}
 	}
 	
-	/**
-	 * Checks if a user with the given architectId exists in the database.
-	 *
-	 * @param architectId The ID of the architect to check for existence.
-	 * @return true if the architect with the given ID exists, false otherwise.
-	 * @throws DAOException if a database error occurs.
-	 */
-//	public boolean isArchitectIdExists(int architectId) throws DAOException {
-//	    String query = "SELECT * FROM ARCHITECT WHERE architect_id = ? AND is_deleted = 0";
-//	    try (Connection connection = ConnectionUtil.getConnection();
-//	         PreparedStatement pstmt = connection.prepareStatement(query)) {
-//	        pstmt.setInt(1, architectId);
-//	        ResultSet rs = pstmt.executeQuery();
-//	        return rs.next(); // Returns true if a row is found (architect with the given ID exists in the database)
-//	    } catch (SQLException e) {
-//	        throw new DAOException("Error while checking if the architect with ID exists: " + e.getMessage());
-//	    }
-//	}
 
 
 	/**

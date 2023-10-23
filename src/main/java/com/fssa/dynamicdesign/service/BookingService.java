@@ -38,6 +38,8 @@ public class BookingService {
 		}
 	}
 
+	
+	
 	/**
 	 * Retrieves a list of bookings for a given user ID.
 	 *
@@ -71,6 +73,9 @@ public class BookingService {
 			throw new ServiceException("Error while retrieving bookings by architect ID");
 		}
 	}
+	
+	
+	
 
 	public boolean updateBookingStatus(int bookingId, String newStatus) throws ServiceException {
 		BookingDAO bookingDAO = new BookingDAO();
