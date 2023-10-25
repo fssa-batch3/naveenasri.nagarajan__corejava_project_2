@@ -12,6 +12,7 @@ import java.util.List;
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
+import com.fssa.dynamicdesign.util.PasswordUtil;
 
 public class ArchitectDAO {
 
@@ -24,8 +25,8 @@ public class ArchitectDAO {
 	 */
 	public boolean arcRegister(Architect architect) throws SQLException {
 
-		String query = "INSERT INTO architect ( profile_photo, name, gender, phone_number, address, cover_photo, email, password, education, experience, degree_certificate, nata_certificate) "
-				+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO architect ( profile_photo, name, gender, phone_number, address, cover_photo, email, password, education, experience, degree_certificate, nata_certificate,salt) "
+				+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
@@ -43,6 +44,8 @@ public class ArchitectDAO {
 			pmt.setInt(10, architect.getExperience());
 			pmt.setString(11, architect.getDegreeCertificate());
 			pmt.setString(12, architect.getNATACertificate());
+			pmt.setString(13, architect.getSalt());
+
 
 			int rows = pmt.executeUpdate();
 
@@ -83,19 +86,32 @@ public class ArchitectDAO {
 	 * @return true if authentication is successful, false otherwise
 	 * @throws SQLException if a database error occurs
 	 */
-	public boolean login(Architect architect, String email) throws SQLException {
-		String query = "SELECT * FROM ARCHITECT WHERE email = ? AND password = ?";
+	public boolean login(Architect architect, String email) throws DAOException {
+		String query = "SELECT * FROM ARCHITECT WHERE email = ? AND is_deleted = 0";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement pmt = connection.prepareStatement(query)) {
 
 			// Set parameters for the prepared statement
 			pmt.setString(1, email); // Use provided email for the query
-			pmt.setString(2, architect.getPassword());
+		//	pmt.setString(2, architect.getPassword());
 
-			try (ResultSet rs = pmt.executeQuery()) {
-				return rs.next(); // If a row is found, authentication is successful
-			}
-		}
+			 try (ResultSet rs = pmt.executeQuery()) {
+		        	if(rs.next()) {
+		        		String password = rs.getString("password");
+		        		String salt = rs.getString("salt");
+		        		if(PasswordUtil.verifyPassword(architect.getPassword(), salt, password)) {
+		        			return true;
+		        		}else {
+		        	        throw new DAOException("Incorrect Email or Password");
+		        		}
+		        	}
+		        	
+		         //   return rs.next(); // Return true if a row is found (authentication successful)
+		            return false;
+		        }
+		    } catch (Exception e) {
+		        throw new DAOException("Error while authenticating the user: " + e.getMessage());
+		    }
 	}
 
 	/**

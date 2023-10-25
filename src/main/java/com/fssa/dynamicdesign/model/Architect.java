@@ -15,7 +15,11 @@ public class Architect {
 	private String degreeCertificate;
 	private String nataCertificate;
 	private boolean isDeleted;
+	private String salt;
+	
+	
 
+	
 	/**
 	 * Default constructor
 	 */
@@ -222,6 +226,17 @@ public class Architect {
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	
+	public String getSalt() {
+		return salt;
+	}
+
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+
 
 	@Override
 	public String toString() {

@@ -15,7 +15,9 @@ public class User implements Serializable {
 	private String phonenumber;
 	private String type;
 	private boolean isDeleted;
+	private String salt;
 
+	
 	/**
 	 * Default constructor
 	 */
@@ -162,5 +164,14 @@ public class User implements Serializable {
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 
 }

@@ -9,6 +9,7 @@ import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.User;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
 import com.fssa.dynamicdesign.util.ConnectionUtil;
+import com.fssa.dynamicdesign.util.PasswordUtil;
 
 public class UserDAO {
 
@@ -20,17 +21,18 @@ public class UserDAO {
 	 * @throws DAOException if a database error occurs.
 	 */
 	public boolean register(User user) throws DAOException {
-	    String query = "INSERT INTO USER (email, user_name, password, phone_number, type) VALUES (?, ?, ?, ?, ?)";
+	    String query = "INSERT INTO USER (email, user_name, password, phone_number, type , salt) VALUES (?, ?, ?, ?, ?, ?)";
 
 	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement pmt = connection.prepareStatement(query)) {
+	         PreparedStatement pmt = connection.prepareStatement(query)) { 
 	        // Set parameters for the prepared statement
 	        pmt.setString(1, user.getEmail());
 	        pmt.setString(2, user.getUsername());
 	        pmt.setString(3, user.getPassword());
 	        pmt.setString(4, user.getPhonenumber()); // corrected method name to getPhoneNumber
 	        pmt.setString(5, user.getType());
-
+	        pmt.setString(6, user.getSalt());
+	        
 	        int rows = pmt.executeUpdate();
 	        return rows == 1; // Return true if one row was affected (registration successful)
 	    } catch (SQLException e) {
@@ -47,15 +49,29 @@ public class UserDAO {
 	 * @throws DAOException if a database error occurs.
 	 */
 	public boolean login(User user, String email) throws DAOException {
-	    String query = "SELECT * FROM USER WHERE email = ? AND password = ? AND is_deleted = 0";
+	  //  String query = "SELECT * FROM USER WHERE email = ? AND password = ? AND is_deleted = 0";
+	    String query = "SELECT * FROM USER WHERE email = ? AND is_deleted = 0";
+
 	    try (Connection connection = ConnectionUtil.getConnection();
 	         PreparedStatement pstmt = connection.prepareStatement(query)) {
 	        pstmt.setString(1, email); // Use the provided email for the query
-	        pstmt.setString(2, user.getPassword());
+//	        pstmt.setString(2, user.getPassword());
+	      
 	        try (ResultSet rs = pstmt.executeQuery()) {
-	            return rs.next(); // Return true if a row is found (authentication successful)
+	        	if(rs.next()) {
+	        		String password = rs.getString("password");
+	        		String salt = rs.getString("salt");
+	        		if(PasswordUtil.verifyPassword(user.getPassword(), salt, password)) {
+	        			return true;
+	        		}else {
+	        	        throw new DAOException("Incorrect Email or Password");
+	        		}
+	        	}
+	        	
+	         //   return rs.next(); // Return true if a row is found (authentication successful)
+	            return false;
 	        }
-	    } catch (SQLException e) {
+	    } catch (Exception e) {
 	        throw new DAOException("Error while authenticating the user: " + e.getMessage());
 	    }
 	}

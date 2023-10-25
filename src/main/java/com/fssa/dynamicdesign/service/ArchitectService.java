@@ -1,12 +1,14 @@
 package com.fssa.dynamicdesign.service;
 
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.List;
 
 import com.fssa.dynamicdesign.dao.ArchitectDAO;
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.Architect;
 import com.fssa.dynamicdesign.service.exception.ServiceException;
+import com.fssa.dynamicdesign.util.PasswordUtil;
 import com.fssa.dynamicdesign.validation.ArchitectValidator;
 import com.fssa.dynamicdesign.validation.exception.InvalidArchitectException;
 
@@ -25,10 +27,16 @@ public class ArchitectService {
         try {
             // Validate the architect's details using the ArchitectValidator
             ArchitectValidator.validateArchitect(architect);
-
+            
+            byte[] salt = PasswordUtil.generateSalt();
+            byte[] derivedKey = PasswordUtil.deriveKey(architect.getPassword(), salt);
+            architect.setSalt(Base64.getEncoder().encodeToString(salt));
+            architect.setPassword(Base64.getEncoder().encodeToString(derivedKey));
+            
+            
             // Call the DAO's arcRegister method to register the architect
             return architectDAO.arcRegister(architect);
-        } catch (SQLException | InvalidArchitectException e) {
+        } catch (Exception e) {
             throw new ServiceException(e);
         }
     }
@@ -54,9 +62,10 @@ public class ArchitectService {
                 throw new ServiceException("Before logging in, you have to register");
             }
 
+            
             return architectDAO.login(architect, email);
 
-        } catch (SQLException | InvalidArchitectException e) {
+        } catch (SQLException | InvalidArchitectException | DAOException e) {
             throw new ServiceException(e);
         }
     }

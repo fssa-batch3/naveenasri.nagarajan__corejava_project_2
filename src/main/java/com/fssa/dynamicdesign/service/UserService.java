@@ -1,5 +1,7 @@
 package com.fssa.dynamicdesign.service;
 
+import java.util.Base64;
+import com.fssa.dynamicdesign.util.PasswordUtil;
 import com.fssa.dynamicdesign.dao.UserDAO;
 import com.fssa.dynamicdesign.dao.exception.DAOException;
 import com.fssa.dynamicdesign.model.User;
@@ -26,7 +28,7 @@ public class UserService {
                 throw new InvalidUserException("User is null while updating");
             }
             
-            
+             
             // Check if the email already exists
             if (userDAO.isEmailExists(user.getEmail())) {
                 throw new ServiceException("User with this email already exists");
@@ -35,8 +37,15 @@ public class UserService {
             // Validate the user's details using the UserValidator
             UserValidator.validateUser(user);
 
+            byte[] salt = PasswordUtil.generateSalt();
+            byte[] derivedKey = PasswordUtil.deriveKey(user.getPassword(), salt);
+            user.setSalt(Base64.getEncoder().encodeToString(salt));
+            user.setPassword(Base64.getEncoder().encodeToString(derivedKey));
+            
             return userDAO.register(user);
-        } catch (InvalidUserException | DAOException e) {
+     //   } catch (InvalidUserException | DAOException e) {
+            
+          } catch (Exception e) {
             throw new ServiceException(e);
         }
     }
@@ -62,6 +71,8 @@ public class UserService {
             if (!userDAO.isEmailExists(email)) {
                 throw new ServiceException("Before logging in, you have to register");
             }
+            
+            
 
             return userDAO.login(user, email);
         } catch (InvalidUserException | DAOException e) {
@@ -84,7 +95,7 @@ public class UserService {
             // Check if the user is null
             if (user == null) {
                 throw new InvalidUserException("User is null while updating");
-            }
+            } 
 
             // Check if the user exists before attempting to update
             if (!userDAO.isEmailExists(email)) {
