@@ -33,7 +33,7 @@ public class UserDAO {
 	        pmt.setString(5, user.getType());
 	        pmt.setString(6, user.getSalt());
 	        
-	        int rows = pmt.executeUpdate();
+	        int rows = pmt.executeUpdate(); 
 	        return rows == 1; // Return true if one row was affected (registration successful)
 	    } catch (SQLException e) {
 	        throw new DAOException("Error while registering the user: " + e.getMessage());

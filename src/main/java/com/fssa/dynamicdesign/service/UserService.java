@@ -40,7 +40,7 @@ public class UserService {
             byte[] salt = PasswordUtil.generateSalt();
             byte[] derivedKey = PasswordUtil.deriveKey(user.getPassword(), salt);
             user.setSalt(Base64.getEncoder().encodeToString(salt));
-            user.setPassword(Base64.getEncoder().encodeToString(derivedKey));
+            user.setPassword(Base64.getEncoder().encodeToString(derivedKey)); 
             
             return userDAO.register(user);
      //   } catch (InvalidUserException | DAOException e) {
@@ -71,7 +71,6 @@ public class UserService {
             if (!userDAO.isEmailExists(email)) {
                 throw new ServiceException("Before logging in, you have to register");
             }
-            
             
 
             return userDAO.login(user, email);
